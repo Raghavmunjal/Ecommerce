@@ -16,10 +16,16 @@ const RegisterCompleteScreen = ({ history }) => {
   const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
+    if (error) {
+      toast.error(error);
+    } else if (userInfo) {
       history.push(redirect);
     }
-  }, [history, userInfo, redirect]);
+  }, [error, history, userInfo, redirect]);
+
+  useEffect(() => {
+    setEmail(window.localStorage.getItem("emailForRegistration"));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,10 +42,6 @@ const RegisterCompleteScreen = ({ history }) => {
 
     dispatch(registerComplete(email, password));
   };
-
-  useEffect(() => {
-    setEmail(window.localStorage.getItem("emailForRegistration"));
-  }, []);
 
   const completeRegistrationForm = () => {
     return (
@@ -63,6 +65,7 @@ const RegisterCompleteScreen = ({ history }) => {
             placeholder="Enter Password"
           />
         </div>
+
         <Button
           onClick={handleSubmit}
           type="primary"
@@ -83,7 +86,6 @@ const RegisterCompleteScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {error && toast.error(error)}
           {loading ? (
             <h4 className="text-danger">Loading...</h4>
           ) : (
