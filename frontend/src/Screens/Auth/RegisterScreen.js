@@ -23,11 +23,13 @@ const RegisterScreen = ({ history }) => {
     setEmail("");
   };
 
-  const userLogin = useSelector((state) => state.userLogin);
+  //const userLogin = useSelector((state) => state.userLogin);
+  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
 
   useEffect(() => {
-    if (userLogin && userLogin.token) history.push("/");
-  }, [userLogin]);
+    // (userLogin && userLogin.token) history.push("/");
+    if (userInfo && userInfo.token) history.push("/");
+  }, [userInfo]);
 
   const registerForm = () => {
     return (
@@ -42,7 +44,7 @@ const RegisterScreen = ({ history }) => {
             placeholder="Enter Email"
           />
         </div>
-        <button type="submit" className="btn btn-raised my-2">
+        <button type="submit" className="btn btn-raised my-2" disabled={!email}>
           Register
         </button>
       </form>

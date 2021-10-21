@@ -8,7 +8,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { useHistory, Link } from "react-router-dom";
 
@@ -22,7 +22,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const userLogin = useSelector((state) => state.userLogin);
+  //const userLogin = useSelector((state) => state.userLogin);
+
+  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
 
   const handleClick = (e) => {
     setCurrent(e.key);
@@ -39,10 +41,10 @@ const Header = () => {
         <Link to="/">Home</Link>
       </Item>
 
-      {userLogin && (
+      {userInfo && (
         <SubMenu
           icon={<SettingOutlined />}
-          title={userLogin && userLogin.email.split("@")[0]}
+          title={userInfo && userInfo.email.split("@")[0]}
           className="float-right"
         >
           <Item key="Dashboard">Dashboard</Item>
@@ -53,13 +55,13 @@ const Header = () => {
         </SubMenu>
       )}
 
-      {!userLogin && (
+      {!userInfo && (
         <Item key="Register" icon={<UserAddOutlined />} className="float-right">
           <Link to="/register">Register</Link>
         </Item>
       )}
 
-      {!userLogin && (
+      {!userInfo && (
         <Item key="Login" icon={<UserOutlined />} className="float-right">
           <Link to="/login">Login</Link>
         </Item>

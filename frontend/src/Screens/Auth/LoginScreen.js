@@ -49,11 +49,13 @@ const LoginScreen = ({ history }) => {
       });
   };
 
-  const userLogin = useSelector((state) => state.userLogin);
+  //const userLogin = useSelector((state) => state.userLogin);
+  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
 
   useEffect(() => {
-    if (userLogin && userLogin.token) history.push("/");
-  }, [userLogin]);
+    // (userLogin && userLogin.token) history.push("/");
+    if (userInfo && userInfo.token) history.push("/");
+  }, [userInfo]);
 
   const loginForm = () => {
     return (

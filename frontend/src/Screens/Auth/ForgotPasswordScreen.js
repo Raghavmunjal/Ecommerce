@@ -7,17 +7,19 @@ const ForgotPasswordScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const userLogin = useSelector((state) => state.userLogin);
+  //const userLogin = useSelector((state) => state.userLogin);
+  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
 
   useEffect(() => {
-    if (userLogin && userLogin.token) history.push("/");
-  }, [userLogin]);
+    // (userLogin && userLogin.token) history.push("/");
+    if (userInfo && userInfo.token) history.push("/");
+  }, [userInfo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const config = {
-      url: process.env.REACT_APP_FORGOT_PASSWORD_REDIRECT,
+      url: process.env.REACT_APP_FORGOT_PASSWORD_REDIRECT_URL,
       handleCodeInApp: true,
     };
     await auth
@@ -51,8 +53,8 @@ const ForgotPasswordScreen = ({ history }) => {
             autoFocus
           />
         </div>
-        <button className="btn btn-raised" disabled={!email}>
-          Submit
+        <button type="submit" className="btn btn-raised" disabled={!email}>
+          Reset Password
         </button>
       </form>
     </div>
