@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { registerComplete } from "../../Actions/userActions";
 import { MailOutlined } from "@ant-design/icons";
 
 const RegisterCompleteScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const redirect = "/";
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [history, userInfo, redirect]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,31 +33,8 @@ const RegisterCompleteScreen = ({ history }) => {
       toast.error("Password must be at least 6 characters long 👈");
       return;
     }
-    setLoading(true);
-    try {
-      const result = await auth.signInWithEmailLink(
-        email,
-        window.location.href
-      );
-      if (result.user.emailVerified) {
-        // remove user email from localStorage
-        window.localStorage.removeItem("emailForRegistration");
 
-        // get user id token
-        let user = auth.currentUser;
-        await user.updatePassword(password);
-        const idTokenResult = await user.getIdTokenResult();
-
-        // redux store
-
-        // redirect
-        history.push("/");
-      }
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-      toast.error(error.message);
-    }
+    dispatch(registerComplete(email, password));
   };
 
   useEffect(() => {
@@ -94,6 +83,7 @@ const RegisterCompleteScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
+          {error && toast.error(error)}
           {loading ? (
             <h4 className="text-danger">Loading...</h4>
           ) : (

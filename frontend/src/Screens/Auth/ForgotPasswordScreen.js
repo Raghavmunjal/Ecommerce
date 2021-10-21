@@ -7,13 +7,16 @@ const ForgotPasswordScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  //const userLogin = useSelector((state) => state.userLogin);
-  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+  const redirect = "/";
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
-    // (userLogin && userLogin.token) history.push("/");
-    if (userInfo && userInfo.token) history.push("/");
-  }, [userInfo]);
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [history, userInfo, redirect]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

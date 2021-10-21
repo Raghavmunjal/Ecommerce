@@ -1,61 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
-import { login } from "../../Actions/userActions";
+import { login, googleLogin } from "../../Actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const result = await auth.signInWithEmailAndPassword(email, password);
-      const { user } = result;
-      if (user) {
-        const idTokenResult = await user.getIdTokenResult();
-        dispatch(login(user.email, idTokenResult.token));
-      }
-      history.push("/");
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-      toast.error(error.message);
-    }
-  };
+  const redirect = "/";
 
-  const googleLogin = async () => {
-    auth
-      .signInWithPopup(googleAuthProvider)
-      .then(async (result) => {
-        const { user } = result;
-        if (user) {
-          const idTokenResult = await user.getIdTokenResult();
-          dispatch(login(user.email, idTokenResult.token));
-        }
-        history.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error(error.message);
-      });
-  };
-
-  //const userLogin = useSelector((state) => state.userLogin);
-  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
-    // (userLogin && userLogin.token) history.push("/");
-    if (userInfo && userInfo.token) history.push("/");
-  }, [userInfo]);
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [history, userInfo, redirect]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
+
+  const loginWithGoogle = () => {
+    dispatch(googleLogin());
+  };
 
   const loginForm = () => {
     return (
@@ -100,6 +75,7 @@ const LoginScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
+          {error && toast.error(error)}
           {loading ? (
             <h4 className="text-danger">Loading...</h4>
           ) : (
@@ -108,7 +84,7 @@ const LoginScreen = ({ history }) => {
           {loginForm()}
 
           <Button
-            onClick={googleLogin}
+            onClick={loginWithGoogle}
             type="danger"
             className="mb-3"
             block

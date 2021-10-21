@@ -8,7 +8,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useHistory, Link } from "react-router-dom";
 
@@ -22,9 +22,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  //const userLogin = useSelector((state) => state.userLogin);
-
-  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const handleClick = (e) => {
     setCurrent(e.key);

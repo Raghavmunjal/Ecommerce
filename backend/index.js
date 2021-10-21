@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import cors from "cors";
 import connectDB from "./config/db.js";
 import { ErrorHandler, notFound } from "./middleware/errMiddleware.js";
 
@@ -9,6 +10,7 @@ dotenv.config();
 
 // middleware
 app.use(express.json());
+app.use(cors());
 app.use(notFound);
 app.use(ErrorHandler);
 

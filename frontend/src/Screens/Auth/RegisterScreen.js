@@ -23,13 +23,16 @@ const RegisterScreen = ({ history }) => {
     setEmail("");
   };
 
-  //const userLogin = useSelector((state) => state.userLogin);
-  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"));
+  const redirect = "/";
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
-    // (userLogin && userLogin.token) history.push("/");
-    if (userInfo && userInfo.token) history.push("/");
-  }, [userInfo]);
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [history, userInfo, redirect]);
 
   const registerForm = () => {
     return (
