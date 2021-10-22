@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import axios from "axios";
 import {
   USER_LOGIN_REQUEST,
   USER_LOGOUT,
@@ -15,10 +16,27 @@ export const login = (email, password) => async (dispatch) => {
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
+
     const result = await auth.signInWithEmailAndPassword(email, password);
     const { user } = result;
     if (user) {
       const idTokenResult = await user.getIdTokenResult();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: idTokenResult.token,
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/users/login",
+        { email, password },
+        config
+      );
+
+      //await axios.get("http://localhost:5000/api/users/signup");
+
       dispatch({
         type: USER_LOGIN_SUCCESS,
         payload: { email: user.email, token: idTokenResult.token },

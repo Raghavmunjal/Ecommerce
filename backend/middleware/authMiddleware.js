@@ -1,3 +1,19 @@
+const admin = require("../config/firebase");
+
+const protect = (req, res, next) => {
+  console.log(req.headers.authorization);
+  next();
+};
+
+const checkAdmin = (req, res, next) => {
+  next();
+};
+
+module.exports = {
+  protect,
+  checkAdmin,
+};
+
 // import jwt from 'jsonwebtoken'
 // import asyncHandler from 'express-async-handler'
 // import UserSchema from '../models/userModel.js'
@@ -33,5 +49,3 @@
 //     throw new Error('Not Authorized as an admin')
 //   }
 // }
-
-// export { protect, admin }

@@ -1,9 +1,10 @@
-import express from "express";
-import morgan from "morgan";
-import dotenv from "dotenv";
-import cors from "cors";
-import connectDB from "./config/db.js";
-import { ErrorHandler, notFound } from "./middleware/errMiddleware.js";
+const express = require("express");
+const morgan = require("morgan");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const connectDB = require("./config/db.js");
+const UserRoutes = require("./routes/userRoute.js");
+const { ErrorHandler, notFound } = require("./middleware/errMiddleware.js");
 
 const app = express();
 dotenv.config();
@@ -11,15 +12,19 @@ dotenv.config();
 // middleware
 app.use(express.json());
 app.use(cors());
-app.use(notFound);
-app.use(ErrorHandler);
-
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// routes
+app.use("/api/users", UserRoutes);
+
 // connecting to the database
 connectDB();
+
+// error handler
+app.use(notFound);
+app.use(ErrorHandler);
 
 // listen on port
 app.listen(process.env.PORT || 5000, () =>
