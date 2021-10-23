@@ -9,11 +9,16 @@ const RegisterCompleteScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const redirect = "/";
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
+
+  const redirect = userInfo
+    ? userInfo.role === process.env.REACT_APP_CHECK_ADMIN
+      ? "/admin/dashboard"
+      : "/user/history"
+    : "/";
 
   useEffect(() => {
     if (error) {

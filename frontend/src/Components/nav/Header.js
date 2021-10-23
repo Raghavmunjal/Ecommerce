@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useHistory, Link } from "react-router-dom";
 
-import { logout } from "../Actions/userActions";
+import { logout } from "../../Actions/userActions";
 
 const { SubMenu, Item } = Menu;
 

@@ -11,6 +11,24 @@ import {
 } from "../Constants/userConstant.js";
 import { auth, googleAuthProvider } from "../firebase";
 
+const registerUser = async (idTokenResult) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: idTokenResult.token,
+    },
+  };
+  return await axios.post("/api/users/register", {}, config);
+};
+
+// const roleRedirect = (info, history) => {
+//   if (info.role === process.env.REACT_APP_CHECK_ADMIN) {
+//     history.push("/admin");
+//   } else {
+//     history.push("/user/history");
+//   }
+// };
+
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -21,30 +39,21 @@ export const login = (email, password) => async (dispatch) => {
     const { user } = result;
     if (user) {
       const idTokenResult = await user.getIdTokenResult();
-
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: idTokenResult.token,
-        },
-      };
-
-      const { data } = await axios.post(
-        "/api/users/login",
-        { email, password },
-        config
-      );
-
-      //await axios.get("http://localhost:5000/api/users/signup");
-
-      dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: { email: user.email, token: idTokenResult.token },
-      });
-      localStorage.setItem(
-        "userInfo",
-        JSON.stringify({ email: email, token: idTokenResult.token })
-      );
+      registerUser(idTokenResult)
+        .then((res) => {
+          dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: res.data,
+          });
+          localStorage.setItem("userInfo", JSON.stringify(res.data));
+        })
+        .catch((error) => {
+          console.log(error);
+          dispatch({
+            type: USER_LOGIN_FAIL,
+            payload: error.message,
+          });
+        });
     }
   } catch (error) {
     console.log(error);
@@ -63,14 +72,21 @@ export const googleLogin = () => async (dispatch) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
 
-        dispatch({
-          type: USER_LOGIN_SUCCESS,
-          payload: { email: user.email, token: idTokenResult.token },
-        });
-        localStorage.setItem(
-          "userInfo",
-          JSON.stringify({ email: user.email, token: idTokenResult.token })
-        );
+        registerUser(idTokenResult)
+          .then((res) => {
+            dispatch({
+              type: USER_LOGIN_SUCCESS,
+              payload: res.data,
+            });
+            localStorage.setItem("userInfo", JSON.stringify(res.data));
+          })
+          .catch((error) => {
+            console.log(error);
+            dispatch({
+              type: USER_LOGIN_FAIL,
+              payload: error.message,
+            });
+          });
       }
     })
     .catch((error) => {
@@ -98,19 +114,27 @@ export const registerComplete = (email, password) => async (dispatch) => {
       await user.updatePassword(password);
       const idTokenResult = await user.getIdTokenResult();
 
-      dispatch({
-        type: USER_REGISTER_SUCCESS,
-        payload: { email: user.email, token: idTokenResult.token },
-      });
+      registerUser(idTokenResult)
+        .then((res) => {
+          dispatch({
+            type: USER_REGISTER_SUCCESS,
+            payload: res.data,
+          });
 
-      dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: { email: user.email, token: idTokenResult.token },
-      });
-      localStorage.setItem(
-        "userInfo",
-        JSON.stringify({ email: email, token: idTokenResult.token })
-      );
+          dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: res.data,
+          });
+
+          localStorage.setItem("userInfo", JSON.stringify(res.data));
+        })
+        .catch((error) => {
+          console.log(error);
+          dispatch({
+            type: USER_LOGIN_FAIL,
+            payload: error.message,
+          });
+        });
     }
   } catch (error) {
     console.log(error);

@@ -23,10 +23,14 @@ const RegisterScreen = ({ history }) => {
     setEmail("");
   };
 
-  const redirect = "/";
-
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const redirect = userInfo
+    ? userInfo.role === process.env.REACT_APP_CHECK_ADMIN
+      ? "/admin/dashboard"
+      : "/user/history"
+    : "/";
 
   useEffect(() => {
     if (userInfo) {

@@ -9,13 +9,12 @@ const userSchema = mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
       index: true,
     },
-    isAdmin: {
-      type: Boolean,
+    role: {
+      type: String,
       required: true,
-      default: false,
+      default: "customer",
     },
     // cart:{
     //     type:Array,
