@@ -71,11 +71,7 @@ const EditCategoryScreen = ({ history, match }) => {
           <AdminNav />
         </div>
         <div className="col-md-6 offset-md-2">
-          {loadingUpdate ? (
-            <h4 className="text-danger">Updating...</h4>
-          ) : (
-            <h4>Update Category</h4>
-          )}
+          <h4>Update Category</h4>
           {categoryForm()}
           {loadingDetails && <h1 className="text-danger">Loading .....</h1>}
         </div>

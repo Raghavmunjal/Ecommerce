@@ -49,6 +49,7 @@ const RegisterScreen = ({ history }) => {
             onChange={(e) => setEmail(e.target.value)}
             autoFocus
             placeholder="Enter Email"
+            required
           />
         </div>
         <button

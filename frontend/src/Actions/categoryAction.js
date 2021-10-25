@@ -140,7 +140,7 @@ export const updateCategory = (name, slug) => async (dispatch, getState) => {
       type: CATEGORY_UPDATE_SUCCESS,
       payload: data,
     });
-    toast.success(`Category updated successfully`);
+    toast.success(`Category ${name} updated successfully`);
   } catch (error) {
     dispatch({
       type: CATEGORY_UPDATE_FAIL,

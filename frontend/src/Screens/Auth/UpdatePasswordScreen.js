@@ -40,13 +40,14 @@ const UpdatePasswordScreen = () => {
             value={password}
             placeholder="Enter your password"
             disabled={loading}
+            required
           />
           <button
             type="submit"
             className="btn btn-primary btn-raised my-3"
             disabled={password.length < 6 || loading}
           >
-            Update Password
+            {loading ? <span>Updating...</span> : <span>Update Password</span>}
           </button>
         </div>
       </form>

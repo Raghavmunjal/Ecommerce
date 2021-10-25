@@ -44,11 +44,7 @@ const ForgotPasswordScreen = ({ history }) => {
   };
   return (
     <div className="container col-md-6 offset-md-3 p-5">
-      {loading ? (
-        <h4 className="text-danger">Loading...</h4>
-      ) : (
-        <h4>Forgot Password</h4>
-      )}
+      <h4>Forgot Password</h4>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <input
@@ -59,6 +55,7 @@ const ForgotPasswordScreen = ({ history }) => {
             onChange={(e) => setEmail(e.target.value)}
             autoFocus
             disabled={loading}
+            required
           />
         </div>
         <button
@@ -66,7 +63,7 @@ const ForgotPasswordScreen = ({ history }) => {
           className="btn btn-danger btn-raised"
           disabled={!email}
         >
-          Reset Password
+          {loading ? <span>Resetting...</span> : <span>Reset Password</span>}
         </button>
       </form>
     </div>

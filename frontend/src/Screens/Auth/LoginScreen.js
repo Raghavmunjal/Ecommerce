@@ -48,6 +48,7 @@ const LoginScreen = ({ history }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Email"
             autoFocus
+            required
             disabled={loading}
           />
         </div>
@@ -59,6 +60,7 @@ const LoginScreen = ({ history }) => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter Password"
             disabled={loading}
+            required
           />
         </div>
         <br />
@@ -72,7 +74,11 @@ const LoginScreen = ({ history }) => {
           size="large"
           disabled={!email || password.length < 6}
         >
-          Login with Email/Password
+          {loading ? (
+            <span>Logging In...</span>
+          ) : (
+            <span>Login with Email/Password</span>
+          )}
         </Button>
       </form>
     );
@@ -82,11 +88,7 @@ const LoginScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Login</h4>
-          )}
+          <h4>Login</h4>
           {loginForm()}
 
           <Button

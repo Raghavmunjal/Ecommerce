@@ -69,6 +69,7 @@ const RegisterCompleteScreen = ({ history }) => {
             autoFocus
             placeholder="Enter Password"
             disabled={loading}
+            required
           />
         </div>
 
@@ -82,7 +83,11 @@ const RegisterCompleteScreen = ({ history }) => {
           size="large"
           disabled={!email || password.length < 6}
         >
-          Sign up with Email/Password
+          {loading ? (
+            <span>Signing In...</span>
+          ) : (
+            <span>Sign up with Email/Password</span>
+          )}
         </Button>
       </form>
     );
@@ -92,11 +97,7 @@ const RegisterCompleteScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Sign Up</h4>
-          )}
+          <h4>Sign Up</h4>
           {completeRegistrationForm()}
         </div>
       </div>

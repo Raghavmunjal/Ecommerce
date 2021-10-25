@@ -24,7 +24,7 @@ const CreateCategoryScreen = () => {
   const { loading: loadingList, categories } = categoryList;
 
   const categoryDelete = useSelector((state) => state.categoryDelete);
-  const { loading: loadingDelete, success: successDelete } = categoryDelete;
+  const { success: successDelete } = categoryDelete;
 
   const dispatch = useDispatch();
 
@@ -66,7 +66,7 @@ const CreateCategoryScreen = () => {
             className="btn btn-primary btn-raised my-4"
             disabled={loadingCreate || !name}
           >
-            Save
+            {loadingCreate ? <span>Saving...</span> : <span>Save</span>}
           </button>
         </div>
       </form>
@@ -80,11 +80,7 @@ const CreateCategoryScreen = () => {
           <AdminNav />
         </div>
         <div className="col-md-6 offset-md-2">
-          {loadingCreate || loadingDelete ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Create Category</h4>
-          )}
+          <h4>Create Category</h4>
           {categoryForm()}
           {loadingList && <h1 className="text-danger">Loading .....</h1>}
           {categories.map((category) => {
