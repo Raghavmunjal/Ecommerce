@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { auth } from "../../firebase";
-import SideNavbar from "../../Components/nav/SideNavbar";
+import UserNav from "../../Components/nav/UserNav";
+import { useSelector } from "react-redux";
+import AdminNav from "../../Components/nav/AdminNav";
 
 const UpdatePasswordScreen = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(false);
+    setLoading(true);
     await auth.currentUser
       .updatePassword(password)
       .then(() => {
@@ -37,7 +42,8 @@ const UpdatePasswordScreen = () => {
             disabled={loading}
           />
           <button
-            className="btn btn-primary my-3"
+            type="submit"
+            className="btn btn-primary btn-raised my-3"
             disabled={password.length < 6 || loading}
           >
             Update Password
@@ -51,7 +57,11 @@ const UpdatePasswordScreen = () => {
     <div className="conatiner-fluid">
       <div className="row">
         <div className="col-md-2">
-          <SideNavbar />
+          {userInfo && userInfo.role === process.env.REACT_APP_CHECK_ADMIN ? (
+            <AdminNav />
+          ) : (
+            <UserNav />
+          )}
         </div>
         <div className="col-md-6 offset-md-2">
           {loading ? (

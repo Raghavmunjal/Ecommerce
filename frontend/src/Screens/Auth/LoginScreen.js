@@ -48,6 +48,7 @@ const LoginScreen = ({ history }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Email"
             autoFocus
+            disabled={loading}
           />
         </div>
         <div className="form-group">
@@ -57,6 +58,7 @@ const LoginScreen = ({ history }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter Password"
+            disabled={loading}
           />
         </div>
         <br />

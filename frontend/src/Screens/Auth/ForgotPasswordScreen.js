@@ -58,9 +58,14 @@ const ForgotPasswordScreen = ({ history }) => {
             placeholder="Enter your email address"
             onChange={(e) => setEmail(e.target.value)}
             autoFocus
+            disabled={loading}
           />
         </div>
-        <button type="submit" className="btn btn-raised" disabled={!email}>
+        <button
+          type="submit"
+          className="btn btn-danger btn-raised"
+          disabled={!email}
+        >
           Reset Password
         </button>
       </form>

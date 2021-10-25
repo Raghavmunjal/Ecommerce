@@ -1,12 +1,12 @@
 import React from "react";
-import SideNavbar from "../Components/nav/SideNavbar";
+import UserNav from "../../Components/nav/UserNav";
 
 const HistoryScreen = () => {
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-2">
-          <SideNavbar />
+          <UserNav />
         </div>
         <div className="col">history page</div>
       </div>

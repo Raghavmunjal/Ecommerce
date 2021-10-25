@@ -68,6 +68,7 @@ const RegisterCompleteScreen = ({ history }) => {
             onChange={(e) => setPassword(e.target.value)}
             autoFocus
             placeholder="Enter Password"
+            disabled={loading}
           />
         </div>
 

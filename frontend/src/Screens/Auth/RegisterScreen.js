@@ -51,7 +51,11 @@ const RegisterScreen = ({ history }) => {
             placeholder="Enter Email"
           />
         </div>
-        <button type="submit" className="btn btn-raised my-2" disabled={!email}>
+        <button
+          type="submit"
+          className="btn btn-primary btn-raised my-2"
+          disabled={!email}
+        >
           Register
         </button>
       </form>

@@ -46,8 +46,18 @@ const Header = () => {
           title={userInfo && userInfo.email.split("@")[0]}
           className="float-right"
         >
-          <Item key="Dashboard">Dashboard</Item>
-          <Item key="Profile">Profile</Item>
+          {userInfo && userInfo.role === process.env.REACT_APP_CHECK_ADMIN && (
+            <Item key="Dashboard">
+              <Link to="/admin/dashboard">Dashboard</Link>
+            </Item>
+          )}
+
+          {userInfo && userInfo.role === "customer" && (
+            <Item key="Dashboard">
+              <Link to="/user/history">Dashboard</Link>
+            </Item>
+          )}
+
           <Item icon={<LogoutOutlined />} onClick={logoutHandler}>
             Logout
           </Item>
