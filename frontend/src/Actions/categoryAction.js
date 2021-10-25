@@ -7,7 +7,6 @@ import {
   CATEGORY_CREATE_REQUEST,
   CATEGORY_CREATE_SUCCESS,
   CATEGORY_CREATE_FAIL,
-  //CATEGORY_CREATE_RESET,
   CATEGORY_DELETE_REQUEST,
   CATEGORY_DELETE_SUCCESS,
   CATEGORY_DELETE_FAIL,
@@ -17,7 +16,6 @@ import {
   CATEGORY_UPDATE_REQUEST,
   CATEGORY_UPDATE_SUCCESS,
   CATEGORY_UPDATE_FAIL,
-  //CATEGORY_UPDATE_RESET,
 } from "../Constants/categoryConstant";
 
 export const createCategory = (name) => async (dispatch, getState) => {

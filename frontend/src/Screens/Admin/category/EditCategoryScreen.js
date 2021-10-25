@@ -6,6 +6,7 @@ import {
   listCategoryDetails,
 } from "../../../Actions/categoryAction";
 import { CATEGORY_UPDATE_RESET } from "../../../Constants/categoryConstant";
+import CategoryForm from "../../../Components/CategoryForm";
 
 const EditCategoryScreen = ({ history, match }) => {
   const [name, setName] = useState("");
@@ -38,32 +39,6 @@ const EditCategoryScreen = ({ history, match }) => {
     }
   }, [dispatch, successUpdate, history, categorySlug, category]);
 
-  const categoryForm = () => {
-    return (
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            autoFocus
-            required
-            disabled={loadingUpdate}
-          />
-          <button
-            type="submit"
-            className="btn btn-primary btn-raised my-4"
-            disabled={!name || loadingUpdate}
-          >
-            {loadingUpdate ? <span>Updating..</span> : <span>Update</span>}
-          </button>
-        </div>
-      </form>
-    );
-  };
-
   return (
     <div className="container-fluid">
       <div className="row">
@@ -72,7 +47,12 @@ const EditCategoryScreen = ({ history, match }) => {
         </div>
         <div className="col-md-6 offset-md-2">
           <h4>Update Category</h4>
-          {categoryForm()}
+          <CategoryForm
+            handleSubmit={handleSubmit}
+            name={name}
+            setName={setName}
+            loading={loadingUpdate}
+          />
           {loadingDetails && <h1 className="text-danger">Loading .....</h1>}
         </div>
       </div>

@@ -70,7 +70,7 @@ const LoginScreen = ({ history }) => {
           className="mb-3"
           block
           shape="round"
-          icon={<MailOutlined />}
+          icon={!loading && <MailOutlined />}
           size="large"
           disabled={!email || password.length < 6}
         >

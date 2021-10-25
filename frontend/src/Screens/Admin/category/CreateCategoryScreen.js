@@ -9,9 +9,12 @@ import {
   deleteCategory,
 } from "../../../Actions/categoryAction";
 import { CATEGORY_CREATE_RESET } from "../../../Constants/categoryConstant";
+import CategoryForm from "../../../Components/CategoryForm";
+import LocalSearch from "../../../Components/LocalSearch";
 
 const CreateCategoryScreen = () => {
   const [name, setName] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const categoryCreate = useSelector((state) => state.categoryCreate);
   const {
@@ -47,31 +50,7 @@ const CreateCategoryScreen = () => {
     dispatch(listCategories());
   }, [dispatch, successCreate, successDelete, createdCategory]);
 
-  const categoryForm = () => {
-    return (
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            autoFocus
-            required
-            disabled={loadingCreate}
-          />
-          <button
-            type="submit"
-            className="btn btn-primary btn-raised my-4"
-            disabled={loadingCreate || !name}
-          >
-            {loadingCreate ? <span>Saving...</span> : <span>Save</span>}
-          </button>
-        </div>
-      </form>
-    );
-  };
+  const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
     <div className="container-fluid">
@@ -81,9 +60,16 @@ const CreateCategoryScreen = () => {
         </div>
         <div className="col-md-6 offset-md-2">
           <h4>Create Category</h4>
-          {categoryForm()}
+          <CategoryForm
+            handleSubmit={handleSubmit}
+            name={name}
+            setName={setName}
+            loading={loadingCreate}
+          />
+
+          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
           {loadingList && <h1 className="text-danger">Loading .....</h1>}
-          {categories.map((category) => {
+          {categories.filter(searched(keyword)).map((category) => {
             return (
               <div key={category._id} className="alert alert-secondary">
                 {category.name}
