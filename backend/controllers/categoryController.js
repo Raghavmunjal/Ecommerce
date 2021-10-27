@@ -4,7 +4,7 @@ const slugify = require("slugify");
 
 //@desc   Create Category
 //@routes POST /api/category
-//@access PRIVATE
+//@access PRIVATE/ADMIN
 const createCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
   const category = await new categorySchema({
@@ -40,7 +40,7 @@ const getAllCategories = asyncHandler(async (req, res) => {
 
 //@desc   Update Category
 //@routes PUT /api/category/:slug
-//@access PRIVATE
+//@access PRIVATE/ADMIN
 const updateCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
   const category = await categorySchema.findOne({ slug: req.params.slug });
@@ -58,7 +58,7 @@ const updateCategory = asyncHandler(async (req, res) => {
 
 //@desc   Delete Category
 //@routes DELETE /api/category/:slug
-//@access PRIVATE
+//@access PRIVATE/ADMIN
 const deleteCategory = asyncHandler(async (req, res) => {
   const category = await categorySchema.findOne({ slug: req.params.slug });
   if (category) {

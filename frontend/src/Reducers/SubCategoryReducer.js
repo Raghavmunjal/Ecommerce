@@ -12,6 +12,7 @@ import {
   SUBCATEGORY_DETAILS_REQUEST,
   SUBCATEGORY_DETAILS_SUCCESS,
   SUBCATEGORY_DETAILS_FAIL,
+  SUBCATEGORY_DETAILS_RESET,
   SUBCATEGORY_UPDATE_REQUEST,
   SUBCATEGORY_UPDATE_SUCCESS,
   SUBCATEGORY_UPDATE_FAIL,
@@ -76,6 +77,8 @@ export const subCategoryDetailsReducer = (
       return { loading: false, subCategory: action.payload };
     case SUBCATEGORY_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+    case SUBCATEGORY_DETAILS_RESET:
+      return { subCategory: {} };
     default:
       return state;
   }

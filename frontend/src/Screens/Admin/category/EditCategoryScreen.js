@@ -45,7 +45,7 @@ const EditCategoryScreen = ({ history, match }) => {
         <div className="col-md-2">
           <AdminNav />
         </div>
-        <div className="col-md-6 offset-md-2">
+        <div className="col-md-8 offset-md-1">
           <h4>Update Category</h4>
           <CategoryForm
             handleSubmit={handleSubmit}

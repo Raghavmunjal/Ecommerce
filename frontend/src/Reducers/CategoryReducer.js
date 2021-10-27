@@ -12,6 +12,7 @@ import {
   CATEGORY_DETAILS_REQUEST,
   CATEGORY_DETAILS_SUCCESS,
   CATEGORY_DETAILS_FAIL,
+  CATEGORY_DETAILS_RESET,
   CATEGORY_UPDATE_REQUEST,
   CATEGORY_UPDATE_SUCCESS,
   CATEGORY_UPDATE_FAIL,
@@ -71,6 +72,8 @@ export const categoryDetailsReducer = (state = { category: {} }, action) => {
       return { loading: false, category: action.payload };
     case CATEGORY_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+    case CATEGORY_DETAILS_RESET:
+      return { category: {} };
     default:
       return state;
   }

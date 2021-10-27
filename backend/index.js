@@ -6,6 +6,8 @@ const connectDB = require("./config/db.js");
 const UserRoutes = require("./routes/userRoute.js");
 const CategoryRoutes = require("./routes/categoryRoute.js");
 const SubCategoryRoutes = require("./routes/subCategoryRoute.js");
+const ProductRoutes = require("./routes/productRoute.js");
+const BrandRoutes = require("./routes/brandRoute");
 const { ErrorHandler, notFound } = require("./middleware/errMiddleware.js");
 
 const app = express();
@@ -22,7 +24,8 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/users", UserRoutes);
 app.use("/api/category", CategoryRoutes);
 app.use("/api/subcategory", SubCategoryRoutes);
-
+app.use("/api/product", ProductRoutes);
+app.use("/api/brand", BrandRoutes);
 // connecting to the database
 connectDB();
 

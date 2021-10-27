@@ -16,6 +16,14 @@ import {
   subCategoryDetailsReducer,
   subCategoryUpdateReducer,
 } from "./Reducers/SubCategoryReducer";
+import {
+  brandCreateReducer,
+  brandListReducer,
+  brandDetailsReducer,
+  brandUpdateReducer,
+  brandDeleteReducer,
+} from "./Reducers/BrandReducer";
+import { productCreateReducer } from "./Reducers/ProductReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -30,6 +38,12 @@ const reducer = combineReducers({
   subCategoryDelete: subCategoryDeleteReducer,
   subCategoryUpdate: subCategoryUpdateReducer,
   subCategoryDetails: subCategoryDetailsReducer,
+  brandCreate: brandCreateReducer,
+  brandDelete: brandDeleteReducer,
+  brandUpdate: brandUpdateReducer,
+  brandDetails: brandDetailsReducer,
+  brandList: brandListReducer,
+  productCreate: productCreateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

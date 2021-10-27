@@ -4,7 +4,7 @@ const subCategorySchema = require("../models/subCategoryModel");
 
 //@desc   Create SubCategory
 //@routes POST /api/subcategory
-//@access PRIVATE
+//@access PRIVATE/ADMIN
 const createSubCategory = asyncHandler(async (req, res) => {
   const { name, category } = req.body;
   const subCategory = await new subCategorySchema({
@@ -45,7 +45,7 @@ const getAllSubCategories = asyncHandler(async (req, res) => {
 
 //@desc   Update SubCategory
 //@routes PUT /api/subcategory/:slug
-//@access PRIVATE
+//@access PRIVATE/ADMIN
 const updateSubCategory = asyncHandler(async (req, res) => {
   const { name, category } = req.body;
   const subCategory = await subCategorySchema.findOne({
@@ -66,7 +66,7 @@ const updateSubCategory = asyncHandler(async (req, res) => {
 
 //@desc   Delete Category
 //@routes DELETE /api/subcategory/:slug
-//@access PRIVATE
+//@access PRIVATE/ADMIN
 const deleteSubCategory = asyncHandler(async (req, res) => {
   const subCategory = await subCategorySchema.findOne({
     slug: req.params.slug,
