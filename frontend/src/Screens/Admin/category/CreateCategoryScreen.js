@@ -50,7 +50,7 @@ const CreateCategoryScreen = () => {
     dispatch(listCategories());
   }, [dispatch, successCreate, successDelete, createdCategory]);
 
-  const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+  //const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
     <div className="container-fluid">
@@ -65,28 +65,31 @@ const CreateCategoryScreen = () => {
             name={name}
             setName={setName}
             loading={loadingCreate}
+            type="create"
           />
 
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
           {loadingList && <h1 className="text-danger">Loading .....</h1>}
-          {categories.filter(searched(keyword)).map((category) => {
-            return (
-              <div key={category._id} className="alert alert-secondary">
-                {category.name}
-                <span className="btn btn-sm float-right">
-                  <DeleteOutlined
-                    onClick={() => handleDelete(category.slug)}
-                    className="text-danger"
-                  />
-                </span>
-                <Link to={`/admin/category/${category.slug}`}>
+          {categories
+            .filter((c) => c.name.toLowerCase().includes(keyword))
+            .map((category) => {
+              return (
+                <div key={category._id} className="alert alert-secondary">
+                  {category.name}
                   <span className="btn btn-sm float-right">
-                    <EditOutlined className="text-primary" />
+                    <DeleteOutlined
+                      onClick={() => handleDelete(category.slug)}
+                      className="text-danger"
+                    />
                   </span>
-                </Link>
-              </div>
-            );
-          })}
+                  <Link to={`/admin/category/${category.slug}`}>
+                    <span className="btn btn-sm float-right">
+                      <EditOutlined className="text-primary" />
+                    </span>
+                  </Link>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

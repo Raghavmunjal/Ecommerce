@@ -52,6 +52,7 @@ const EditCategoryScreen = ({ history, match }) => {
             name={name}
             setName={setName}
             loading={loadingUpdate}
+            type="update"
           />
           {loadingDetails && <h1 className="text-danger">Loading .....</h1>}
         </div>

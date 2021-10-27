@@ -1,6 +1,6 @@
 import React from "react";
 
-const CategoryForm = ({ handleSubmit, name, setName, loading }) => {
+const CategoryForm = ({ handleSubmit, name, setName, loading, type }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -20,7 +20,17 @@ const CategoryForm = ({ handleSubmit, name, setName, loading }) => {
             className="btn btn-primary btn-raised my-4"
             disabled={loading || !name}
           >
-            {loading ? <span>Saving...</span> : <span>Save</span>}
+            {type === "create" ? (
+              loading ? (
+                <span>Saving...</span>
+              ) : (
+                <span>Save</span>
+              )
+            ) : loading ? (
+              <span>Updating...</span>
+            ) : (
+              <span>Update</span>
+            )}
           </button>
         </div>
       </form>

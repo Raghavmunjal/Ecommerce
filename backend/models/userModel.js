@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       index: true,
+      unique: true,
     },
     role: {
       type: String,

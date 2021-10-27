@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectDB = require("./config/db.js");
 const UserRoutes = require("./routes/userRoute.js");
 const CategoryRoutes = require("./routes/categoryRoute.js");
+const SubCategoryRoutes = require("./routes/subCategoryRoute.js");
 const { ErrorHandler, notFound } = require("./middleware/errMiddleware.js");
 
 const app = express();
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === "development") {
 // routes
 app.use("/api/users", UserRoutes);
 app.use("/api/category", CategoryRoutes);
+app.use("/api/subcategory", SubCategoryRoutes);
 
 // connecting to the database
 connectDB();

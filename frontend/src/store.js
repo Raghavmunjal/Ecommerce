@@ -9,6 +9,13 @@ import {
   categoryDeleteReducer,
   categoryUpdateReducer,
 } from "./Reducers/CategoryReducer";
+import {
+  subCategoryCreateReducer,
+  subCategoryListReducer,
+  subCategoryDeleteReducer,
+  subCategoryDetailsReducer,
+  subCategoryUpdateReducer,
+} from "./Reducers/SubCategoryReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -18,6 +25,11 @@ const reducer = combineReducers({
   categoryDetails: categoryDetailsReducer,
   categoryList: categoryListReducer,
   categoryUpdate: categoryUpdateReducer,
+  subCategoryCreate: subCategoryCreateReducer,
+  subCategoryList: subCategoryListReducer,
+  subCategoryDelete: subCategoryDeleteReducer,
+  subCategoryUpdate: subCategoryUpdateReducer,
+  subCategoryDetails: subCategoryDetailsReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

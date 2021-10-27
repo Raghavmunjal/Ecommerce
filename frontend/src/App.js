@@ -20,6 +20,8 @@ import UpdatePasswordScreen from "./Screens/Auth/UpdatePasswordScreen";
 import AdminDashBoardScreen from "./Screens/Admin/AdminDashBoardScreen";
 import CreateCategoryScreen from "./Screens/Admin/category/CreateCategoryScreen";
 import EditCategoryScreen from "./Screens/Admin/category/EditCategoryScreen";
+import CreateSubCategoryScreen from "./Screens/Admin/subCategory/CreateSubCategoryScreen";
+import EditSubCategoryScreen from "./Screens/Admin/subCategory/EditSubCategoryScreen";
 
 // User Screens
 import WishlistScreen from "./Screens/User/WishlistScreen";
@@ -57,6 +59,16 @@ const App = () => {
           exact
           path="/admin/category/:slug"
           component={EditCategoryScreen}
+        />
+        <AdminRoute
+          exact
+          path="/admin/subcategory"
+          component={CreateSubCategoryScreen}
+        />
+        <AdminRoute
+          exact
+          path="/admin/subcategory/:slug"
+          component={EditSubCategoryScreen}
         />
         <UserRoute exact path="/user/history" component={HistoryScreen} />
         <UserRoute
