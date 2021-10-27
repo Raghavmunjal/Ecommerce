@@ -27,8 +27,8 @@ export const createProduct = (values) => async (dispatch, getState) => {
       description,
       price,
       quantity,
-      colors,
-      brands,
+      category,
+      subCategory,
       images,
       color,
       brand,
@@ -42,21 +42,19 @@ export const createProduct = (values) => async (dispatch, getState) => {
         description,
         price,
         quantity,
+        category,
+        subCategory,
         images,
         color,
         brand,
         shipping,
-        colors,
-        brands,
       },
       config
     );
-    console.log(data);
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
       payload: data,
     });
-    toast.success(`Product Created`);
   } catch (error) {
     dispatch({
       type: PRODUCT_CREATE_FAIL,

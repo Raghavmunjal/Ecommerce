@@ -46,21 +46,18 @@ const productSchema = mongoose.Schema(
     },
     color: {
       type: String,
-      enum: ["Red", "Green", "Blue", "Black", "Brown", "Silver", "White"],
-    },
-    brand: {
-      type: String,
       enum: [
-        "Apple",
-        "Samsung",
-        "Microsoft",
-        "Lenevo",
-        "Asus",
-        "Dell",
-        "Hp",
-        "Acer",
+        "Red",
+        "Green",
+        "Blue",
+        "Black",
+        "Brown",
+        "Silver",
+        "White",
+        "Grey",
       ],
     },
+
     // ratings: [
     //   {
     //     star: Number,
@@ -71,16 +68,22 @@ const productSchema = mongoose.Schema(
     //     },
     //   },
     // ],
-    // category: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Category",
-    // },
-    // subCategory: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "SubCategory",
-    //   },
-    // ],
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Category",
+    },
+    subCategory: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SubCategory",
+      },
+    ],
+    brand: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Brand",
+    },
   },
   { timestamps: true }
 );

@@ -60,6 +60,7 @@ const CreateCategoryScreen = () => {
         </div>
         <div className="col-md-8 offset-md-1">
           <h4>Create Category</h4>
+          <hr />
           <CategoryForm
             handleSubmit={handleSubmit}
             name={name}

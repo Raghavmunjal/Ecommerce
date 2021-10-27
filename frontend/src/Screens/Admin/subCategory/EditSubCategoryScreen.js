@@ -65,7 +65,7 @@ const EditSubCategoryScreen = ({ match, history }) => {
         </div>
         <div className="col-md-8 offset-md-1">
           <h4>Update Category</h4>
-
+          <hr />
           <div className="form-group">
             <select
               name="category"

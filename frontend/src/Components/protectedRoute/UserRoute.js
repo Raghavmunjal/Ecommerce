@@ -17,7 +17,7 @@ const UserRoute = ({ children, ...rest }) => {
         Authorization: token,
       },
     };
-    return await axios.post("/api/users/isValid", {}, config);
+    return await axios.post("/api/users/isvalid", {}, config);
   };
 
   useEffect(() => {

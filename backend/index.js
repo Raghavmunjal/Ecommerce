@@ -8,13 +8,14 @@ const CategoryRoutes = require("./routes/categoryRoute.js");
 const SubCategoryRoutes = require("./routes/subCategoryRoute.js");
 const ProductRoutes = require("./routes/productRoute.js");
 const BrandRoutes = require("./routes/brandRoute");
+const UploadRoutes = require("./routes/uploadRoute");
 const { ErrorHandler, notFound } = require("./middleware/errMiddleware.js");
 
 const app = express();
 dotenv.config();
 
 // middleware
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
 app.use(cors());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -26,6 +27,8 @@ app.use("/api/category", CategoryRoutes);
 app.use("/api/subcategory", SubCategoryRoutes);
 app.use("/api/product", ProductRoutes);
 app.use("/api/brand", BrandRoutes);
+app.use("/api/images", UploadRoutes);
+
 // connecting to the database
 connectDB();
 

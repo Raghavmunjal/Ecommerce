@@ -17,7 +17,7 @@ const AdminRoute = ({ children, ...rest }) => {
         Authorization: token,
       },
     };
-    return await axios.post("/api/users/isAdmin", {}, config);
+    return await axios.post("/api/users/isadmin", {}, config);
   };
 
   useEffect(() => {
