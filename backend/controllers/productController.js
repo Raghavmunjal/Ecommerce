@@ -28,6 +28,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
       .find({ category })
       .populate("category")
       .populate("subCategory")
+      .populate("brand")
       .sort({ createdAt: -1 })
       .limit(pageSize)
       .skip(pageSize * (page - 1));
@@ -37,6 +38,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
       .find({})
       .populate("category")
       .populate("subCategory")
+      .populate("brand")
       .sort({ createdAt: -1 })
       .limit(pageSize)
       .skip(pageSize * (page - 1));
@@ -62,8 +64,38 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc   Get Product
+//@routes GET /api/product/:slug
+//@access PUBLIC
+const getProduct = asyncHandler(async (req, res) => {
+  const product = await productSchema
+    .findOne({
+      slug: req.params.slug,
+    })
+    .populate("category")
+    .populate("subCategory")
+    .populate("brand")
+    .exec();
+  res.json(product);
+});
+
+//@desc   Update Product
+//@routes PUT /api/product/:slug
+//@access PRIVATE/ADMIN
+const updateProduct = asyncHandler(async (req, res) => {
+  if (req.body.title) {
+    req.body.slug = slugify(req.body.title);
+  }
+  const updatedProduct = await productSchema
+    .findOneAndUpdate({ slug: req.params.slug }, req.body, { new: true })
+    .exec();
+  res.json(updatedProduct);
+});
+
 module.exports = {
   createProduct,
   getAllProducts,
   deleteProduct,
+  getProduct,
+  updateProduct,
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "antd";
+import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
@@ -15,13 +16,15 @@ const ProductCard = ({ product, loading, handleDelete }) => {
         />
       }
       actions={[
-        <EditOutlined className="text-primary" />,
+        <Link to={`/admin/product/${product.slug}`}>
+          <EditOutlined className="text-primary" />
+        </Link>,
         <DeleteOutlined
           className="text-danger"
           onClick={() => handleDelete(product.slug)}
         />,
       ]}
-      style={{ width: 300, marginTop: 16 }}
+      style={{ width: 280, marginTop: 16 }}
       loading={loading}
     >
       <Meta

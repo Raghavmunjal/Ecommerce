@@ -2,7 +2,7 @@ import React from "react";
 import { Select } from "antd";
 const { Option } = Select;
 
-const ProductForm = ({
+const ProductUpdateForm = ({
   handleSubmit,
   handleChange,
   values,
@@ -11,8 +11,9 @@ const ProductForm = ({
   brands,
   setValues,
   handleCategoryChange,
-  show,
-  loading,
+  subIds,
+  setSubIds,
+  handleBrandChange,
 }) => {
   const {
     title,
@@ -20,12 +21,12 @@ const ProductForm = ({
     price,
     quantity,
     colors,
-    category,
-    subCategory,
     shipping,
     color,
+    category,
     brand,
-    images,
+    //subCategory,
+    // images,
   } = values;
 
   return (
@@ -67,11 +68,11 @@ const ProductForm = ({
       <div className="form-group">
         <label className="text-info">Shipping</label>
         <select
+          value={shipping === "No" ? "No" : "Yes"}
           name="shipping"
           className="form-control"
           onChange={handleChange}
         >
-          <option>Please Select</option>
           <option value="No">Not Available</option>
           <option value="Yes">Available</option>
         </select>
@@ -88,8 +89,12 @@ const ProductForm = ({
       </div>
       <div className="form-group">
         <label className="text-info">Color</label>
-        <select name="color" className="form-control" onChange={handleChange}>
-          <option>Please Select Color</option>
+        <select
+          name="color"
+          className="form-control"
+          value={color}
+          onChange={handleChange}
+        >
           {colors.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -103,8 +108,8 @@ const ProductForm = ({
           name="category"
           className="form-control"
           onChange={handleCategoryChange}
+          value={category._id}
         >
-          <option>Please Select Category</option>
           {categories.length > 0 &&
             categories.map((c) => (
               <option key={c._id} value={c._id}>
@@ -113,66 +118,52 @@ const ProductForm = ({
             ))}
         </select>
       </div>
-      {show && (
-        <div className="form-group">
-          <label className="text-info">SubCategory</label>
-          <Select
-            mode="multiple"
-            style={{ width: "100%" }}
-            placeholder="Please Select Sub Category"
-            value={subCategory}
-            onChange={(value) => setValues({ ...values, subCategory: value })}
-          >
-            {subCategories.length > 0 &&
-              subCategories
-                .filter((s) => s.category === category)
-                .map((c) => (
-                  <Option key={c._id} value={c._id}>
-                    {c.name}
-                  </Option>
-                ))}
-          </Select>
-        </div>
-      )}
 
-      {show && (
-        <div className="form-group">
-          <label className="text-info">Brand</label>
-          <select name="brand" className="form-control" onChange={handleChange}>
-            <option>Please Select Brand</option>
-            {brands.length > 0 &&
-              brands
-                .filter((b) => b.category === category)
-                .map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.name}
-                  </option>
-                ))}
-          </select>
-        </div>
-      )}
+      <div className="form-group">
+        <label className="text-info">SubCategory</label>
+        <Select
+          mode="multiple"
+          style={{ width: "100%" }}
+          value={subIds}
+          placeholder="Please Select Sub Category"
+          onChange={(value) => setSubIds(value)}
+        >
+          {subCategories.length > 0 &&
+            subCategories
+              .filter((s) => s.category === category._id)
+              .map((c) => (
+                <Option key={c._id} value={c._id}>
+                  {c.name}
+                </Option>
+              ))}
+        </Select>
+      </div>
 
-      <button
-        type="submit"
-        className="btn btn-raised btn-info my-3"
-        disabled={
-          loading ||
-          !title ||
-          !description ||
-          !price ||
-          !quantity ||
-          !shipping ||
-          !color ||
-          !category ||
-          !brand ||
-          !subCategory ||
-          images.length === 0
-        }
-      >
-        {loading ? <span>Saving...</span> : <span>Save Product</span>}
+      <div className="form-group">
+        <label className="text-info">Brand</label>
+        <select
+          name="brand"
+          className="form-control"
+          onChange={handleBrandChange}
+          value={brand._id}
+        >
+          {brands.length > 0 &&
+            brands
+              .filter((b) => b.category === category._id)
+              .map((c) => (
+                <option key={c._id} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+        </select>
+      </div>
+
+      <button type="submit" className="btn btn-raised btn-info my-3">
+        {/* {loading ? <span>Updating...</span> : <span>Update Product</span>} */}
+        <span>Update Product</span>
       </button>
     </form>
   );
 };
 
-export default ProductForm;
+export default ProductUpdateForm;

@@ -24,6 +24,7 @@ import SubCategoryCreateScreen from "./Screens/Admin/subCategory/SubCategoryCrea
 import SubCategoryEditScreen from "./Screens/Admin/subCategory/SubCategoryEditScreen";
 import ProductCreateScreen from "./Screens/Admin/product/ProductCreateScreen";
 import ProductListScreen from "./Screens/Admin/product/ProductListScreen";
+import ProductEditScreen from "./Screens/Admin/product/ProductEditScreen";
 import BrandCreateScreen from "./Screens/Admin/brand/BrandCreateScreen";
 import BrandEditScreen from "./Screens/Admin/brand/BrandEditScreen";
 
@@ -91,6 +92,12 @@ const App = () => {
           path="/admin/products"
           component={ProductListScreen}
         />
+        <AdminRoute
+          exact
+          path="/admin/product/:slug"
+          component={ProductEditScreen}
+        />
+
         <UserRoute exact path="/user/history" component={HistoryScreen} />
         <UserRoute
           exact

@@ -4,11 +4,17 @@ const {
   createProduct,
   getAllProducts,
   deleteProduct,
+  getProduct,
+  updateProduct,
 } = require("../controllers/productController");
 const router = express.Router();
 
 router.route("/all").get(getAllProducts);
-router.route("/:slug").delete(tokenCheck, adminCheck, deleteProduct);
+router
+  .route("/:slug")
+  .get(getProduct)
+  .delete(tokenCheck, adminCheck, deleteProduct)
+  .put(tokenCheck, adminCheck, updateProduct);
 router.route("/").post(tokenCheck, adminCheck, createProduct);
 
 module.exports = router;

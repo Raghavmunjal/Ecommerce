@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminNav from "../../../Components/nav/AdminNav";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../../Actions/productAction";
-import ProductForm from "../../../Components/ProductForm";
+import ProductCreateForm from "../../../Components/ProductCreateForm";
 import { listCategories } from "../../../Actions/categoryAction";
 import { listSubCategories } from "../../../Actions/subCategoryAction";
 import { listBrands } from "../../../Actions/brandAction";
@@ -88,7 +88,7 @@ const ProductCreateScreen = () => {
             <FileUpload values={values} setValues={setValues} />
           </div>
 
-          <ProductForm
+          <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             values={values}
