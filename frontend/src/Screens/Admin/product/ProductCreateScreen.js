@@ -23,7 +23,7 @@ const intialState = {
   brand: "",
 };
 
-const CreateProductScreen = () => {
+const ProductCreateScreen = () => {
   const [values, setValues] = useState(intialState);
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
@@ -106,4 +106,4 @@ const CreateProductScreen = () => {
   );
 };
 
-export default CreateProductScreen;
+export default ProductCreateScreen;

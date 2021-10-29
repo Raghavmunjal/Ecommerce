@@ -5,10 +5,14 @@ import {
   updateCategory,
   listCategoryDetails,
 } from "../../../Actions/categoryAction";
-import { CATEGORY_UPDATE_RESET } from "../../../Constants/categoryConstant";
+import {
+  CATEGORY_UPDATE_RESET,
+  CATEGORY_DETAILS_RESET,
+} from "../../../Constants/categoryConstant";
 import CategoryForm from "../../../Components/CategoryForm";
+import { Spin } from "antd";
 
-const EditCategoryScreen = ({ history, match }) => {
+const CategoryEditScreen = ({ history, match }) => {
   const [name, setName] = useState("");
 
   const dispatch = useDispatch();
@@ -29,6 +33,7 @@ const EditCategoryScreen = ({ history, match }) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: CATEGORY_UPDATE_RESET });
+      dispatch({ type: CATEGORY_DETAILS_RESET });
       history.push("/admin/category");
     } else {
       if (!category.name || category.slug !== categorySlug) {
@@ -40,26 +45,27 @@ const EditCategoryScreen = ({ history, match }) => {
   }, [dispatch, successUpdate, history, categorySlug, category]);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-2">
-          <AdminNav />
-        </div>
-        <div className="col-md-8 offset-md-1">
-          <h4>Update Category</h4>
-          <hr />
-          <CategoryForm
-            handleSubmit={handleSubmit}
-            name={name}
-            setName={setName}
-            loading={loadingUpdate}
-            type="update"
-          />
-          {loadingDetails && <h1 className="text-danger">Loading .....</h1>}
+    <Spin spinning={loadingDetails} tip="Loading..." size="large">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <AdminNav />
+          </div>
+          <div className="col-md-8 offset-md-1">
+            <h4>Update Category</h4>
+            <hr />
+            <CategoryForm
+              handleSubmit={handleSubmit}
+              name={name}
+              setName={setName}
+              loading={loadingUpdate}
+              type="update"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </Spin>
   );
 };
 
-export default EditCategoryScreen;
+export default CategoryEditScreen;

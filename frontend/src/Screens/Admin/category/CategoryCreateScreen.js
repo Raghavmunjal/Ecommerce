@@ -11,8 +11,9 @@ import {
 import { CATEGORY_CREATE_RESET } from "../../../Constants/categoryConstant";
 import CategoryForm from "../../../Components/CategoryForm";
 import LocalSearch from "../../../Components/LocalSearch";
+import { Spin } from "antd";
 
-const CreateCategoryScreen = () => {
+const CategoryCreateScreen = () => {
   const [name, setName] = useState("");
   const [keyword, setKeyword] = useState("");
 
@@ -53,48 +54,50 @@ const CreateCategoryScreen = () => {
   //const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-2">
-          <AdminNav />
-        </div>
-        <div className="col-md-8 offset-md-1">
-          <h4>Create Category</h4>
-          <hr />
-          <CategoryForm
-            handleSubmit={handleSubmit}
-            name={name}
-            setName={setName}
-            loading={loadingCreate}
-            type="create"
-          />
+    <Spin spinning={loadingList} tip="Loading..." size="large">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <AdminNav />
+          </div>
+          <div className="col-md-8 offset-md-1">
+            <h4>Create Category</h4>
+            <hr />
+            <CategoryForm
+              handleSubmit={handleSubmit}
+              name={name}
+              setName={setName}
+              loading={loadingCreate}
+              type="create"
+            />
 
-          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-          {loadingList && <h1 className="text-danger">Loading .....</h1>}
-          {categories
-            .filter((c) => c.name.toLowerCase().includes(keyword))
-            .map((category) => {
-              return (
-                <div key={category._id} className="alert alert-secondary">
-                  {category.name}
-                  <span className="btn btn-sm float-right">
-                    <DeleteOutlined
-                      onClick={() => handleDelete(category.slug)}
-                      className="text-danger"
-                    />
-                  </span>
-                  <Link to={`/admin/category/${category.slug}`}>
+            <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+            {loadingList && <h1 className="text-danger">Loading .....</h1>}
+            {categories
+              .filter((c) => c.name.toLowerCase().includes(keyword))
+              .map((category) => {
+                return (
+                  <div key={category._id} className="alert alert-secondary">
+                    {category.name}
                     <span className="btn btn-sm float-right">
-                      <EditOutlined className="text-primary" />
+                      <DeleteOutlined
+                        onClick={() => handleDelete(category.slug)}
+                        className="text-danger"
+                      />
                     </span>
-                  </Link>
-                </div>
-              );
-            })}
+                    <Link to={`/admin/category/${category.slug}`}>
+                      <span className="btn btn-sm float-right">
+                        <EditOutlined className="text-primary" />
+                      </span>
+                    </Link>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>
-    </div>
+    </Spin>
   );
 };
 
-export default CreateCategoryScreen;
+export default CategoryCreateScreen;

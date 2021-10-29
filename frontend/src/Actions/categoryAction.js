@@ -49,6 +49,7 @@ export const createCategory = (name) => async (dispatch, getState) => {
           ? error.response.data.message
           : error.message,
     });
+    console.log(error.message);
     toast.error(
       error.response && error.response.data.message
         ? error.response.data.message

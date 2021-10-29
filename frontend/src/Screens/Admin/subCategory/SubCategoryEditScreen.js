@@ -3,32 +3,35 @@ import AdminNav from "../../../Components/nav/AdminNav";
 import { useSelector, useDispatch } from "react-redux";
 import CategoryForm from "../../../Components/CategoryForm";
 import {
-  BRAND_DETAILS_RESET,
-  BRAND_UPDATE_RESET,
-} from "../../../Constants/brandConstant";
-import { listBrandDetails, updateBrand } from "../../../Actions/brandAction";
+  SUBCATEGORY_DETAILS_RESET,
+  SUBCATEGORY_UPDATE_RESET,
+} from "../../../Constants/subCategoryConstant";
+import {
+  listSubCategoryDetails,
+  updateSubCategory,
+} from "../../../Actions/subCategoryAction";
 import { listCategories } from "../../../Actions/categoryAction";
 
-const EditBrandScreen = ({ match, history }) => {
+const SubCategoryEditScreen = ({ match, history }) => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
 
   const dispatch = useDispatch();
 
-  const brandSlug = match.params.slug;
+  const subCategorySlug = match.params.slug;
 
   const categoryList = useSelector((state) => state.categoryList);
   const { categories } = categoryList;
 
-  const brandUpdate = useSelector((state) => state.brandUpdate);
-  const { loading: loadingUpdate, success: successUpdate } = brandUpdate;
+  const subCategoryUpdate = useSelector((state) => state.subCategoryUpdate);
+  const { loading: loadingUpdate, success: successUpdate } = subCategoryUpdate;
 
-  const brandDetails = useSelector((state) => state.brandDetails);
-  const { loading: loadingDetails, brand } = brandDetails;
+  const subCategoryDetails = useSelector((state) => state.subCategoryDetails);
+  const { loading: loadingDetails, subCategory } = subCategoryDetails;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateBrand(name, brandSlug, category));
+    dispatch(updateSubCategory(name, subCategorySlug, category));
   };
 
   useEffect(() => {
@@ -37,18 +40,22 @@ const EditBrandScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: BRAND_UPDATE_RESET });
-      dispatch({ type: BRAND_DETAILS_RESET });
-      history.push("/admin/brand");
+      dispatch({ type: SUBCATEGORY_UPDATE_RESET });
+      dispatch({ type: SUBCATEGORY_DETAILS_RESET });
+      history.push("/admin/subcategory");
     } else {
-      if (!brand.name || !brand.category || brand.slug !== brandSlug) {
-        dispatch(listBrandDetails(brandSlug));
+      if (
+        !subCategory.name ||
+        !subCategory.category ||
+        subCategory.slug !== subCategorySlug
+      ) {
+        dispatch(listSubCategoryDetails(subCategorySlug));
       } else {
-        setName(brand.name);
-        setCategory(brand.category);
+        setName(subCategory.name);
+        setCategory(subCategory.category);
       }
     }
-  }, [dispatch, successUpdate, history, brandSlug, brand]);
+  }, [dispatch, successUpdate, history, subCategorySlug, subCategory]);
 
   return (
     <div className="container-fluid">
@@ -93,4 +100,4 @@ const EditBrandScreen = ({ match, history }) => {
   );
 };
 
-export default EditBrandScreen;
+export default SubCategoryEditScreen;

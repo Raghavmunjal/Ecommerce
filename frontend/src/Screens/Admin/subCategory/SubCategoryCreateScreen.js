@@ -3,42 +3,42 @@ import AdminNav from "../../../Components/nav/AdminNav";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
-  createBrand,
-  listBrands,
-  deleteBrand,
-} from "../../../Actions/brandAction";
+  createSubCategory,
+  listSubCategories,
+  deleteSubCategory,
+} from "../../../Actions/subCategoryAction";
 import { listCategories } from "../../../Actions/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
-import { BRAND_CREATE_RESET } from "../../../Constants/brandConstant";
+import { SUBCATEGORY_CREATE_RESET } from "../../../Constants/subCategoryConstant";
 import CategoryForm from "../../../Components/CategoryForm";
 import LocalSearch from "../../../Components/LocalSearch";
 
-const CreateBrandScreen = () => {
+const SubCategoryCreateScreen = () => {
   const [name, setName] = useState("");
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("");
 
-  const brandCreate = useSelector((state) => state.brandCreate);
+  const subCategoryCreate = useSelector((state) => state.subCategoryCreate);
   const {
     loading: loadingCreate,
     success: successCreate,
-    brand: createdBrand,
-  } = brandCreate;
+    category: createdSubCategory,
+  } = subCategoryCreate;
 
   const categoryList = useSelector((state) => state.categoryList);
   const { categories } = categoryList;
 
-  const brandList = useSelector((state) => state.brandList);
-  const { loading: loadingBrandsList, brands } = brandList;
+  const subCategoryList = useSelector((state) => state.subCategoryList);
+  const { loading: loadingSubCategoriesList, subCategories } = subCategoryList;
 
-  const brandDelete = useSelector((state) => state.brandDelete);
-  const { success: successDelete } = brandDelete;
+  const subCategoryDelete = useSelector((state) => state.subCategoryDelete);
+  const { success: successDelete } = subCategoryDelete;
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createBrand(name, category));
+    dispatch(createSubCategory(name, category));
   };
 
   useEffect(() => {
@@ -46,15 +46,15 @@ const CreateBrandScreen = () => {
   }, [dispatch]);
   useEffect(() => {
     if (successCreate) {
-      dispatch({ type: BRAND_CREATE_RESET });
+      dispatch({ type: SUBCATEGORY_CREATE_RESET });
       setName("");
     }
-    dispatch(listBrands());
-  }, [dispatch, successCreate, successDelete, createdBrand]);
+    dispatch(listSubCategories());
+  }, [dispatch, successCreate, successDelete, createdSubCategory]);
 
   const handleDelete = (slug) => {
     if (window.confirm("Are you sure you want to delete?")) {
-      dispatch(deleteBrand(slug));
+      dispatch(deleteSubCategory(slug));
     }
   };
 
@@ -65,7 +65,7 @@ const CreateBrandScreen = () => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h4>Create Brand</h4>
+          <h4>Create SubCategory</h4>
           <hr />
           <div className="form-group">
             <select
@@ -91,20 +91,22 @@ const CreateBrandScreen = () => {
             type="create"
           />
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-          {loadingBrandsList && <h1 className="text-danger">Loading .....</h1>}
-          {brands
+          {loadingSubCategoriesList && (
+            <h1 className="text-danger">Loading .....</h1>
+          )}
+          {subCategories
             .filter((c) => c.name.toLowerCase().includes(keyword))
-            .map((brand) => {
+            .map((category) => {
               return (
-                <div key={brand._id} className="alert alert-secondary">
-                  {brand.name}
+                <div key={category._id} className="alert alert-secondary">
+                  {category.name}
                   <span className="btn btn-sm float-right">
                     <DeleteOutlined
-                      onClick={() => handleDelete(brand.slug)}
+                      onClick={() => handleDelete(category.slug)}
                       className="text-danger"
                     />
                   </span>
-                  <Link to={`/admin/brand/${brand.slug}`}>
+                  <Link to={`/admin/subcategory/${category.slug}`}>
                     <span className="btn btn-sm float-right">
                       <EditOutlined className="text-primary" />
                     </span>
@@ -118,4 +120,4 @@ const CreateBrandScreen = () => {
   );
 };
 
-export default CreateBrandScreen;
+export default SubCategoryCreateScreen;

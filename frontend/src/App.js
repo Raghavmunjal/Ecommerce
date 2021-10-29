@@ -18,13 +18,14 @@ import UpdatePasswordScreen from "./Screens/Auth/UpdatePasswordScreen";
 
 // Admin Screens
 import AdminDashBoardScreen from "./Screens/Admin/AdminDashBoardScreen";
-import CreateCategoryScreen from "./Screens/Admin/category/CreateCategoryScreen";
-import EditCategoryScreen from "./Screens/Admin/category/EditCategoryScreen";
-import CreateSubCategoryScreen from "./Screens/Admin/subCategory/CreateSubCategoryScreen";
-import EditSubCategoryScreen from "./Screens/Admin/subCategory/EditSubCategoryScreen";
-import CreateProductScreen from "./Screens/Admin/product/CreateProductScreen";
-import CreateBrandScreen from "./Screens/Admin/brand/CreateBrandScreen";
-import EditBrandScreen from "./Screens/Admin/brand/EditBrandScreen";
+import CategoryCreateScreen from "./Screens/Admin/category/CategoryCreateScreen";
+import CategoryEditScreen from "./Screens/Admin/category/CategoryEditScreen";
+import SubCategoryCreateScreen from "./Screens/Admin/subCategory/SubCategoryCreateScreen";
+import SubCategoryEditScreen from "./Screens/Admin/subCategory/SubCategoryEditScreen";
+import ProductCreateScreen from "./Screens/Admin/product/ProductCreateScreen";
+import ProductListScreen from "./Screens/Admin/product/ProductListScreen";
+import BrandCreateScreen from "./Screens/Admin/brand/BrandCreateScreen";
+import BrandEditScreen from "./Screens/Admin/brand/BrandEditScreen";
 
 // User Screens
 import WishlistScreen from "./Screens/User/WishlistScreen";
@@ -32,6 +33,7 @@ import HistoryScreen from "./Screens/User/HistoryScreen";
 
 // Components
 import Header from "./Components/nav/Header";
+import NotFound from "./Components/NotFound";
 
 const App = () => {
   return (
@@ -56,33 +58,38 @@ const App = () => {
         <AdminRoute
           exact
           path="/admin/category"
-          component={CreateCategoryScreen}
+          component={CategoryCreateScreen}
         />
         <AdminRoute
           exact
           path="/admin/category/:slug"
-          component={EditCategoryScreen}
+          component={CategoryEditScreen}
         />
         <AdminRoute
           exact
           path="/admin/subcategory"
-          component={CreateSubCategoryScreen}
+          component={SubCategoryCreateScreen}
         />
         <AdminRoute
           exact
           path="/admin/subcategory/:slug"
-          component={EditSubCategoryScreen}
+          component={SubCategoryEditScreen}
         />
-        <AdminRoute exact path="/admin/brand" component={CreateBrandScreen} />
+        <AdminRoute exact path="/admin/brand" component={BrandCreateScreen} />
         <AdminRoute
           exact
           path="/admin/brand/:slug"
-          component={EditBrandScreen}
+          component={BrandEditScreen}
         />
         <AdminRoute
           exact
           path="/admin/product"
-          component={CreateProductScreen}
+          component={ProductCreateScreen}
+        />
+        <AdminRoute
+          exact
+          path="/admin/products"
+          component={ProductListScreen}
         />
         <UserRoute exact path="/user/history" component={HistoryScreen} />
         <UserRoute
@@ -91,6 +98,7 @@ const App = () => {
           component={UpdatePasswordScreen}
         />
         <UserRoute exact path="/user/wishlist" component={WishlistScreen} />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   );

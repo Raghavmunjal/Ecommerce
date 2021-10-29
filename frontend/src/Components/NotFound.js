@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Result } from "antd";
 
-const LoadingToRedirect = () => {
+const NotFound = () => {
   const [count, setCount] = useState(5);
   const history = useHistory();
   useEffect(() => {
@@ -18,9 +18,9 @@ const LoadingToRedirect = () => {
   return (
     <div className="container p-5 text-center">
       <Result
-        status="403"
-        title="403"
-        subTitle="Sorry, you are not authorized to access this page."
+        status="404"
+        title="404"
+        subTitle="Sorry, the page you visited does not exist."
         extra={
           <h6 className="text-warning">Redirecting you in {count} seconds</h6>
         }
@@ -29,4 +29,4 @@ const LoadingToRedirect = () => {
   );
 };
 
-export default LoadingToRedirect;
+export default NotFound;
