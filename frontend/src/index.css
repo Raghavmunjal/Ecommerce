@@ -50,6 +50,13 @@ body {
   font-size: 0.875rem;
 }
 
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
 h1,
 h2,
 h3,
@@ -101,6 +108,17 @@ p {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-card {
+    width: 280px;
+  }
+}
+
 .underline {
   width: 5rem;
   height: 0.25rem;
@@ -110,12 +128,6 @@ p {
   margin-right: auto;
 }
 
-@media screen and (max-width: 768px) {
-  .product-card {
-    width: 240px;
-  }
-}
-
 .jumbo {
   color: var(--clr-white);
   background-color: var(--clr-primary-6);
@@ -123,4 +135,10 @@ p {
 }
 .jumbo h4 {
   font-size: 20px;
+}
+.abc {
+  transition: var(--transition);
+}
+.abc:hover {
+  transform: translateY(-5px);
 }

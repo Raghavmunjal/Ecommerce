@@ -4,6 +4,7 @@ import { listProducts, deleteProduct } from "../../../Actions/productAction";
 import AdminNav from "../../../Components/nav/AdminNav";
 import AdminProductCard from "../../../Components/AdminProductCard";
 import { listCategories } from "../../../Actions/categoryAction";
+import LoadingCard from "../../../Components/LoadingCard";
 
 const ProductListScreen = ({ match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -69,20 +70,23 @@ const ProductListScreen = ({ match }) => {
                 ))}
             </select>
           </div>
-          {products.length > 0 && (
-            <div className="row">
-              {products.map((product) => {
-                return (
-                  <div key={product._id} className="col-md-4">
-                    <AdminProductCard
-                      product={product}
-                      loading={loadingList}
-                      handleDelete={handleDelete}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+          {loadingList ? (
+            <LoadingCard count={6} />
+          ) : (
+            products.length > 0 && (
+              <div className="row">
+                {products.map((product) => {
+                  return (
+                    <div key={product._id} className="col-md-4">
+                      <AdminProductCard
+                        product={product}
+                        handleDelete={handleDelete}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )
           )}
           <p>Page : {page}</p>
           <p>Pages : {pages}</p>

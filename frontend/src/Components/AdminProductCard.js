@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
-const ProductCard = ({ product, loading, handleDelete }) => {
+const ProductCard = ({ product, handleDelete }) => {
   const { title, description, images } = product;
   return (
-    <>
+    <div className="products">
       <Card
         cover={
           <img
@@ -28,14 +28,13 @@ const ProductCard = ({ product, loading, handleDelete }) => {
         ]}
         style={{ marginTop: 16 }}
         className="product-card"
-        loading={loading}
       >
         <Meta
           title={title}
           description={`${description && description.substring(0, 20)}...`}
         />
       </Card>
-    </>
+    </div>
   );
 };
 
