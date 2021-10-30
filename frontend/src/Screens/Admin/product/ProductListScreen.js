@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts, deleteProduct } from "../../../Actions/productAction";
 import AdminNav from "../../../Components/nav/AdminNav";
-import ProductCard from "../../../Components/ProductCard";
+import AdminProductCard from "../../../Components/AdminProductCard";
 import { listCategories } from "../../../Actions/categoryAction";
 
-const ProductListScreen = () => {
+const ProductListScreen = ({ match }) => {
+  const pageNumber = match.params.pageNumber || 1;
   const productList = useSelector((state) => state.productList);
   const { loading: loadingList, products, page, pages } = productList;
 
@@ -24,8 +25,8 @@ const ProductListScreen = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(listProducts(category));
-  }, [dispatch, category, successDelete]);
+    dispatch(listProducts(category, pageNumber));
+  }, [dispatch, category, successDelete, pageNumber]);
 
   const handleDelete = (slug) => {
     if (window.confirm("Are you sure you want to delete?")) {
@@ -38,12 +39,21 @@ const ProductListScreen = () => {
         <div className="col-md-2">
           <AdminNav />
         </div>
-        <div className="col">
+        <div className="col-md-8 offset-md-1">
           {products.length > 0 ? (
-            <h4>Products</h4>
+            <h3
+              style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
+            >
+              All Products
+            </h3>
           ) : (
-            <h4 className="text-danger">No Product Found</h4>
+            <h3
+              style={{ textAlign: "center", marginTop: 55, color: "#40a9ff" }}
+            >
+              No Product Found
+            </h3>
           )}
+          <div className="underline"></div>
           <div className="form-group">
             <select
               name="category"
@@ -64,7 +74,7 @@ const ProductListScreen = () => {
               {products.map((product) => {
                 return (
                   <div key={product._id} className="col-md-4">
-                    <ProductCard
+                    <AdminProductCard
                       product={product}
                       loading={loadingList}
                       handleDelete={handleDelete}

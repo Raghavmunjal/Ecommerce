@@ -15,10 +15,10 @@ const createProduct = asyncHandler(async (req, res) => {
 //@routes GET /api/product/all
 //@access PUBLIC
 const getAllProducts = asyncHandler(async (req, res) => {
-  const pageSize = 6;
-
-  const page = Number(req.query.page) || 1;
+  console.log(req.query.pageNumber, req.query.category, req.query.limit);
+  const page = Number(req.query.pageNumber) || 1;
   const category = req.query.category || "all";
+  const pageSize = Number(req.query.limit) || 6;
 
   let products;
   let count;
@@ -43,6 +43,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
       .limit(pageSize)
       .skip(pageSize * (page - 1));
   }
+  console.log(products.length);
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 

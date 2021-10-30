@@ -44,10 +44,10 @@ const UpdatePasswordScreen = () => {
           />
           <button
             type="submit"
-            className="btn btn-primary btn-raised my-3"
+            className="btn btn-info btn-raised my-3"
             disabled={password.length < 6 || loading}
           >
-            {loading ? <span>Updating...</span> : <span>Update Password</span>}
+            {loading ? <span>Updating...</span> : <span>Update</span>}
           </button>
         </div>
       </form>
@@ -55,7 +55,7 @@ const UpdatePasswordScreen = () => {
   };
 
   return (
-    <div className="conatiner-fluid">
+    <div className="container-fluid">
       <div className="row">
         <div className="col-md-2">
           {userInfo && userInfo.role === process.env.REACT_APP_CHECK_ADMIN ? (
@@ -64,12 +64,8 @@ const UpdatePasswordScreen = () => {
             <UserNav />
           )}
         </div>
-        <div className="col-md-6 offset-md-2">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4>Password</h4>
-          )}
+        <div className="col-md-8 offset-1">
+          <h3 style={{ marginTop: 55, color: "#001529" }}>Update Password</h3>
           {passwordUpdateForm()}
         </div>
       </div>

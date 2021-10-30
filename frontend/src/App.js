@@ -94,6 +94,11 @@ const App = () => {
         />
         <AdminRoute
           exact
+          path="/admin/products/:pageNumber"
+          component={ProductListScreen}
+        />
+        <AdminRoute
+          exact
           path="/admin/product/:slug"
           component={ProductEditScreen}
         />

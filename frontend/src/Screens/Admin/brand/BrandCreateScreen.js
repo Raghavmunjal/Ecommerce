@@ -65,8 +65,10 @@ const BrandCreateScreen = () => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h4>Create Brand</h4>
-          <hr />
+          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+            Create Brand
+          </h3>
+          <div className="underline"></div>
           <div className="form-group">
             <select
               name="category"

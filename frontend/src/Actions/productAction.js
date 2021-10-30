@@ -83,29 +83,31 @@ export const createProduct = (values) => async (dispatch, getState) => {
   }
 };
 
-export const listProducts = (category, page) => async (dispatch) => {
-  try {
-    dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await axios.get(
-      `/api/product/all?category=${category}&page=${page}`
-    );
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-    console.log(data);
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_LIST_FAIL,
-      payload:
+export const listProducts =
+  (category = " ", pageNumber = " ", limit = " ") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST });
+      const { data } = await axios.get(
+        `/api/product/all?category=${category}&pageNumber=${pageNumber}&limit=${limit}`
+      );
+      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+      console.log(data);
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+      toast.error(
         error.response && error.response.data.message
           ? error.response.data.message
-          : error.message,
-    });
-    toast.error(
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    );
-  }
-};
+          : error.message
+      );
+    }
+  };
 
 export const deleteProduct = (slug) => async (dispatch, getState) => {
   try {

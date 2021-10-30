@@ -8,7 +8,12 @@ const HistoryScreen = () => {
         <div className="col-md-2">
           <UserNav />
         </div>
-        <div className="col">history page</div>
+        <div className="col-md-8 offset-1">
+          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+            User History
+          </h3>
+          <div className="underline"></div>
+        </div>
       </div>
     </div>
   );

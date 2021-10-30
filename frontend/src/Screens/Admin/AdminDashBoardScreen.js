@@ -8,7 +8,12 @@ const AdminDashBoardScreen = () => {
         <div className="col-md-2">
           <AdminNav />
         </div>
-        <div className="col">Admin dashboard</div>
+        <div className="col-md-8 offset-md-1">
+          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+            Admin DashBoard
+          </h3>
+          <div className="underline"></div>
+        </div>
       </div>
     </div>
   );

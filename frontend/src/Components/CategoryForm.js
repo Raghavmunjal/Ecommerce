@@ -17,7 +17,7 @@ const CategoryForm = ({ handleSubmit, name, setName, loading, type }) => {
           />
           <button
             type="submit"
-            className="btn btn-primary btn-raised my-4"
+            className="btn btn-info btn-raised my-4"
             disabled={loading || !name}
           >
             {type === "create" ? (

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import AdminNav from "../../../Components/nav/AdminNav";
 import { Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createCategory,
@@ -16,6 +20,8 @@ import { Spin } from "antd";
 const CategoryCreateScreen = () => {
   const [name, setName] = useState("");
   const [keyword, setKeyword] = useState("");
+
+  const antIcon = <LoadingOutlined style={{ fontSize: 100 }} spin />;
 
   const categoryCreate = useSelector((state) => state.categoryCreate);
   const {
@@ -54,15 +60,22 @@ const CategoryCreateScreen = () => {
   //const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
-    <Spin spinning={loadingList} tip="Loading..." size="large">
+    <Spin
+      spinning={loadingList === true || loadingCreate === true}
+      indicator={antIcon}
+    >
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-2">
             <AdminNav />
           </div>
           <div className="col-md-8 offset-md-1">
-            <h4>Create Category</h4>
-            <hr />
+            <h3
+              style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
+            >
+              Create Category
+            </h3>
+            <div className="underline"></div>
             <CategoryForm
               handleSubmit={handleSubmit}
               name={name}
@@ -72,7 +85,7 @@ const CategoryCreateScreen = () => {
             />
 
             <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-            {loadingList && <h1 className="text-danger">Loading .....</h1>}
+
             {categories
               .filter((c) => c.name.toLowerCase().includes(keyword))
               .map((category) => {

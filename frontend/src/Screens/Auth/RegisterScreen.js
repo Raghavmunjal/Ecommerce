@@ -54,7 +54,7 @@ const RegisterScreen = ({ history }) => {
         </div>
         <button
           type="submit"
-          className="btn btn-primary btn-raised my-2"
+          className="btn btn-info btn-raised my-2"
           disabled={!email}
         >
           Register
@@ -67,7 +67,7 @@ const RegisterScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h4>Register</h4>
+          <h3 style={{ marginTop: 20, color: "#001529" }}>Register</h3>
           {registerForm()}
         </div>
       </div>

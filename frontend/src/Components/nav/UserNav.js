@@ -3,25 +3,27 @@ import { Link } from "react-router-dom";
 
 const UserNav = () => {
   return (
-    <nav>
-      <ul className="nav flex-column">
-        <li className="nav-item">
-          <Link to="/user/history" className="nav-link">
-            History
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/user/update/password" className="nav-link">
-            Password
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/user/wishlist" className="nav-link">
-            Wishlist
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <nav style={{ marginTop: 55 }}>
+        <ul className="nav flex-column">
+          <li className="nav-item">
+            <Link to="/user/history" className="nav-link">
+              <h4 className="text-info">History</h4>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/user/wishlist" className="nav-link">
+              <h4 className="text-info">Wishlist</h4>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/user/update/password" className="nav-link">
+              <h4 className="text-info">Password</h4>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 };
 

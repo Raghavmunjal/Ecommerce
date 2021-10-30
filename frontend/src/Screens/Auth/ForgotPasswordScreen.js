@@ -44,7 +44,7 @@ const ForgotPasswordScreen = ({ history }) => {
   };
   return (
     <div className="container col-md-6 offset-md-3 p-5">
-      <h4>Forgot Password</h4>
+      <h3 style={{ marginTop: 55, color: "#001529" }}>Forgot Password</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <input
@@ -63,7 +63,7 @@ const ForgotPasswordScreen = ({ history }) => {
           className="btn btn-danger btn-raised"
           disabled={!email}
         >
-          {loading ? <span>Resetting...</span> : <span>Reset Password</span>}
+          {loading ? <span>Resetting...</span> : <span>Reset</span>}
         </button>
       </form>
     </div>

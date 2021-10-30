@@ -76,7 +76,7 @@ const RegisterCompleteScreen = ({ history }) => {
         <Button
           onClick={handleSubmit}
           type="primary"
-          className="mb-3"
+          className="mt-3"
           block
           shape="round"
           icon={<MailOutlined />}
@@ -86,7 +86,7 @@ const RegisterCompleteScreen = ({ history }) => {
           {loading ? (
             <span>Signing In...</span>
           ) : (
-            <span>Sign up with Email/Password</span>
+            <span>Sign up with Email</span>
           )}
         </Button>
       </form>
@@ -97,7 +97,7 @@ const RegisterCompleteScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h4>Sign Up</h4>
+          <h3 style={{ marginTop: 20, color: "#001529" }}>Sign Up</h3>
           {completeRegistrationForm()}
         </div>
       </div>

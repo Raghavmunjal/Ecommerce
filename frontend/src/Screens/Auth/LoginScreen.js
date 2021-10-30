@@ -74,11 +74,7 @@ const LoginScreen = ({ history }) => {
           size="large"
           disabled={!email || password.length < 6}
         >
-          {loading ? (
-            <span>Logging In...</span>
-          ) : (
-            <span>Login with Email/Password</span>
-          )}
+          {loading ? <span>Logging In...</span> : <span>Login with Email</span>}
         </Button>
       </form>
     );
@@ -88,21 +84,25 @@ const LoginScreen = ({ history }) => {
     <div className="container p-5">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <h4>Login</h4>
+          <h3 style={{ marginTop: 20, color: "#001529" }}>Login</h3>
           {loginForm()}
-
           <Button
             onClick={loginWithGoogle}
-            type="danger"
+            // type="danger"
             className="mb-3"
             block
             shape="round"
             icon={<GoogleOutlined />}
             size="large"
+            style={{ backgroundColor: "#001529", color: "white" }}
           >
             Login with Google
           </Button>
-          <Link to="/forgot/password" className="float-right text-danger">
+          <Link
+            to="/forgot/password"
+            className="float-right"
+            style={{ color: "#001529" }}
+          >
             Forgot Password ?
           </Link>
         </div>

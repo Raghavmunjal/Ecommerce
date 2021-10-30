@@ -5,6 +5,7 @@ import {
   updateCategory,
   listCategoryDetails,
 } from "../../../Actions/categoryAction";
+import { LoadingOutlined } from "@ant-design/icons";
 import {
   CATEGORY_UPDATE_RESET,
   CATEGORY_DETAILS_RESET,
@@ -16,6 +17,8 @@ const CategoryEditScreen = ({ history, match }) => {
   const [name, setName] = useState("");
 
   const dispatch = useDispatch();
+
+  const antIcon = <LoadingOutlined style={{ fontSize: 100 }} spin />;
 
   const categorySlug = match.params.slug;
 
@@ -45,15 +48,22 @@ const CategoryEditScreen = ({ history, match }) => {
   }, [dispatch, successUpdate, history, categorySlug, category]);
 
   return (
-    <Spin spinning={loadingDetails} tip="Loading..." size="large">
+    <Spin
+      spinning={loadingDetails === true || loadingUpdate === true}
+      indicator={antIcon}
+    >
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-2">
             <AdminNav />
           </div>
           <div className="col-md-8 offset-md-1">
-            <h4>Update Category</h4>
-            <hr />
+            <h3
+              style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
+            >
+              Edit Category
+            </h3>
+            <div className="underline"></div>
             <CategoryForm
               handleSubmit={handleSubmit}
               name={name}
