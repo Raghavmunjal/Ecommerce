@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdminNav from "../../../Components/nav/AdminNav";
 import { useSelector, useDispatch } from "react-redux";
-import CategoryForm from "../../../Components/CategoryForm";
+import CategoryForm from "../../../Components/forms/CategoryForm";
 import {
   SUBCATEGORY_DETAILS_RESET,
   SUBCATEGORY_UPDATE_RESET,
@@ -64,7 +64,7 @@ const SubCategoryEditScreen = ({ match, history }) => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+          <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>
             Edit Sub Category
           </h3>
           <div className="underline"></div>

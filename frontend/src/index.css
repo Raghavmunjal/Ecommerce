@@ -29,7 +29,7 @@ Variables
   --clr-white: #fff;
   --ff-primary: "Roboto", sans-serif;
   --ff-secondary: "Open Sans", sans-serif;
-  --transition: all 0.3s linear;
+  --transition: all 0.4s linear;
   --spacing: 0.2rem;
   --radius: 0.5rem;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -84,6 +84,7 @@ p {
   margin-bottom: 1.25rem;
   color: var(--clr-grey-5);
 }
+
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 4rem;
@@ -108,17 +109,6 @@ p {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .products {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .product-card {
-    width: 280px;
-  }
-}
-
 .underline {
   width: 5rem;
   height: 0.25rem;
@@ -128,17 +118,4 @@ p {
   margin-right: auto;
 }
 
-.jumbo {
-  color: var(--clr-white);
-  background-color: var(--clr-primary-6);
-  width: 100%;
-}
-.jumbo h4 {
-  font-size: 20px;
-}
-.abc {
-  transition: var(--transition);
-}
-.abc:hover {
-  transform: translateY(-5px);
-}
+/* 576 768 998 1200 */

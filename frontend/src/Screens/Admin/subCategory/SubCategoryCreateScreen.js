@@ -11,7 +11,7 @@ import {
 import { listCategories } from "../../../Actions/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import { SUBCATEGORY_CREATE_RESET } from "../../../Constants/subCategoryConstant";
-import CategoryForm from "../../../Components/CategoryForm";
+import CategoryForm from "../../../Components/forms/CategoryForm";
 import LocalSearch from "../../../Components/LocalSearch";
 
 const SubCategoryCreateScreen = () => {
@@ -66,7 +66,7 @@ const SubCategoryCreateScreen = () => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+          <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>
             Create Sub Category
           </h3>
           <div className="underline"></div>

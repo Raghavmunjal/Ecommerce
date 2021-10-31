@@ -5,7 +5,7 @@ import {
   listProductsDetails,
   updateProduct,
 } from "../../../Actions/productAction";
-import ProductUpdateForm from "../../../Components/ProductUpdateForm";
+import ProductUpdateForm from "../../../Components/forms/ProductUpdateForm";
 import { listCategories } from "../../../Actions/categoryAction";
 import { listSubCategories } from "../../../Actions/subCategoryAction";
 import { listBrands } from "../../../Actions/brandAction";
@@ -113,7 +113,7 @@ const ProductEditScreen = ({ match, history }) => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+          <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>
             Edit Product
           </h3>
           <div className="underline"></div>

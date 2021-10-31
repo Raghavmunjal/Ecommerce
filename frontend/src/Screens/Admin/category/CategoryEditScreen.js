@@ -10,7 +10,7 @@ import {
   CATEGORY_UPDATE_RESET,
   CATEGORY_DETAILS_RESET,
 } from "../../../Constants/categoryConstant";
-import CategoryForm from "../../../Components/CategoryForm";
+import CategoryForm from "../../../Components/forms/CategoryForm";
 import { Spin } from "antd";
 
 const CategoryEditScreen = ({ history, match }) => {
@@ -59,7 +59,7 @@ const CategoryEditScreen = ({ history, match }) => {
           </div>
           <div className="col-md-8 offset-md-1">
             <h3
-              style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
+              style={{ textAlign: "center", marginTop: 60, color: "#001529" }}
             >
               Edit Category
             </h3>

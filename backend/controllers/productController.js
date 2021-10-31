@@ -15,10 +15,9 @@ const createProduct = asyncHandler(async (req, res) => {
 //@routes GET /api/product/all
 //@access PUBLIC
 const getAllProducts = asyncHandler(async (req, res) => {
-  console.log(req.query.pageNumber, req.query.category, req.query.limit);
   const page = Number(req.query.pageNumber) || 1;
   const category = req.query.category || "all";
-  const pageSize = Number(req.query.limit) || 6;
+  const pageSize = 6;
 
   let products;
   let count;
@@ -43,7 +42,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
       .limit(pageSize)
       .skip(pageSize * (page - 1));
   }
-  console.log(products.length);
+
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
@@ -93,10 +92,30 @@ const updateProduct = asyncHandler(async (req, res) => {
   res.json(updatedProduct);
 });
 
+//@desc   Get Sorted Products
+//@routes POST /api/product/all
+//@access PUBLIC
+const getSortedProducts = asyncHandler(async (req, res) => {
+  const { sort, order, page } = req.body;
+  const pageSize = 3;
+  const count = await productSchema.countDocuments({});
+  const products = await productSchema
+    .find({})
+    .populate("category")
+    .populate("subCategory")
+    .populate("brand")
+    .sort([[sort, order]])
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
+});
+
 module.exports = {
   createProduct,
   getAllProducts,
   deleteProduct,
   getProduct,
   updateProduct,
+  getSortedProducts,
 };

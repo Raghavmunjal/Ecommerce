@@ -47,7 +47,9 @@ const Header = () => {
       }}
     >
       <Item key="Home" icon={<AppstoreOutlined />}>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          {userInfo ? <span>Home</span> : <span>Electro</span>}
+        </Link>
       </Item>
 
       {userInfo && (

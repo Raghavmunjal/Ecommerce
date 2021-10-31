@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminNav from "../../../Components/nav/AdminNav";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../../Actions/productAction";
-import ProductCreateForm from "../../../Components/ProductCreateForm";
+import ProductCreateForm from "../../../Components/forms/ProductCreateForm";
 import { listCategories } from "../../../Actions/categoryAction";
 import { listSubCategories } from "../../../Actions/subCategoryAction";
 import { listBrands } from "../../../Actions/brandAction";
@@ -81,7 +81,7 @@ const ProductCreateScreen = () => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+          <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>
             Create Product
           </h3>
           <div className="underline"></div>

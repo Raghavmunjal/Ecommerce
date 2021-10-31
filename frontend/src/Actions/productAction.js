@@ -16,6 +16,9 @@ import {
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_REQUEST,
+  PRODUCT_SORTED_LIST_REQUEST,
+  PRODUCT_SORTED_LIST_SUCCESS,
+  PRODUCT_SORTED_LIST_FAIL,
 } from "../Constants/productConstant";
 
 export const createProduct = (values) => async (dispatch, getState) => {
@@ -84,15 +87,14 @@ export const createProduct = (values) => async (dispatch, getState) => {
 };
 
 export const listProducts =
-  (category = " ", pageNumber = " ", limit = " ") =>
+  (category = " ", pageNumber = " ") =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get(
-        `/api/product/all?category=${category}&pageNumber=${pageNumber}&limit=${limit}`
+        `/api/product/all?category=${category}&pageNumber=${pageNumber}`
       );
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-      console.log(data);
     } catch (error) {
       dispatch({
         type: PRODUCT_LIST_FAIL,
@@ -108,6 +110,31 @@ export const listProducts =
       );
     }
   };
+
+export const listSortedProducts = (sort, order, page) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_SORTED_LIST_REQUEST });
+    const { data } = await axios.post(`/api/product/all`, {
+      sort,
+      order,
+      page,
+    });
+    dispatch({ type: PRODUCT_SORTED_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_SORTED_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+    toast.error(
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    );
+  }
+};
 
 export const deleteProduct = (slug) => async (dispatch, getState) => {
   try {

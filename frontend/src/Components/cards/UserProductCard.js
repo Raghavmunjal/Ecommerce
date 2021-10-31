@@ -1,11 +1,11 @@
 import React from "react";
 import { Card } from "antd";
 import { Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
-const ProductCard = ({ product, handleDelete }) => {
-  const { title, description, images } = product;
+const UserProductCard = ({ product }) => {
+  const { title, description, images, slug } = product;
   return (
     <div className="products">
       <Card
@@ -14,20 +14,22 @@ const ProductCard = ({ product, handleDelete }) => {
             src={images && images.length ? images[0].url : ""}
             alt="product"
             style={{ height: "150px", objectFit: "cover" }}
-            className="p-1"
           />
         }
         actions={[
-          <Link to={`/admin/product/${product.slug}`}>
-            <EditOutlined className="text-primary" />
+          <Link to={`/product/${slug}`}>
+            <EyeOutlined style={{ color: "#40a9ff", fontSize: "16px" }} />
+            <br /> View Product
           </Link>,
-          <DeleteOutlined
-            className="text-danger"
-            onClick={() => handleDelete(product.slug)}
-          />,
+          <>
+            <ShoppingCartOutlined
+              style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
+            />
+            <br />
+            Add to Cart
+          </>,
         ]}
         style={{ marginTop: 16 }}
-        className="product-card"
       >
         <Meta
           title={title}
@@ -38,4 +40,4 @@ const ProductCard = ({ product, handleDelete }) => {
   );
 };
 
-export default ProductCard;
+export default UserProductCard;

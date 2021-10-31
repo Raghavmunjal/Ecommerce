@@ -25,8 +25,6 @@ const ProductUpdateForm = ({
     color,
     category,
     brand,
-    //subCategory,
-    // images,
   } = values;
 
   return (

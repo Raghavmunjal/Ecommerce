@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts, deleteProduct } from "../../../Actions/productAction";
 import AdminNav from "../../../Components/nav/AdminNav";
-import AdminProductCard from "../../../Components/AdminProductCard";
+import AdminProductCard from "../../../Components/cards/AdminProductCard";
 import { listCategories } from "../../../Actions/categoryAction";
-import LoadingCard from "../../../Components/LoadingCard";
+import LoadingCard from "../../../Components/cards/LoadingCard";
 
 const ProductListScreen = ({ match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -43,13 +43,13 @@ const ProductListScreen = ({ match }) => {
         <div className="col-md-8 offset-md-1">
           {products.length > 0 ? (
             <h3
-              style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
+              style={{ textAlign: "center", marginTop: 60, color: "#001529" }}
             >
               All Products
             </h3>
           ) : (
             <h3
-              style={{ textAlign: "center", marginTop: 55, color: "#40a9ff" }}
+              style={{ textAlign: "center", marginTop: 60, color: "#40a9ff" }}
             >
               No Product Found
             </h3>

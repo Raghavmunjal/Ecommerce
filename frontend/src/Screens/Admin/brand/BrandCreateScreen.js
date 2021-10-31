@@ -10,7 +10,7 @@ import {
 import { listCategories } from "../../../Actions/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import { BRAND_CREATE_RESET } from "../../../Constants/brandConstant";
-import CategoryForm from "../../../Components/CategoryForm";
+import CategoryForm from "../../../Components/forms/CategoryForm";
 import LocalSearch from "../../../Components/LocalSearch";
 
 const BrandCreateScreen = () => {
@@ -65,7 +65,7 @@ const BrandCreateScreen = () => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+          <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>
             Create Brand
           </h3>
           <div className="underline"></div>

@@ -13,7 +13,7 @@ import {
   deleteCategory,
 } from "../../../Actions/categoryAction";
 import { CATEGORY_CREATE_RESET } from "../../../Constants/categoryConstant";
-import CategoryForm from "../../../Components/CategoryForm";
+import CategoryForm from "../../../Components/forms/CategoryForm";
 import LocalSearch from "../../../Components/LocalSearch";
 import { Spin } from "antd";
 
@@ -71,7 +71,7 @@ const CategoryCreateScreen = () => {
           </div>
           <div className="col-md-8 offset-md-1">
             <h3
-              style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
+              style={{ textAlign: "center", marginTop: 60, color: "#001529" }}
             >
               Create Category
             </h3>

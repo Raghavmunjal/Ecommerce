@@ -6,10 +6,11 @@ const {
   deleteProduct,
   getProduct,
   updateProduct,
+  getSortedProducts,
 } = require("../controllers/productController");
 const router = express.Router();
 
-router.route("/all").get(getAllProducts);
+router.route("/all").get(getAllProducts).post(getSortedProducts);
 router
   .route("/:slug")
   .get(getProduct)

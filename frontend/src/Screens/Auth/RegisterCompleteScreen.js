@@ -46,6 +46,8 @@ const RegisterCompleteScreen = ({ history }) => {
     }
 
     dispatch(registerComplete(email, password));
+    setEmail("");
+    setPassword("");
   };
 
   const completeRegistrationForm = () => {

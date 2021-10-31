@@ -9,7 +9,7 @@ const AdminDashBoardScreen = () => {
           <AdminNav />
         </div>
         <div className="col-md-8 offset-md-1">
-          <h3 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}>
+          <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>
             Admin DashBoard
           </h3>
           <div className="underline"></div>
