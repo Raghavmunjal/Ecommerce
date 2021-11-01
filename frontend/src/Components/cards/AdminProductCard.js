@@ -27,6 +27,7 @@ const ProductCard = ({ product, handleDelete }) => {
           />,
         ]}
         style={{ marginTop: 16 }}
+        className="product-card"
       >
         <Meta
           title={title}

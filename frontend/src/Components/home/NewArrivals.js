@@ -34,9 +34,10 @@ const NewArrivals = () => {
   return (
     <>
       <div className="container">
+        <div className="row">&nbsp;</div>
         <h2
-          className="text-center font-weight-bold p-3 mb-3"
-          style={{ color: "rgb(0, 21, 41)" }}
+          className="text-center font-weight-bold p-3 mb-3 mt-2"
+          style={{ color: "rgb(0, 21, 41)", textTransform: "uppercase" }}
         >
           New <span style={{ color: "#40a9ff" }}>Arrivals</span>
         </h2>

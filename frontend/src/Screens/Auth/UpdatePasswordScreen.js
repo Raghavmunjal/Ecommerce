@@ -64,7 +64,7 @@ const UpdatePasswordScreen = () => {
             <UserNav />
           )}
         </div>
-        <div className="col-md-8 offset-1">
+        <div className="col-md-8 offset-1 p-5">
           <h3 style={{ marginTop: 55, color: "#001529" }}>Update Password</h3>
           {passwordUpdateForm()}
         </div>

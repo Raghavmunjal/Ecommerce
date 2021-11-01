@@ -30,6 +30,7 @@ const UserProductCard = ({ product }) => {
           </>,
         ]}
         style={{ marginTop: 16 }}
+        className="product-card"
       >
         <Meta
           title={title}

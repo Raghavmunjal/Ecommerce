@@ -32,13 +32,14 @@ const BestSellers = () => {
   };
 
   return (
-    <>
+    <div className="products-container">
       <div className="container">
+        <div className="row">&nbsp;</div>
         <h2
-          className="text-center font-weight-bold p-3 mb-3"
-          style={{ color: "rgb(0, 21, 41)" }}
+          className="text-center font-weight-bold p-3 mb-3 mt-2"
+          style={{ color: "rgb(0, 21, 41)", textTransform: "uppercase" }}
         >
-          Best <span style={{ color: "#40a9ff" }}>Sellers</span>
+          Top <span style={{ color: "#40a9ff" }}>Sellings</span>
         </h2>
         {loading ? (
           <LoadingCard count={3} />
@@ -61,7 +62,7 @@ const BestSellers = () => {
           />
         </nav>
       </div>
-    </>
+    </div>
   );
 };
 
