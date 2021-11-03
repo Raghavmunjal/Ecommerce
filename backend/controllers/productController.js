@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
 const productSchema = require("../models/productModel");
+const userSchema = require("../models/userModel");
 
 //@desc   Create Product
 //@routes POST /api/product
@@ -111,6 +112,44 @@ const getSortedProducts = asyncHandler(async (req, res) => {
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
+//@desc    Create new Review
+//@routes  POST /api/product/:id/reviews
+//@access  PRIVATE
+const createProductReview = asyncHandler(async (req, res) => {
+  const { rateValue, comment } = req.body;
+  const product = await productSchema.findById(req.params.id);
+
+  const { email } = req.user;
+  const user = await userSchema.findOne({ email });
+
+  if (product) {
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === user._id.toString()
+    );
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error("Product already reviewed");
+    }
+
+    const review = {
+      name: user.name,
+      rating: Number(rateValue),
+      comment,
+      user: user._id,
+    };
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+    product.rating =
+      product.reviews.reduce((acc, currItem) => currItem.rating + acc, 0) /
+      product.reviews.length;
+    await product.save();
+    res.status(201).json({ message: "Review Added" });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
 module.exports = {
   createProduct,
   getAllProducts,
@@ -118,4 +157,5 @@ module.exports = {
   getProduct,
   updateProduct,
   getSortedProducts,
+  createProductReview,
 };

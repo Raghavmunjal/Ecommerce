@@ -2,10 +2,11 @@ import React from "react";
 import { Card } from "antd";
 import { Link } from "react-router-dom";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import Rating from "../Rating";
 const { Meta } = Card;
 
 const UserProductCard = ({ product }) => {
-  const { title, description, images, slug } = product;
+  const { title, description, images, slug, numReviews, rating } = product;
   return (
     <div className="products">
       <Card
@@ -36,6 +37,7 @@ const UserProductCard = ({ product }) => {
           title={title}
           description={`${description && description.substring(0, 20)}...`}
         />
+        <Rating value={rating} text={`${numReviews} reviews`} />
       </Card>
     </div>
   );

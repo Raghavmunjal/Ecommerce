@@ -19,6 +19,9 @@ import {
   PRODUCT_SORTED_LIST_REQUEST,
   PRODUCT_SORTED_LIST_SUCCESS,
   PRODUCT_SORTED_LIST_FAIL,
+  PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_REQUEST,
 } from "../Constants/productConstant";
 
 export const createProduct = (values) => async (dispatch, getState) => {
@@ -262,3 +265,40 @@ export const updateProduct = (slug, values) => async (dispatch, getState) => {
     );
   }
 };
+
+export const createProductReview =
+  (productId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          Authorization: userInfo.token,
+        },
+      };
+      await axios.post(`/api/product/${productId}/reviews`, review, config);
+
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_SUCCESS,
+      });
+      toast.success(`Review Added`);
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };

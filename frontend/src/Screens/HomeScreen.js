@@ -25,11 +25,13 @@ const HomeScreen = () => {
           <h1 className="font-weight-bold mt-3">
             Electro<span>.</span>
           </h1>
+
           <h2 className="mb-5 mt-3">
             <Jumbotron text={text} />
           </h2>
+
           <Link to="/" className="hero-btn">
-            Shop with us
+            Shop Now
           </Link>
         </div>
       </div>

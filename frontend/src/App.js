@@ -8,6 +8,7 @@ import UserRoute from "./Components/protectedRoute/UserRoute";
 import AdminRoute from "./Components/protectedRoute/AdminRoute";
 
 import HomeScreen from "./Screens/HomeScreen";
+import ProductScreen from "./Screens/ProductScreen";
 
 // Auth Screens
 import LoginScreen from "./Screens/Auth/LoginScreen";
@@ -43,6 +44,7 @@ const App = () => {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/product/:slug" component={ProductScreen} />
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
         <Route

@@ -53,15 +53,17 @@ const NewArrivals = () => {
           </div>
         )}
       </div>
-      <div className="row">
-        <nav className="col-md-4 offset-md-4 text-center pt-2 p-3 mt-3">
-          <Pagination
-            defaultCurrent={1}
-            total={total * 10}
-            onChange={(value) => setPage(value)}
-          />
-        </nav>
-      </div>
+      {products && products.length > 0 && (
+        <div className="row">
+          <nav className="col-md-4 offset-md-4 text-center pt-2 p-3 mt-3">
+            <Pagination
+              defaultCurrent={1}
+              total={total * 10}
+              onChange={(value) => setPage(value)}
+            />
+          </nav>
+        </div>
+      )}
     </>
   );
 };

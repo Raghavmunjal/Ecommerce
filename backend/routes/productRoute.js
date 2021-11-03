@@ -7,10 +7,12 @@ const {
   getProduct,
   updateProduct,
   getSortedProducts,
+  createProductReview,
 } = require("../controllers/productController");
 const router = express.Router();
 
 router.route("/all").get(getAllProducts).post(getSortedProducts);
+router.route("/:id/reviews").post(tokenCheck, createProductReview);
 router
   .route("/:slug")
   .get(getProduct)
