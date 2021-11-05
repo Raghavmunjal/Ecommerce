@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Tabs, Modal } from "antd";
 import { Link } from "react-router-dom";
 import {
@@ -14,120 +14,36 @@ import Reviews from "./Reviews";
 import Rating from "./Rating";
 import AddReviewForm from "./forms/AddReviewForm";
 import { useDispatch, useSelector } from "react-redux";
-import { createProductReview } from "../Actions/productAction";
+import {
+  createProductReview,
+  listProductsDetails,
+} from "../Actions/productAction";
+import { useHistory, useParams } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
-const ProductDetails = ({ product, history }) => {
-  // const data = [
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 2,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 4,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 5,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 3,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 2,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 4,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 5,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 2,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 4,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 5,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 2,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 4,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 5,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 2,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 4,
-  //   },
-  //   {
-  //     comment: "Amazing Headphone",
-  //     date: "2021-02-11",
-  //     user: "Raghav",
-  //     value: 5,
-  //   },
-  // ];
-
+const ProductDetails = () => {
   const [visible, setVisible] = useState(false);
-  const { title, images, description, numReviews, rating, reviews } = product;
+
+  const history = useHistory();
+  const params = useParams();
+
+  const productDetails = useSelector((state) => state.productDetails);
+  const { product } = productDetails;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listProductsDetails(params.slug));
+  }, [dispatch, params]);
+
+  const { title, images, description, numReviews, rating } = product;
 
   const [rateValue, setRateValue] = useState(0);
   const [comment, setComment] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const dispatch = useDispatch();
 
   const handleOk = () => {
     dispatch(createProductReview(product._id, { rateValue, comment }));
@@ -140,7 +56,10 @@ const ProductDetails = ({ product, history }) => {
     if (userInfo && userInfo.token) {
       setVisible(true);
     } else {
-      history.push("/login");
+      history.push({
+        pathname: "/login",
+        state: { from: `/product/${params.slug}` },
+      });
     }
   };
 
@@ -171,19 +90,26 @@ const ProductDetails = ({ product, history }) => {
             <p>Call us on xxxx-xxx-xxx to learn more about this product.</p>
           </TabPane>
         </Tabs>
-        <div className="row mt-5">
-          <div className="col">
-            <h2>Reviews</h2>
-
-            {numReviews === 0 ? <p>No reviews</p> : <Reviews data={reviews} />}
+        {numReviews !== 0 && (
+          <div className="row mt-5">
+            <div className="col">
+              <h2>Reviews</h2>
+              <Reviews />
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="col-md-5 mt-5">
         <h1 className="p-3">{title}</h1>
 
-        <div className="mb-3 text-center">
-          <Rating value={rating} text={`(${numReviews})`} />
+        <div className="text-center pt-1 pb-3">
+          {rating > 0 ? (
+            <Rating value={rating} text={`(${numReviews})`} />
+          ) : (
+            <div className="text-center pt-1 pb-3 text-secondary">
+              No Rating Yet
+            </div>
+          )}
         </div>
 
         <Card
@@ -217,7 +143,7 @@ const ProductDetails = ({ product, history }) => {
         onOk={handleOk}
         okText="Add Review"
         cancelText="Cancel"
-        okButtonProps={{ disabled: !comment }}
+        okButtonProps={{ disabled: comment.length === 0 }}
         onCancel={() => setVisible(false)}
       >
         <AddReviewForm setRateValue={setRateValue} setComment={setComment} />

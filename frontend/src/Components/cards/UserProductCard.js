@@ -31,7 +31,7 @@ const UserProductCard = ({ product }) => {
           </>,
         ]}
         style={{ marginTop: 16 }}
-        className="product-card"
+        className="product-card mb-3"
       >
         <Meta
           title={title}

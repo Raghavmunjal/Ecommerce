@@ -22,6 +22,15 @@ import {
   PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_CREATE_REVIEW_SUCCESS,
   PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_RELATED_REQUEST,
+  PRODUCT_RELATED_SUCCESS,
+  PRODUCT_RELATED_FAIL,
+  PRODUCT_CATEGORY_LIST_FAIL,
+  PRODUCT_CATEGORY_LIST_REQUEST,
+  PRODUCT_CATEGORY_LIST_SUCCESS,
+  PRODUCT_SUBCATEGORY_LIST_REQUEST,
+  PRODUCT_SUBCATEGORY_LIST_SUCCESS,
+  PRODUCT_SUBCATEGORY_LIST_FAIL,
 } from "../Constants/productConstant";
 
 export const createProduct = (values) => async (dispatch, getState) => {
@@ -180,7 +189,6 @@ export const listProductsDetails = (slug) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
     const { data } = await axios.get(`/api/product/${slug}`);
-
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data,
@@ -290,6 +298,88 @@ export const createProductReview =
     } catch (error) {
       dispatch({
         type: PRODUCT_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };
+
+export const listRelatedProducts = (slug) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_RELATED_REQUEST });
+    const { data } = await axios.get(`/api/product/${slug}/related`);
+
+    dispatch({
+      type: PRODUCT_RELATED_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_RELATED_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+    toast.error(
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    );
+  }
+};
+
+export const listCategoryProducts = (slug, pageNumber) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_CATEGORY_LIST_REQUEST });
+
+    const { data } = await axios.get(
+      `/api/product/category/${slug}?pageNumber=${pageNumber}`
+    );
+
+    dispatch({
+      type: PRODUCT_CATEGORY_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CATEGORY_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+    toast.error(
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    );
+  }
+};
+
+export const listSubCategoryProducts =
+  (slug, pageNumber) => async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_SUBCATEGORY_LIST_REQUEST });
+
+      const { data } = await axios.get(
+        `/api/product/subcategory/${slug}?pageNumber=${pageNumber}`
+      );
+
+      dispatch({
+        type: PRODUCT_SUBCATEGORY_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_SUBCATEGORY_LIST_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

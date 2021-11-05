@@ -178,7 +178,6 @@ p {
   text-transform: uppercase;
   color: var(--clr-white);
   transition: var(--transition);
-  animation: show 5s linear 1;
 }
 
 .hero-banner span {
@@ -223,7 +222,7 @@ p {
     transform: translateY(-5px);
   }
   .hero-btn:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 
@@ -274,6 +273,10 @@ p {
 
 .rating {
   margin-top: 12px;
+}
+
+.rating i {
+  margin-left: 0.1rem;
 }
 
 @keyframes show {

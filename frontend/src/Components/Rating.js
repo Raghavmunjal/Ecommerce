@@ -6,7 +6,7 @@ const Rating = ({ value, text, color }) => {
     <div className="rating">
       <span>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "16px" }}
           className={
             value >= 1
               ? "fas fa-star"
@@ -14,11 +14,9 @@ const Rating = ({ value, text, color }) => {
               ? "fas fa-star-half-alt"
               : "far fa-star"
           }
-        >
-          {" "}
-        </i>
+        ></i>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "16px" }}
           className={
             value >= 2
               ? "fas fa-star"
@@ -26,11 +24,9 @@ const Rating = ({ value, text, color }) => {
               ? "fas fa-star-half-alt"
               : "far fa-star"
           }
-        >
-          {" "}
-        </i>
+        ></i>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "16px" }}
           className={
             value >= 3
               ? "fas fa-star"
@@ -38,11 +34,9 @@ const Rating = ({ value, text, color }) => {
               ? "fas fa-star-half-alt"
               : "far fa-star"
           }
-        >
-          {" "}
-        </i>
+        ></i>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "16px" }}
           className={
             value >= 4
               ? "fas fa-star"
@@ -50,11 +44,9 @@ const Rating = ({ value, text, color }) => {
               ? "fas fa-star-half-alt"
               : "far fa-star"
           }
-        >
-          {" "}
-        </i>
+        ></i>
         <i
-          style={{ color }}
+          style={{ color, fontSize: "16px" }}
           className={
             value >= 5
               ? "fas fa-star"
@@ -62,9 +54,7 @@ const Rating = ({ value, text, color }) => {
               ? "fas fa-star-half-alt"
               : "far fa-star"
           }
-        >
-          {" "}
-        </i>
+        ></i>
       </span>
       <span className="mx-1" style={{ color: "hsl(210, 22%, 49%)" }}>
         {text && text}
@@ -73,7 +63,7 @@ const Rating = ({ value, text, color }) => {
   );
 };
 Rating.defaultProps = {
-  color: "rgb(64, 169, 255)",
+  color: "#FFA41C",
 };
 Rating.prototype = {
   value: PropTypes.number.isRequired,

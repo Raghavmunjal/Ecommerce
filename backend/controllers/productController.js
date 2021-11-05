@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
 const productSchema = require("../models/productModel");
 const userSchema = require("../models/userModel");
+const categorySchema = require("../models/categoryModel");
+const subCategorySchema = require("../models/subCategoryModel");
 
 //@desc   Create Product
 //@routes POST /api/product
@@ -126,10 +128,6 @@ const createProductReview = asyncHandler(async (req, res) => {
     const alreadyReviewed = product.reviews.find(
       (r) => r.user.toString() === user._id.toString()
     );
-    if (alreadyReviewed) {
-      res.status(400);
-      throw new Error("Product already reviewed");
-    }
 
     const review = {
       name: user.name,
@@ -137,7 +135,15 @@ const createProductReview = asyncHandler(async (req, res) => {
       comment,
       user: user._id,
     };
-    product.reviews.push(review);
+
+    if (alreadyReviewed) {
+      console.log(alreadyReviewed);
+      alreadyReviewed.rating = Number(rateValue);
+      alreadyReviewed.comment = comment;
+    } else {
+      product.reviews.push(review);
+    }
+
     product.numReviews = product.reviews.length;
     product.rating =
       product.reviews.reduce((acc, currItem) => currItem.rating + acc, 0) /
@@ -150,6 +156,72 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc    Get related products
+//@routes  POST /api/product/:id/related
+//@access  PUBLIC
+const relatedProduct = asyncHandler(async (req, res) => {
+  const product = await productSchema.findOne({
+    slug: req.params.slug,
+  });
+  //$ne not including
+  const related = await productSchema
+    .find({
+      _id: { $ne: product._id },
+      category: product.category,
+    })
+    .limit(3)
+    .populate("category")
+    .populate("subCategory")
+    .populate("brand");
+  res.json(related);
+});
+
+//@desc    Get products by category
+//@routes  POST /api/product/category/:slug
+//@access  PUBLIC
+const categoryProducts = asyncHandler(async (req, res) => {
+  const page = Number(req.query.pageNumber) || 1;
+  const category = await categorySchema.findOne({ slug: req.params.slug });
+  const pageSize = 3;
+  if (category) {
+    const count = await productSchema.countDocuments({ category });
+    const products = await productSchema
+      .find({ category })
+      .populate("category")
+      .populate("subCategory")
+      .populate("brand")
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+    res.json({ products, page, pages: Math.ceil(count / pageSize) });
+  } else {
+    res.status(404);
+    throw new Error(`Category ${req.params.slug} not found`);
+  }
+});
+
+//@desc    Get products by subCategory
+//@routes  POST /api/product/subcategory/:slug
+//@access  PUBLIC
+const subCategoryProducts = asyncHandler(async (req, res) => {
+  const page = Number(req.query.pageNumber) || 1;
+  const sub = await subCategorySchema.findOne({ slug: req.params.slug });
+  const pageSize = 3;
+  if (sub) {
+    const count = await productSchema.countDocuments({ subCategory: sub });
+    const products = await productSchema
+      .find({ subCategory: sub })
+      .populate("category")
+      .populate("subCategory")
+      .populate("brand")
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+    res.json({ products, page, pages: Math.ceil(count / pageSize) });
+  } else {
+    res.status(404);
+    throw new Error(`SubCategory ${req.params.slug} not found`);
+  }
+});
+
 module.exports = {
   createProduct,
   getAllProducts,
@@ -158,4 +230,24 @@ module.exports = {
   updateProduct,
   getSortedProducts,
   createProductReview,
+  relatedProduct,
+  categoryProducts,
+  subCategoryProducts,
 };
+
+// res.status(400);
+// throw new Error("Product already reviewed");
+// $elemMatch -> element match
+// $push:{reviews:{rating:Number(rateValue),name:user.name,comment,user:user._id}}
+
+// const reviewUpdated = await productSchema.updateOne(
+//     {
+//         reviews: { $elemMatch: alreadyReviewed },
+//     },
+//     {
+//       $set: {
+//           "$reviews.$.rating": Number(rateValue),
+//           "$reviews.$.comment": comment,
+//       },
+//     }
+// );

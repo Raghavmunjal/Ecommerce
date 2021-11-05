@@ -4,7 +4,10 @@ import NewArrivals from "../Components/home/NewArrivals";
 import BestSellers from "../Components/home/BestSellers";
 import { Link } from "react-router-dom";
 import { listCategories } from "../Actions/categoryAction";
+import { listSubCategories } from "../Actions/subCategoryAction";
 import { useSelector, useDispatch } from "react-redux";
+import SubCategories from "../Components/home/SubCategories";
+import Categories from "../Components/home/Categories";
 
 const HomeScreen = () => {
   const text = ["Latest Products", "New Products", "Best Selling Products"];
@@ -12,10 +15,14 @@ const HomeScreen = () => {
   const categoryList = useSelector((state) => state.categoryList);
   const { categories } = categoryList;
 
+  const subCategoryList = useSelector((state) => state.subCategoryList);
+  const { subCategories } = subCategoryList;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(listCategories());
+    dispatch(listSubCategories());
   }, [dispatch]);
 
   return (
@@ -35,17 +42,14 @@ const HomeScreen = () => {
           </Link>
         </div>
       </div>
-      <div className="categories mb-5">
-        {categories.map((c) => (
-          <div key={c._id} className="category">
-            <p>{c.name}</p>
-          </div>
-        ))}
-      </div>
+
+      <Categories categories={categories} />
 
       <NewArrivals className="mb-5" />
 
       <BestSellers className="mb-5" />
+
+      <SubCategories subCategories={subCategories} />
     </div>
   );
 };

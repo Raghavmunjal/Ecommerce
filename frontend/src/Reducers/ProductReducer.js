@@ -24,6 +24,15 @@ import {
   PRODUCT_CREATE_REVIEW_SUCCESS,
   PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_CREATE_REVIEW_RESET,
+  PRODUCT_RELATED_REQUEST,
+  PRODUCT_RELATED_SUCCESS,
+  PRODUCT_RELATED_FAIL,
+  PRODUCT_CATEGORY_LIST_SUCCESS,
+  PRODUCT_CATEGORY_LIST_FAIL,
+  PRODUCT_CATEGORY_LIST_REQUEST,
+  PRODUCT_SUBCATEGORY_LIST_REQUEST,
+  PRODUCT_SUBCATEGORY_LIST_SUCCESS,
+  PRODUCT_SUBCATEGORY_LIST_FAIL,
 } from "../Constants/productConstant";
 
 export const productCreateReducer = (state = {}, action) => {
@@ -130,6 +139,64 @@ export const productReviewCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case PRODUCT_CREATE_REVIEW_RESET:
       return { product: {} };
+    default:
+      return state;
+  }
+};
+
+export const productRelatedReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_RELATED_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_RELATED_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload,
+      };
+    case PRODUCT_RELATED_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productCategoryListReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_CATEGORY_LIST_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_CATEGORY_LIST_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
+    case PRODUCT_CATEGORY_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productSubCategoryListReducer = (
+  state = { products: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_SUBCATEGORY_LIST_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_SUBCATEGORY_LIST_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
+    case PRODUCT_SUBCATEGORY_LIST_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

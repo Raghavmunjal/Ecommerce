@@ -21,8 +21,11 @@ const LoginScreen = ({ history }) => {
     : "/";
 
   useEffect(() => {
+    const intended = history.location.state;
     if (error) {
       toast.error(error);
+    } else if (intended) {
+      history.push(intended.from);
     } else if (userInfo) {
       history.push(redirect);
     }

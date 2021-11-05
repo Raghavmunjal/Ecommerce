@@ -9,6 +9,7 @@ import AdminRoute from "./Components/protectedRoute/AdminRoute";
 
 import HomeScreen from "./Screens/HomeScreen";
 import ProductScreen from "./Screens/ProductScreen";
+import ProductCategoryScreen from "./Screens/ProductCategoryScreen";
 
 // Auth Screens
 import LoginScreen from "./Screens/Auth/LoginScreen";
@@ -36,6 +37,7 @@ import HistoryScreen from "./Screens/User/HistoryScreen";
 // Components
 import Header from "./Components/nav/Header";
 import NotFound from "./Components/NotFound";
+import ProductSubCategoryScreen from "./Screens/ProductSubCategoryScreen";
 
 const App = () => {
   return (
@@ -45,6 +47,16 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomeScreen} />
         <Route exact path="/product/:slug" component={ProductScreen} />
+        <Route
+          exact
+          path="/product/category/:slug"
+          component={ProductCategoryScreen}
+        />
+        <Route
+          exact
+          path="/product/subcategory/:slug"
+          component={ProductSubCategoryScreen}
+        />
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
         <Route

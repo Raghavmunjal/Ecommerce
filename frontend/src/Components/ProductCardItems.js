@@ -25,7 +25,7 @@ const ProductCardItems = ({ product }) => {
         <li className="list-group-item">
           Category
           <Link
-            to={`/category/${category.slug}`}
+            to={`/product/category/${category.slug}`}
             className="label label-default label-pill pull-xs-right"
           >
             {category.name}
