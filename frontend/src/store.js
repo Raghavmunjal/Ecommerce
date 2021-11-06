@@ -34,6 +34,7 @@ import {
   productRelatedReducer,
   productCategoryListReducer,
   productSubCategoryListReducer,
+  productBrandListReducer,
 } from "./Reducers/ProductReducer";
 
 const reducer = combineReducers({
@@ -64,6 +65,7 @@ const reducer = combineReducers({
   productRelated: productRelatedReducer,
   productCategoryList: productCategoryListReducer,
   productSubCategoryList: productSubCategoryListReducer,
+  productBrandList: productBrandListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

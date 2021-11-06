@@ -4,6 +4,7 @@ const productSchema = require("../models/productModel");
 const userSchema = require("../models/userModel");
 const categorySchema = require("../models/categoryModel");
 const subCategorySchema = require("../models/subCategoryModel");
+const brandSchema = require("../models/brandModel");
 
 //@desc   Create Product
 //@routes POST /api/product
@@ -222,6 +223,29 @@ const subCategoryProducts = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc    Get products by brands
+//@routes  POST /api/product/brand/:slug
+//@access  PUBLIC
+const brandProducts = asyncHandler(async (req, res) => {
+  const page = Number(req.query.pageNumber) || 1;
+  const brand = await brandSchema.findOne({ slug: req.params.slug });
+  const pageSize = 3;
+  if (brand) {
+    const count = await productSchema.countDocuments({ brand });
+    const products = await productSchema
+      .find({ brand })
+      .populate("category")
+      .populate("subCategory")
+      .populate("brand")
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+    res.json({ products, page, pages: Math.ceil(count / pageSize) });
+  } else {
+    res.status(404);
+    throw new Error(`Brand ${req.params.slug} not found`);
+  }
+});
+
 module.exports = {
   createProduct,
   getAllProducts,
@@ -233,6 +257,7 @@ module.exports = {
   relatedProduct,
   categoryProducts,
   subCategoryProducts,
+  brandProducts,
 };
 
 // res.status(400);

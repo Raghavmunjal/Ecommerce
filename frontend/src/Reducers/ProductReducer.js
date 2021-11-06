@@ -33,6 +33,9 @@ import {
   PRODUCT_SUBCATEGORY_LIST_REQUEST,
   PRODUCT_SUBCATEGORY_LIST_SUCCESS,
   PRODUCT_SUBCATEGORY_LIST_FAIL,
+  PRODUCT_BRAND_LIST_REQUEST,
+  PRODUCT_BRAND_LIST_SUCCESS,
+  PRODUCT_BRAND_LIST_FAIL,
 } from "../Constants/productConstant";
 
 export const productCreateReducer = (state = {}, action) => {
@@ -196,6 +199,24 @@ export const productSubCategoryListReducer = (
         pages: action.payload.pages,
       };
     case PRODUCT_SUBCATEGORY_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productBrandListReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_BRAND_LIST_REQUEST:
+      return { loading: true, products: [] };
+    case PRODUCT_BRAND_LIST_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
+    case PRODUCT_BRAND_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

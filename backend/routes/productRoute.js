@@ -11,6 +11,7 @@ const {
   relatedProduct,
   categoryProducts,
   subCategoryProducts,
+  brandProducts,
 } = require("../controllers/productController");
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.route("/:id/reviews").post(tokenCheck, createProductReview);
 router.route("/:slug/related").get(relatedProduct);
 router.route("/category/:slug").get(categoryProducts);
 router.route("/subcategory/:slug").get(subCategoryProducts);
+router.route("/brand/:slug").get(brandProducts);
 router
   .route("/:slug")
   .get(getProduct)

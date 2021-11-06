@@ -31,6 +31,9 @@ import {
   PRODUCT_SUBCATEGORY_LIST_REQUEST,
   PRODUCT_SUBCATEGORY_LIST_SUCCESS,
   PRODUCT_SUBCATEGORY_LIST_FAIL,
+  PRODUCT_BRAND_LIST_REQUEST,
+  PRODUCT_BRAND_LIST_SUCCESS,
+  PRODUCT_BRAND_LIST_FAIL,
 } from "../Constants/productConstant";
 
 export const createProduct = (values) => async (dispatch, getState) => {
@@ -392,3 +395,31 @@ export const listSubCategoryProducts =
       );
     }
   };
+
+export const listBrandProducts = (slug, pageNumber) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_BRAND_LIST_REQUEST });
+
+    const { data } = await axios.get(
+      `/api/product/brand/${slug}?pageNumber=${pageNumber}`
+    );
+
+    dispatch({
+      type: PRODUCT_BRAND_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_BRAND_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+    toast.error(
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    );
+  }
+};
