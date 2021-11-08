@@ -181,11 +181,12 @@ const relatedProduct = asyncHandler(async (req, res) => {
 //@routes  POST /api/product/category/:slug
 //@access  PUBLIC
 const categoryProducts = asyncHandler(async (req, res) => {
-  const page = Number(req.query.pageNumber) || 1;
+  let page = Number(req.query.pageNumber) || 1;
   const category = await categorySchema.findOne({ slug: req.params.slug });
   const pageSize = 3;
   if (category) {
     const count = await productSchema.countDocuments({ category });
+    page = (page - 1) * 3 >= count ? 1 : page;
     const products = await productSchema
       .find({ category })
       .populate("category")
@@ -204,11 +205,12 @@ const categoryProducts = asyncHandler(async (req, res) => {
 //@routes  POST /api/product/subcategory/:slug
 //@access  PUBLIC
 const subCategoryProducts = asyncHandler(async (req, res) => {
-  const page = Number(req.query.pageNumber) || 1;
+  let page = Number(req.query.pageNumber) || 1;
   const sub = await subCategorySchema.findOne({ slug: req.params.slug });
   const pageSize = 3;
   if (sub) {
     const count = await productSchema.countDocuments({ subCategory: sub });
+    page = (page - 1) * 3 >= count ? 1 : page;
     const products = await productSchema
       .find({ subCategory: sub })
       .populate("category")
@@ -227,11 +229,12 @@ const subCategoryProducts = asyncHandler(async (req, res) => {
 //@routes  POST /api/product/brand/:slug
 //@access  PUBLIC
 const brandProducts = asyncHandler(async (req, res) => {
-  const page = Number(req.query.pageNumber) || 1;
+  let page = Number(req.query.pageNumber) || 1;
   const brand = await brandSchema.findOne({ slug: req.params.slug });
   const pageSize = 3;
   if (brand) {
     const count = await productSchema.countDocuments({ brand });
+    page = (page - 1) * 3 >= count ? 1 : page;
     const products = await productSchema
       .find({ brand })
       .populate("category")

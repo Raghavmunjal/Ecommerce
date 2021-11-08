@@ -1,22 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { listCategoryProducts } from "../Actions/productAction";
+import { getProductByCategories } from "../axios/products";
 import UserProductCard from "../Components/cards/UserProductCard";
 import LoadingCard from "../Components/cards/LoadingCard";
 import { Pagination } from "antd";
+import { toast } from "react-toastify";
 
 const ProductCategoryScreen = ({ match }) => {
-  const productCategoryList = useSelector((state) => state.productCategoryList);
-  const { products, page, pages, loading } = productCategoryList;
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState([]);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(1);
 
-  const [pageNumber, setPageNumber] = useState(page ? page : 1);
   const productSlug = match.params.slug;
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(listCategoryProducts(productSlug, pageNumber));
-  }, [match, productSlug, dispatch, pageNumber]);
+    loadProducts();
+    // eslint-disable-next-line
+  }, [page, productSlug]);
+
+  const loadProducts = () => {
+    setLoading(true);
+    getProductByCategories(productSlug, page)
+      .then((res) => {
+        setProducts(res.data.products);
+        setPage(res.data.page);
+        setTotal(res.data.pages);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className="container">
@@ -45,9 +60,9 @@ const ProductCategoryScreen = ({ match }) => {
         <div className="row">
           <nav className="col-md-4 offset-md-4 text-center pt-2 p-3 mb-3">
             <Pagination
-              defaultCurrent={1}
-              total={pages * 10}
-              onChange={(value) => setPageNumber(value)}
+              current={page}
+              total={total * 10}
+              onChange={(value) => setPage(value)}
             />
           </nav>
         </div>

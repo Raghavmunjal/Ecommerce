@@ -32,7 +32,7 @@ const BestSellers = () => {
   };
 
   return (
-    <div className="products-container">
+    <>
       <div className="container">
         <div className="row">&nbsp;</div>
         <h2
@@ -65,7 +65,7 @@ const BestSellers = () => {
           </nav>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

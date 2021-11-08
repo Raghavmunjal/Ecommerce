@@ -7,10 +7,8 @@ import { Link } from "react-router-dom";
 import { listCategories } from "../Actions/categoryAction";
 import { listSubCategories } from "../Actions/subCategoryAction";
 import { listBrands } from "../Actions/brandAction";
-import { useSelector, useDispatch } from "react-redux";
-import SubCategories from "../Components/home/SubCategories";
-import Categories from "../Components/home/Categories";
-import Brands from "../Components/home/Brands";
+import { useDispatch } from "react-redux";
+
 import Collections from "../Components/home/Collections";
 import { Carousel } from "antd";
 import Laptop from "../images/l2.jpg";
@@ -19,15 +17,6 @@ import Mobile from "../images/m1.jpg";
 
 const HomeScreen = () => {
   const text = ["Latest Products", "New Products", "Best Selling Products"];
-
-  const categoryList = useSelector((state) => state.categoryList);
-  const { categories } = categoryList;
-
-  const subCategoryList = useSelector((state) => state.subCategoryList);
-  const { subCategories } = subCategoryList;
-
-  const brandList = useSelector((state) => state.brandList);
-  const { brands } = brandList;
 
   const dispatch = useDispatch();
 
@@ -54,16 +43,10 @@ const HomeScreen = () => {
           </Link>
         </div>
       </div>
-
-      <Categories categories={categories} />
-
       <Collections />
+      <TopRated className="mb-5" />
 
-      <NewArrivals className="mb-5" />
-
-      <SubCategories subCategories={subCategories} />
-
-      <div className="products-container">
+      <div>
         <div className="section-center offers">
           <div className="offer-info">
             <div className="offer-title">
@@ -99,9 +82,7 @@ const HomeScreen = () => {
         </div>
       </div>
 
-      <Brands brands={brands} />
-
-      <TopRated className="mb-5" />
+      <NewArrivals className="mb-5" />
 
       <BestSellers className="mb-5" />
     </div>

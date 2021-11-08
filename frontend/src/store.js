@@ -32,9 +32,6 @@ import {
   productUpdateReducer,
   productReviewCreateReducer,
   productRelatedReducer,
-  productCategoryListReducer,
-  productSubCategoryListReducer,
-  productBrandListReducer,
 } from "./Reducers/ProductReducer";
 import {
   searchProductsReducer,
@@ -67,9 +64,6 @@ const reducer = combineReducers({
   productSortedList: productSortedListReducer,
   productReviewCreate: productReviewCreateReducer,
   productRelated: productRelatedReducer,
-  productCategoryList: productCategoryListReducer,
-  productSubCategoryList: productSubCategoryListReducer,
-  productBrandList: productBrandListReducer,
   searchProducts: searchProductsReducer,
   searchQuery: searchQueryReducer,
 });

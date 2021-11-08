@@ -27,15 +27,6 @@ import {
   PRODUCT_RELATED_REQUEST,
   PRODUCT_RELATED_SUCCESS,
   PRODUCT_RELATED_FAIL,
-  PRODUCT_CATEGORY_LIST_SUCCESS,
-  PRODUCT_CATEGORY_LIST_FAIL,
-  PRODUCT_CATEGORY_LIST_REQUEST,
-  PRODUCT_SUBCATEGORY_LIST_REQUEST,
-  PRODUCT_SUBCATEGORY_LIST_SUCCESS,
-  PRODUCT_SUBCATEGORY_LIST_FAIL,
-  PRODUCT_BRAND_LIST_REQUEST,
-  PRODUCT_BRAND_LIST_SUCCESS,
-  PRODUCT_BRAND_LIST_FAIL,
 } from "../Constants/productConstant";
 
 export const productCreateReducer = (state = {}, action) => {
@@ -157,66 +148,6 @@ export const productRelatedReducer = (state = { products: [] }, action) => {
         products: action.payload,
       };
     case PRODUCT_RELATED_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
-
-export const productCategoryListReducer = (
-  state = { products: [] },
-  action
-) => {
-  switch (action.type) {
-    case PRODUCT_CATEGORY_LIST_REQUEST:
-      return { loading: true, products: [] };
-    case PRODUCT_CATEGORY_LIST_SUCCESS:
-      return {
-        loading: false,
-        products: action.payload.products,
-        page: action.payload.page,
-        pages: action.payload.pages,
-      };
-    case PRODUCT_CATEGORY_LIST_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
-
-export const productSubCategoryListReducer = (
-  state = { products: [] },
-  action
-) => {
-  switch (action.type) {
-    case PRODUCT_SUBCATEGORY_LIST_REQUEST:
-      return { loading: true, products: [] };
-    case PRODUCT_SUBCATEGORY_LIST_SUCCESS:
-      return {
-        loading: false,
-        products: action.payload.products,
-        page: action.payload.page,
-        pages: action.payload.pages,
-      };
-    case PRODUCT_SUBCATEGORY_LIST_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
-
-export const productBrandListReducer = (state = { products: [] }, action) => {
-  switch (action.type) {
-    case PRODUCT_BRAND_LIST_REQUEST:
-      return { loading: true, products: [] };
-    case PRODUCT_BRAND_LIST_SUCCESS:
-      return {
-        loading: false,
-        products: action.payload.products,
-        page: action.payload.page,
-        pages: action.payload.pages,
-      };
-    case PRODUCT_BRAND_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
