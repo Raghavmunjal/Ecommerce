@@ -12,6 +12,7 @@ import ProductScreen from "./Screens/ProductScreen";
 import ProductCategoryScreen from "./Screens/ProductCategoryScreen";
 import ProductSubCategoryScreen from "./Screens/ProductSubCategoryScreen";
 import ProductBrandScreen from "./Screens/ProductBrandScreen";
+import ShopScreen from "./Screens/ShopScreen";
 
 // Auth Screens
 import LoginScreen from "./Screens/Auth/LoginScreen";
@@ -47,6 +48,7 @@ const App = () => {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/shop" component={ShopScreen} />
         <Route exact path="/product/:slug" component={ProductScreen} />
         <Route
           exact

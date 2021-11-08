@@ -6,7 +6,8 @@ import Rating from "../Rating";
 const { Meta } = Card;
 
 const UserProductCard = ({ product }) => {
-  const { title, description, images, slug, numReviews, rating } = product;
+  const { title, description, images, slug, numReviews, rating, price } =
+    product;
   return (
     <div className="products">
       <Card
@@ -37,7 +38,9 @@ const UserProductCard = ({ product }) => {
           title={title}
           description={`${description && description.substring(0, 20)}...`}
         />
+
         <Rating value={rating} text={`${numReviews} reviews`} />
+        <h4 className="mt-3">Rs. {price}</h4>
       </Card>
     </div>
   );

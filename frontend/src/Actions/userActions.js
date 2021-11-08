@@ -29,12 +29,12 @@ const registerUser = async (idTokenResult) => {
 //   }
 // };
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, password, history) => async (dispatch) => {
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
-
+    const intended = history.location.state;
     const result = await auth.signInWithEmailAndPassword(email, password);
     const { user } = result;
     if (user) {
@@ -46,6 +46,9 @@ export const login = (email, password) => async (dispatch) => {
             payload: res.data,
           });
           localStorage.setItem("userInfo", JSON.stringify(res.data));
+          if (intended) {
+            history.push(intended.from);
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -64,14 +67,14 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const googleLogin = () => async (dispatch) => {
+export const googleLogin = (history) => async (dispatch) => {
   auth
     .signInWithPopup(googleAuthProvider)
     .then(async (result) => {
       const { user } = result;
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
-
+        const intended = history.location.state;
         registerUser(idTokenResult)
           .then((res) => {
             dispatch({
@@ -79,6 +82,9 @@ export const googleLogin = () => async (dispatch) => {
               payload: res.data,
             });
             localStorage.setItem("userInfo", JSON.stringify(res.data));
+            if (intended) {
+              history.push(intended.from);
+            }
           })
           .catch((error) => {
             console.log(error);

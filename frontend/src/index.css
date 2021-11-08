@@ -225,6 +225,94 @@ p {
   }
 }
 
+.section-center {
+  padding: 4rem 0;
+  width: 85vw;
+  margin: 0 auto;
+  max-width: 1170px;
+}
+
+@media screen and (min-width: 992px) {
+  .section-center {
+    width: 95vw;
+    padding: 4rem 2rem;
+  }
+}
+
+@media screen and (min-width: 572px) {
+  .collections {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .collection-Laptop,
+  .collection-Headset,
+  .collection-Camera {
+    flex: 0 0 calc(50% - 1rem);
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .collections {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .collection-Laptop,
+  .collection-Headset,
+  .collection-Camera {
+    flex: 0 0 calc(33.3% - 1.5rem);
+  }
+}
+
+.collection-Laptop {
+  background: linear-gradient(
+      -47deg,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(64, 169, 255, 0.9) 40%
+    ),
+    url("./images/l11.jpg") center/cover no-repeat;
+  height: 17rem;
+  transition: var(--transition);
+}
+.collection-Laptop:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.collection-Camera {
+  background: linear-gradient(
+      -47deg,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(64, 169, 255, 0.9) 40%
+    ),
+    url("./images/c1.jpg") center/cover no-repeat;
+  height: 17rem;
+  transition: var(--transition);
+}
+
+.collection-Camera:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.collection-Headset {
+  background: linear-gradient(
+      -47deg,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(64, 169, 255, 0.9) 40%
+    ),
+    url("./images/e1.jpg") center/cover no-repeat;
+  height: 17rem;
+  transition: var(--transition);
+}
+
+.collection-Headset:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 .categories {
   background-color: var(--clr-primary-6);
 }
@@ -293,13 +381,6 @@ p {
   }
 }
 
-.offers-info {
-  padding: 5rem 0;
-}
-.offers-inventory {
-  padding: 3rem 0;
-}
-
 .offer-title h2 {
   color: var(--clr-primary-5);
 }
@@ -330,6 +411,23 @@ p {
   background: var(--clr-primary-6);
   color: var(--clr-white);
   transition: var(--transition);
+}
+
+.offer-info,
+.offer-inventory {
+  margin-bottom: 1.25rem;
+}
+
+@media screen and (min-width: 768px) {
+  .offers {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .offer-info,
+  .offer-inventory {
+    flex: 0 0 calc(50% - 1rem);
+  }
 }
 
 /* 576 768 998 1200 */

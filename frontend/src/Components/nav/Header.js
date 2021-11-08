@@ -6,7 +6,10 @@ import {
   UserOutlined,
   UserAddOutlined,
   LogoutOutlined,
+  ShoppingOutlined,
 } from "@ant-design/icons";
+
+import SearchForm from "../forms/SearchForm";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -52,6 +55,10 @@ const Header = () => {
         </Link>
       </Item>
 
+      <Item key="Shop" icon={<ShoppingOutlined />}>
+        <Link to="/shop">Shop</Link>
+      </Item>
+
       {userInfo && (
         <SubMenu
           icon={<SettingOutlined />}
@@ -87,6 +94,10 @@ const Header = () => {
           <Link to="/login">Login</Link>
         </Item>
       )}
+
+      <span className="float-right p-1">
+        <SearchForm />
+      </span>
     </Menu>
   );
 };

@@ -21,11 +21,8 @@ const LoginScreen = ({ history }) => {
     : "/";
 
   useEffect(() => {
-    const intended = history.location.state;
     if (error) {
       toast.error(error);
-    } else if (intended) {
-      history.push(intended.from);
     } else if (userInfo) {
       history.push(redirect);
     }
@@ -33,11 +30,11 @@ const LoginScreen = ({ history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    dispatch(login(email, password, history));
   };
 
   const loginWithGoogle = () => {
-    dispatch(googleLogin());
+    dispatch(googleLogin(history));
   };
 
   const loginForm = () => {

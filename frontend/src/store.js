@@ -36,6 +36,10 @@ import {
   productSubCategoryListReducer,
   productBrandListReducer,
 } from "./Reducers/ProductReducer";
+import {
+  searchProductsReducer,
+  searchQueryReducer,
+} from "./Reducers/SearchReducer.js";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -66,6 +70,8 @@ const reducer = combineReducers({
   productCategoryList: productCategoryListReducer,
   productSubCategoryList: productSubCategoryListReducer,
   productBrandList: productBrandListReducer,
+  searchProducts: searchProductsReducer,
+  searchQuery: searchQueryReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

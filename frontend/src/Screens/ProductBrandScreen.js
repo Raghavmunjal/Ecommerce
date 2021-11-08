@@ -45,7 +45,7 @@ const ProductBrandScreen = ({ match }) => {
         <div className="row">
           <nav className="col-md-4 offset-md-4 text-center pt-2 p-3 mb-3">
             <Pagination
-              defaultCurrent={pageNumber}
+              defaultCurrent={1}
               total={pages * 10}
               onChange={(value) => setPageNumber(value)}
             />

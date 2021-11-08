@@ -12,6 +12,7 @@ const {
   categoryProducts,
   subCategoryProducts,
   brandProducts,
+  searchProducts,
 } = require("../controllers/productController");
 const router = express.Router();
 
@@ -21,6 +22,7 @@ router.route("/:slug/related").get(relatedProduct);
 router.route("/category/:slug").get(categoryProducts);
 router.route("/subcategory/:slug").get(subCategoryProducts);
 router.route("/brand/:slug").get(brandProducts);
+router.route("/search/filters").post(searchProducts);
 router
   .route("/:slug")
   .get(getProduct)
