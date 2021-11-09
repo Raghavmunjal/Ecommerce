@@ -249,26 +249,6 @@ const brandProducts = asyncHandler(async (req, res) => {
   }
 });
 
-const handleQuery = async (req, res, query) => {
-  const products = await productSchema
-    .find({ $text: { $search: query } })
-    .populate("category")
-    .populate("subCategory")
-    .populate("brand")
-    .exec();
-  res.json(products);
-};
-
-//@desc    Get products by brands
-//@routes  POST /api/product/search/filters
-//@access  PUBLIC
-const searchProducts = asyncHandler(async (req, res) => {
-  const { query } = req.body;
-  if (query) {
-    await handleQuery(req, res, query);
-  }
-});
-
 module.exports = {
   createProduct,
   getAllProducts,
@@ -281,7 +261,6 @@ module.exports = {
   categoryProducts,
   subCategoryProducts,
   brandProducts,
-  searchProducts,
 };
 
 // res.status(400);

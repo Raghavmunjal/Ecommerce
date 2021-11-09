@@ -48,6 +48,7 @@ const App = () => {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/shop/:keyword" component={ShopScreen} />
         <Route exact path="/shop" component={ShopScreen} />
         <Route exact path="/product/:slug" component={ProductScreen} />
         <Route

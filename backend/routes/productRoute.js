@@ -12,8 +12,8 @@ const {
   categoryProducts,
   subCategoryProducts,
   brandProducts,
-  searchProducts,
 } = require("../controllers/productController");
+const { searchProducts } = require("../controllers/searchController");
 const router = express.Router();
 
 router.route("/all").get(getAllProducts).post(getSortedProducts);

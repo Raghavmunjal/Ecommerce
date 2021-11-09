@@ -38,25 +38,26 @@ const ProductScreen = ({ match }) => {
         <div className="row pt-4">
           <ProductDetails product={product} />
         </div>
-
-        <div className="row products-container">
-          <div className="col pt-5 pb-5 text-center">
-            <h3>Related Products</h3>
-            <div className="underline"></div>
-            <div className="container">
-              <div className="row pb-5">
-                {relatedProduct.length ? (
-                  relatedProduct.map((p) => (
-                    <div key={p._id} className="col-md-4">
-                      <UserProductCard product={p} />
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center col">
-                    <p>No Products Found</p>
+        <div className="products-container">
+          <div className="row">
+            <div className="col pt-5 pb-5 text-center">
+              <h3>Related Products</h3>
+              <div className="underline"></div>
+            </div>
+          </div>
+          <div className="container">
+            <div className="row pb-5">
+              {relatedProduct.length ? (
+                relatedProduct.map((p) => (
+                  <div key={p._id} className="col-md-4">
+                    <UserProductCard product={p} />
                   </div>
-                )}
-              </div>
+                ))
+              ) : (
+                <div className="text-center col">
+                  <p>No Products Found</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

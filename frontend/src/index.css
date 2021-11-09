@@ -206,7 +206,7 @@ p {
 .hero-btn:hover {
   background: var(--clr-white);
   color: var(--clr-primary-5);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 @media screen and (min-width: 768px) {

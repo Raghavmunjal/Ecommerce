@@ -33,10 +33,11 @@ import {
   productReviewCreateReducer,
   productRelatedReducer,
 } from "./Reducers/ProductReducer";
+
 import {
-  searchProductsReducer,
-  searchQueryReducer,
-} from "./Reducers/SearchReducer.js";
+  searchReducer,
+  searchFilterProductsReducer,
+} from "./Reducers/SearchReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -64,8 +65,8 @@ const reducer = combineReducers({
   productSortedList: productSortedListReducer,
   productReviewCreate: productReviewCreateReducer,
   productRelated: productRelatedReducer,
-  searchProducts: searchProductsReducer,
-  searchQuery: searchQueryReducer,
+  search: searchReducer,
+  searchFilterProducts: searchFilterProductsReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
