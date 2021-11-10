@@ -25,7 +25,12 @@ export const searchFilterProductsReducer = (
     case SEARCH_PRODUCT_REQUEST:
       return { loading: true, products: [] };
     case SEARCH_PRODUCT_SUCCESS:
-      return { loading: false, products: action.payload };
+      return {
+        loading: false,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
     case SEARCH_PRODUCT_FAIL:
       return { loading: false, error: action.payload };
     case SEARCH_PRODUCT_RESET:

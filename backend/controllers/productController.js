@@ -21,7 +21,7 @@ const createProduct = asyncHandler(async (req, res) => {
 const getAllProducts = asyncHandler(async (req, res) => {
   const page = Number(req.query.pageNumber) || 1;
   const category = req.query.category || "all";
-  const pageSize = 6;
+  const pageSize = 3;
 
   let products;
   let count;

@@ -377,11 +377,6 @@ p {
     ),
     url("./images/l11.jpg") center/cover no-repeat;
   height: 17rem;
-  transition: var(--transition);
-}
-.collection-Laptop:hover {
-  transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .collection-Camera {
@@ -392,12 +387,6 @@ p {
     ),
     url("./images/c1.jpg") center/cover no-repeat;
   height: 17rem;
-  transition: var(--transition);
-}
-
-.collection-Camera:hover {
-  transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .collection-Headset {
@@ -408,12 +397,6 @@ p {
     ),
     url("./images/e1.jpg") center/cover no-repeat;
   height: 17rem;
-  transition: var(--transition);
-}
-
-.collection-Headset:hover {
-  transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* 576 768 998 1200 */

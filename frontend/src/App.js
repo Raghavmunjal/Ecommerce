@@ -48,7 +48,7 @@ const App = () => {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomeScreen} />
-        <Route exact path="/shop/:keyword" component={ShopScreen} />
+
         <Route exact path="/shop" component={ShopScreen} />
         <Route exact path="/product/:slug" component={ProductScreen} />
         <Route
@@ -115,11 +115,7 @@ const App = () => {
           path="/admin/products"
           component={ProductListScreen}
         />
-        <AdminRoute
-          exact
-          path="/admin/products/:pageNumber"
-          component={ProductListScreen}
-        />
+
         <AdminRoute
           exact
           path="/admin/product/:slug"

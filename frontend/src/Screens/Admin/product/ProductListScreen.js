@@ -5,11 +5,13 @@ import AdminNav from "../../../Components/nav/AdminNav";
 import AdminProductCard from "../../../Components/cards/AdminProductCard";
 import { listCategories } from "../../../Actions/categoryAction";
 import LoadingCard from "../../../Components/cards/LoadingCard";
+import { Pagination } from "antd";
 
 const ProductListScreen = ({ match }) => {
-  const pageNumber = match.params.pageNumber || 1;
   const productList = useSelector((state) => state.productList);
-  const { loading: loadingList, products, page, pages } = productList;
+  const { loading: loadingList, products, pages } = productList;
+
+  const [page, setPage] = useState(1);
 
   const categoryList = useSelector((state) => state.categoryList);
   const { categories } = categoryList;
@@ -26,8 +28,8 @@ const ProductListScreen = ({ match }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(listProducts(category, pageNumber));
-  }, [dispatch, category, successDelete, pageNumber]);
+    dispatch(listProducts(category, page));
+  }, [dispatch, category, successDelete, page]);
 
   const handleDelete = (slug) => {
     if (window.confirm("Are you sure you want to delete?")) {
@@ -88,8 +90,18 @@ const ProductListScreen = ({ match }) => {
               </div>
             )
           )}
-          <p>Page : {page}</p>
-          <p>Pages : {pages}</p>
+
+          {products && products.length > 0 && (
+            <div className="row">
+              <nav className="col-md-4 offset-md-4 text-center pt-2 p-3 mb-3">
+                <Pagination
+                  current={page}
+                  total={pages * 10}
+                  onChange={(value) => setPage(value)}
+                />
+              </nav>
+            </div>
+          )}
         </div>
       </div>
     </div>
