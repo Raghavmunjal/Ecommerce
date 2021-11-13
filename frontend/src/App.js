@@ -13,6 +13,7 @@ import ProductCategoryScreen from "./Screens/ProductCategoryScreen";
 import ProductSubCategoryScreen from "./Screens/ProductSubCategoryScreen";
 import ProductBrandScreen from "./Screens/ProductBrandScreen";
 import ShopScreen from "./Screens/ShopScreen";
+import CartScreen from "./Screens/CartScreen";
 
 // Auth Screens
 import LoginScreen from "./Screens/Auth/LoginScreen";
@@ -36,19 +37,22 @@ import BrandEditScreen from "./Screens/Admin/brand/BrandEditScreen";
 // User Screens
 import WishlistScreen from "./Screens/User/WishlistScreen";
 import HistoryScreen from "./Screens/User/HistoryScreen";
+import CheckoutScreen from "./Screens/CheckoutScreen";
 
 // Components
 import Header from "./Components/nav/Header";
 import NotFound from "./Components/NotFound";
+import CartDrawer from "./Components/CartDrawer";
 
 const App = () => {
   return (
     <Router>
       <Header />
+      <CartDrawer />
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomeScreen} />
-
+        <Route exact path="/cart" component={CartScreen} />
         <Route exact path="/shop" component={ShopScreen} />
         <Route exact path="/product/:slug" component={ProductScreen} />
         <Route
@@ -66,6 +70,7 @@ const App = () => {
           path="/product/brand/:slug"
           component={ProductBrandScreen}
         />
+        <UserRoute exact path="/checkout" component={CheckoutScreen} />
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
         <Route

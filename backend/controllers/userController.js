@@ -14,6 +14,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       role: user.role,
       token: req.user.token,
+      address: user.address,
     });
   } else {
     const newUser = await new userSchema({

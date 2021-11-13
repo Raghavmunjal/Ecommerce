@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu } from "antd";
+import { Menu, Badge } from "antd";
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -8,6 +8,7 @@ import {
   LogoutOutlined,
   ShoppingOutlined,
   DownCircleOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 
 import SearchForm from "../forms/SearchForm";
@@ -41,6 +42,9 @@ const Header = () => {
 
   const brandList = useSelector((state) => state.brandList);
   const { brands } = brandList;
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
   const handleClick = (e) => {
     setCurrent(e.key);
@@ -113,6 +117,18 @@ const Header = () => {
 
       <Item key="Shop" icon={<ShoppingOutlined />}>
         <Link to="/shop">Shop</Link>
+      </Item>
+
+      <Item key="Cart" icon={<ShoppingCartOutlined />}>
+        <Link to="/cart">
+          <Badge
+            count={cartItems.length}
+            offset={[10, 0]}
+            style={{ backgroundColor: "white" }}
+          >
+            <span style={{ color: "white" }}>Cart</span>
+          </Badge>
+        </Link>
       </Item>
 
       {userInfo && (

@@ -1,13 +1,24 @@
-import React from "react";
-import { Card } from "antd";
+import React, { useState } from "react";
+import { Card, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import Rating from "../Rating";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../Actions/cartAction";
+import { CART_DRAWER } from "../../Constants/cartConstant";
 const { Meta } = Card;
 
 const UserProductCard = ({ product }) => {
   const { title, description, images, slug, numReviews, rating, price } =
     product;
+
+  const dispatch = useDispatch();
+  const handleCart = () => {
+    setTooltip("Added");
+    dispatch(addToCart({ ...product, count: 1 }));
+    dispatch({ type: CART_DRAWER, payload: true });
+  };
+  const [tooltip, setTooltip] = useState("Add to Cart");
   return (
     <div className="products">
       <Card
@@ -23,13 +34,15 @@ const UserProductCard = ({ product }) => {
             <EyeOutlined style={{ color: "#40a9ff", fontSize: "16px" }} />
             <br /> View Product
           </Link>,
-          <>
-            <ShoppingCartOutlined
-              style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
-            />
-            <br />
-            Add to Cart
-          </>,
+          <Tooltip title={tooltip}>
+            <span onClick={handleCart}>
+              <ShoppingCartOutlined
+                style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
+              />
+              <br />
+              Add to Cart
+            </span>
+          </Tooltip>,
         ]}
         style={{ marginTop: 16 }}
         className="product-card mb-3"

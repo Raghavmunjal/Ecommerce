@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Tabs, Modal } from "antd";
+import { Card, Tabs, Modal, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 import {
   HeartOutlined,
@@ -20,6 +20,9 @@ import {
 } from "../Actions/productAction";
 import { useHistory, useParams } from "react-router-dom";
 
+import { addToCart } from "../Actions/cartAction";
+import { CART_DRAWER } from "../Constants/cartConstant";
+
 const { TabPane } = Tabs;
 
 const ProductDetails = () => {
@@ -32,6 +35,8 @@ const ProductDetails = () => {
   const { product } = productDetails;
 
   const dispatch = useDispatch();
+
+  const [tooltip, setTooltip] = useState("Add to Cart");
 
   useEffect(() => {
     dispatch(listProductsDetails(params.slug));
@@ -61,6 +66,12 @@ const ProductDetails = () => {
         state: { from: `/product/${params.slug}` },
       });
     }
+  };
+
+  const handleCart = () => {
+    setTooltip("Added");
+    dispatch(addToCart({ ...product, count: 1 }));
+    dispatch({ type: CART_DRAWER, payload: true });
   };
 
   return (
@@ -114,11 +125,15 @@ const ProductDetails = () => {
 
         <Card
           actions={[
-            <>
-              <ShoppingCartOutlined className="text-primary" />
-              <br />
-              Add to Cart
-            </>,
+            <Tooltip title={tooltip}>
+              <span onClick={handleCart}>
+                <ShoppingCartOutlined
+                  style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
+                />
+                <br />
+                Add to Cart
+              </span>
+            </Tooltip>,
             <Link to="/">
               <HeartOutlined className="text-danger" />
               <br />
