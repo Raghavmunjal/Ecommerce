@@ -3,6 +3,10 @@ import {
   CART_REMOVE_ITEM,
   CART_DRAWER,
   CART_EMPTY,
+  COUPON_APPLIED_FAIL,
+  COUPON_APPLIED_REQUEST,
+  COUPON_APPLIED_RESET,
+  COUPON_APPLIED_SUCCESS,
 } from "../Constants/cartConstant";
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
@@ -41,6 +45,28 @@ export const cartDrawerReducer = (state = false, action) => {
     case CART_DRAWER:
       return action.payload;
 
+    default:
+      return state;
+  }
+};
+
+export const applyCouponReducer = (
+  state = { totalAfterDiscount: 0 },
+  action
+) => {
+  switch (action.type) {
+    case COUPON_APPLIED_REQUEST:
+      return { loading: true };
+    case COUPON_APPLIED_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        totalAfterDiscount: action.payload,
+      };
+    case COUPON_APPLIED_FAIL:
+      return { loading: false, error: action.payload };
+    case COUPON_APPLIED_RESET:
+      return {};
     default:
       return state;
   }

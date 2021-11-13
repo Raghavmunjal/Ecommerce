@@ -39,7 +39,11 @@ import {
   searchFilterProductsReducer,
 } from "./Reducers/SearchReducer";
 
-import { cartReducer, cartDrawerReducer } from "./Reducers/CartReducer";
+import {
+  cartReducer,
+  cartDrawerReducer,
+  applyCouponReducer,
+} from "./Reducers/CartReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -71,6 +75,7 @@ const reducer = combineReducers({
   searchFilterProducts: searchFilterProductsReducer,
   cart: cartReducer,
   cartDrawer: cartDrawerReducer,
+  applyCoupon: applyCouponReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

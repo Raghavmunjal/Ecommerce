@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const cartSchema = require("../models/cartModel");
 const userSchema = require("../models/userModel");
 const productSchema = require("../models/productModel");
+const couponSchema = require("../models/couponModel");
 
 //@desc   Save Cart Items
 //@routes POST /api/cart
@@ -76,9 +77,43 @@ const saveUserShippingAddress = asyncHandler(async (req, res) => {
   res.json({ success: true });
 });
 
+//@desc   Apply coupon
+//@routes POST /api/cart/coupon
+//@access PRIVATE
+const applyCoupon = asyncHandler(async (req, res) => {
+  const { coupon } = req.body;
+  const validCoupon = await couponSchema.findOne({ name: coupon }).exec();
+  if (validCoupon === null) {
+    throw new Error(`Invalid Coupon`);
+  }
+  const expiryDate = validCoupon.expiry;
+  const today = new Date();
+
+  if (today.getTime() > expiryDate.getTime()) {
+    console.log("ok");
+    throw new Error(`Coupon Expired`);
+  }
+
+  const user = await userSchema.findOne({ email: req.user.email }).exec();
+  let { products, cartTotal } = await cartSchema
+    .findOne({ orderedBy: user._id })
+    .populate("products.product", "_id title price");
+  const totalAfterDiscount = (
+    cartTotal -
+    (cartTotal * validCoupon.discount) / 100
+  ).toFixed(2);
+  cartSchema.findByIdAndUpdate(
+    { orderedBy: user._id },
+    { totalAfterDiscount },
+    { new: true }
+  );
+  res.json(totalAfterDiscount);
+});
+
 module.exports = {
   saveUserCartItems,
   getUserCartItems,
   deleteUserCartItems,
   saveUserShippingAddress,
+  applyCoupon,
 };

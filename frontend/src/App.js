@@ -33,6 +33,7 @@ import ProductListScreen from "./Screens/Admin/product/ProductListScreen";
 import ProductEditScreen from "./Screens/Admin/product/ProductEditScreen";
 import BrandCreateScreen from "./Screens/Admin/brand/BrandCreateScreen";
 import BrandEditScreen from "./Screens/Admin/brand/BrandEditScreen";
+import CouponCreateScreen from "./Screens/Admin/coupons/CouponCreateScreen";
 
 // User Screens
 import WishlistScreen from "./Screens/User/WishlistScreen";
@@ -120,6 +121,7 @@ const App = () => {
           path="/admin/products"
           component={ProductListScreen}
         />
+        <AdminRoute exact path="/admin/coupon" component={CouponCreateScreen} />
 
         <AdminRoute
           exact

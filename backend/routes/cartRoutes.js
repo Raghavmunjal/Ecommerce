@@ -6,8 +6,10 @@ const {
   getUserCartItems,
   deleteUserCartItems,
   saveUserShippingAddress,
+  applyCoupon,
 } = require("../controllers/cartController");
 
+router.route("/coupon").post(tokenCheck, applyCoupon);
 router.route("/address").post(tokenCheck, saveUserShippingAddress);
 router
   .route("/")
