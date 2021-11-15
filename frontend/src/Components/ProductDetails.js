@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card, Tabs, Modal, Tooltip } from "antd";
-import { Link } from "react-router-dom";
 import {
   HeartOutlined,
   ShoppingCartOutlined,
@@ -22,6 +21,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { addToCart } from "../Actions/cartAction";
 import { CART_DRAWER } from "../Constants/cartConstant";
+import { addToWishlist } from "../axios/user";
 
 const { TabPane } = Tabs;
 
@@ -72,6 +72,13 @@ const ProductDetails = () => {
     setTooltip("Added");
     dispatch(addToCart({ ...product, count: 1 }));
     dispatch({ type: CART_DRAWER, payload: true });
+  };
+
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    addToWishlist(product._id, userInfo.token).then((res) =>
+      history.push("/user/wishlist")
+    );
   };
 
   return (
@@ -125,20 +132,31 @@ const ProductDetails = () => {
 
         <Card
           actions={[
-            <Tooltip title={tooltip}>
-              <span onClick={handleCart}>
+            product.quantity < 1 ? (
+              <span>
                 <ShoppingCartOutlined
-                  style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
+                  style={{ fontSize: "16px" }}
+                  className="text-danger"
                 />
                 <br />
-                Add to Cart
+                Out of Stock
               </span>
-            </Tooltip>,
-            <Link to="/">
+            ) : (
+              <Tooltip title={tooltip}>
+                <span onClick={handleCart}>
+                  <ShoppingCartOutlined
+                    style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
+                  />
+                  <br />
+                  Add to Cart
+                </span>
+              </Tooltip>
+            ),
+            <div onClick={handleAddToWishlist}>
               <HeartOutlined className="text-danger" />
               <br />
               Add to Wishlist
-            </Link>,
+            </div>,
             <div onClick={handleModal}>
               <StarOutlined className="text-info" />
               <br />

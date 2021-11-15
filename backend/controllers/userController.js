@@ -33,10 +33,9 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc   check User
+//@desc   Check User
 //@routes POST /api/users/isAdmin,isValid
 //@access PRIVATE
-
 const currentUser = asyncHandler(async (req, res) => {
   const { email } = req.user;
   userSchema.findOne({ email }).exec((err, user) => {
@@ -45,4 +44,50 @@ const currentUser = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { registerUser, currentUser };
+//@desc   Add to Wishlist
+//@routes POST /api/users/wishlist
+//@access PRIVATE
+const addToWishlist = asyncHandler(async (req, res) => {
+  const { productId } = req.body;
+  // $addToSet -> no duplicate will add in wishlist
+  const user = await userSchema
+    .findOneAndUpdate(
+      { email: req.user.email },
+      { $addToSet: { wishlist: productId } },
+      { new: true }
+    )
+    .exec();
+  res.json({ success: true });
+});
+
+//@desc   Remove from Wishlist
+//@routes PUT /api/users/wishlist/:id
+//@access PRIVATE
+const removeFromWishlist = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await userSchema
+    .findOneAndUpdate({ email: req.user.email }, { $pull: { wishlist: id } })
+    .exec();
+  res.json({ success: true });
+});
+
+//@desc   Get User Wishlist
+//@routes GET /api/users/wishlist
+//@access PRIVATE
+const getUserWishlist = asyncHandler(async (req, res) => {
+  const list = await userSchema
+    .findOne({ email: req.user.email })
+    .select("wishlist")
+    .populate("wishlist")
+    .exec();
+
+  res.json(list);
+});
+
+module.exports = {
+  registerUser,
+  currentUser,
+  addToWishlist,
+  removeFromWishlist,
+  getUserWishlist,
+};

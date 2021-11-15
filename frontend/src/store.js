@@ -45,6 +45,13 @@ import {
   applyCouponReducer,
 } from "./Reducers/CartReducer";
 
+import {
+  orderCreateReducer,
+  orderUserListReducer,
+  orderListReducer,
+  orderUpdateReducer,
+} from "./Reducers/oderReducer";
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -76,6 +83,10 @@ const reducer = combineReducers({
   cart: cartReducer,
   cartDrawer: cartDrawerReducer,
   applyCoupon: applyCouponReducer,
+  orderCreate: orderCreateReducer,
+  orderUserList: orderUserListReducer,
+  orderList: orderListReducer,
+  orderUpdate: orderUpdateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

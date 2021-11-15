@@ -34,15 +34,26 @@ const UserProductCard = ({ product }) => {
             <EyeOutlined style={{ color: "#40a9ff", fontSize: "16px" }} />
             <br /> View Product
           </Link>,
-          <Tooltip title={tooltip}>
-            <span onClick={handleCart}>
+          product.quantity < 1 ? (
+            <span>
               <ShoppingCartOutlined
-                style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
+                style={{ fontSize: "16px" }}
+                className="text-danger"
               />
               <br />
-              Add to Cart
+              Out of Stock
             </span>
-          </Tooltip>,
+          ) : (
+            <Tooltip title={tooltip}>
+              <span onClick={handleCart}>
+                <ShoppingCartOutlined
+                  style={{ color: "hsl(211, 39%, 23%)", fontSize: "16px" }}
+                />
+                <br />
+                Add to Cart
+              </span>
+            </Tooltip>
+          ),
         ]}
         style={{ marginTop: 16 }}
         className="product-card mb-3"

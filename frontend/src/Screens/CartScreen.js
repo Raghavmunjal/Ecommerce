@@ -56,7 +56,7 @@ const CartScreen = ({ history }) => {
       <div className="row">
         <div className="col">
           <h3 style={{ marginTop: 60, color: "#001529" }}>
-            Cart / {cartItems.length}
+            Cart ({cartItems.length})
           </h3>
         </div>
       </div>
@@ -100,9 +100,12 @@ const CartScreen = ({ history }) => {
               <span className="h6">Proceed to Checkout</span>
             </button>
           ) : (
-            <button className="btn btn-sm btn-info mt-2">
+            <button className="btn btn-sm btn-raised btn-info mt-2">
               <Link to={{ pathname: "/login", state: { from: "/cart" } }}>
-                <span className="h6"> Login to Checkout</span>
+                <span className="h6" style={{ color: "white" }}>
+                  {" "}
+                  Login to Checkout
+                </span>
               </Link>
             </button>
           )}

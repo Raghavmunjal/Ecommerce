@@ -12,7 +12,7 @@ const stripe = require("stripe")(
 //@access PRIVATE
 const createPaymentIntent = asyncHandler(async (req, res) => {
   const { couponApplied } = req.body;
-  console.log(couponApplied);
+
   const user = await userSchema.findOne({ email: req.user.email }).exec();
   const { cartTotal, totalAfterDiscount } = await cartSchema
     .findOne({ orderedBy: user._id })

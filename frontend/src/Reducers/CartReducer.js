@@ -52,7 +52,7 @@ export const applyCouponReducer = (state = false, action) => {
     case COUPON_APPLIED_SUCCESS:
       return action.payload;
     case COUPON_APPLIED_RESET:
-      return {};
+      return action.payload;
     default:
       return state;
   }

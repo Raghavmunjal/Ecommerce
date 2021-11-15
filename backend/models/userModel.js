@@ -24,11 +24,13 @@ const userSchema = mongoose.Schema(
     address: {
       type: String,
     },
-    // wishlist: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: 'Product',
-    // },
+    wishlist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Product",
+      },
+    ],
   },
   {
     timestamps: true,

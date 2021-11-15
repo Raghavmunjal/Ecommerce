@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createPaymentIntent } from "../axios/payment";
-import { Link } from "react-router-dom";
-import { Alert } from "antd";
+import { Alert, Divider, Button } from "antd";
+import { createOrder, createCodOrder } from "../Actions/orderAction";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+import { CART_EMPTY, COUPON_APPLIED_RESET } from "../Constants/cartConstant";
 
 const StripeCheckout = ({ intended }) => {
   const stripe = useStripe();
@@ -12,6 +15,10 @@ const StripeCheckout = ({ intended }) => {
   const { userInfo } = userLogin;
 
   const applyCoupon = useSelector((state) => state.applyCoupon);
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
@@ -53,11 +60,30 @@ const StripeCheckout = ({ intended }) => {
       // successful
       // create order and save in database
       // empty user cart
-      console.log(JSON.stringify(payload, null, 4));
+      dispatch(createOrder(payload.paymentIntent));
+      dispatch({ type: CART_EMPTY });
+      dispatch({ type: COUPON_APPLIED_RESET, payload: false });
+      localStorage.removeItem("cartItems");
       setProcessing(false);
       setError(null);
       setSuccess(true);
+      toast.success("Order Placed Successfully");
+      setTimeout(() => {
+        history.push("/user/history");
+      }, 1000);
     }
+  };
+
+  const handleCod = () => {
+    dispatch(createCodOrder(applyCoupon));
+    dispatch({ type: CART_EMPTY });
+    dispatch({ type: COUPON_APPLIED_RESET, payload: false });
+    localStorage.removeItem("cartItems");
+    setSuccess(true);
+    toast.success("Order Placed Successfully");
+    setTimeout(() => {
+      history.push("/user/history");
+    }, 1000);
   };
 
   const handleChange = async (e) => {
@@ -67,13 +93,6 @@ const StripeCheckout = ({ intended }) => {
     setError(e.error ? e.error.message : "");
     setProcessing(false);
   };
-
-  const message = () => (
-    <>
-      Payment Successfull{" "}
-      <Link to="/user/history">See it in your purchase history</Link>
-    </>
-  );
 
   const description = () => (
     <>
@@ -119,7 +138,7 @@ const StripeCheckout = ({ intended }) => {
               style={{ fontSize: "17px", cursor: "pointer" }}
               onClick={() => setShow(!show)}
             >
-              <i class="fas fa-info-circle"></i>
+              <i className="fas fa-info-circle"></i>
             </span>
           }
         />
@@ -134,7 +153,12 @@ const StripeCheckout = ({ intended }) => {
           disabled={processing || disabled || success}
         >
           <span id="button-text">
-            {processing ? <div className="spinner" id="spinner"></div> : "Pay"}
+            <i className="fab fa-cc-visa"></i>{" "}
+            {processing ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay Using Credit/Debit Card"
+            )}
           </span>
         </button>
         {error && (
@@ -142,14 +166,17 @@ const StripeCheckout = ({ intended }) => {
             {error}
           </div>
         )}
-        {success && (
-          <Alert
-            message={message()}
-            type="success"
-            showIcon
-            className="mt-3 mb-3"
-          />
-        )}
+        <Divider>Or</Divider>
+        <Button
+          className="mb-3"
+          block
+          icon={<i className="fas fa-rupee-sign"></i>}
+          size="large"
+          onClick={handleCod}
+          style={{ backgroundColor: "#001529", color: "white" }}
+        >
+          Cash on Delivery
+        </Button>
       </form>
     </>
   );
