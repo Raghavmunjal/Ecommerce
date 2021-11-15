@@ -11,6 +11,7 @@ const BrandRoutes = require("./routes/brandRoute");
 const UploadRoutes = require("./routes/uploadRoute");
 const CartRoutes = require("./routes/cartRoutes");
 const CouponRoutes = require("./routes/couponRoute");
+const StripeRoutes = require("./routes/stripeRoute");
 const { ErrorHandler, notFound } = require("./middleware/errMiddleware.js");
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/brand", BrandRoutes);
 app.use("/api/images", UploadRoutes);
 app.use("/api/cart", CartRoutes);
 app.use("/api/coupon", CouponRoutes);
+app.use("/create-payment-intent", StripeRoutes);
 
 // connecting to the database
 connectDB();

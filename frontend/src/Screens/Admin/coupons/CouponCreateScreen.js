@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,6 +15,7 @@ const CouponCreateScreen = () => {
   const [name, setName] = useState("");
   const [expiry, setExpiry] = useState(new Date());
   const [discount, setDiscount] = useState("");
+  //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [coupons, setCoupons] = useState([]);
 

@@ -35,3 +35,14 @@ export const saveUserShippingAddress = async (address, token) =>
       },
     }
   );
+
+export const applyCoupon = async (coupon, token) =>
+  await axios.post(
+    "/api/cart/coupon",
+    { coupon },
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );

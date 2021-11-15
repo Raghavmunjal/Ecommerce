@@ -82,31 +82,39 @@ const saveUserShippingAddress = asyncHandler(async (req, res) => {
 //@access PRIVATE
 const applyCoupon = asyncHandler(async (req, res) => {
   const { coupon } = req.body;
+
   const validCoupon = await couponSchema.findOne({ name: coupon }).exec();
   if (validCoupon === null) {
-    throw new Error(`Invalid Coupon`);
+    res.json({ err: `Invalid ${coupon} Coupon` });
+    return;
   }
+
   const expiryDate = validCoupon.expiry;
   const today = new Date();
 
   if (today.getTime() > expiryDate.getTime()) {
-    console.log("ok");
-    throw new Error(`Coupon Expired`);
+    res.json({ err: `Coupon ${coupon} Expired` });
+    return;
   }
 
   const user = await userSchema.findOne({ email: req.user.email }).exec();
   let { products, cartTotal } = await cartSchema
     .findOne({ orderedBy: user._id })
     .populate("products.product", "_id title price");
+
   const totalAfterDiscount = (
     cartTotal -
     (cartTotal * validCoupon.discount) / 100
   ).toFixed(2);
-  cartSchema.findByIdAndUpdate(
-    { orderedBy: user._id },
-    { totalAfterDiscount },
-    { new: true }
-  );
+
+  await cartSchema
+    .findOneAndUpdate(
+      { orderedBy: user._id },
+      { totalAfterDiscount },
+      { new: true }
+    )
+    .exec();
+
   res.json(totalAfterDiscount);
 });
 

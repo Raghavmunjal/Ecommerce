@@ -93,7 +93,7 @@ const CartScreen = ({ history }) => {
           <hr />
           {userInfo ? (
             <button
-              className="btn btn-sm  btn-primary mt-2"
+              className="btn btn-sm btn-raised  btn-primary mt-2"
               onClick={saveOrderToDb}
               disabled={cartItems.length === 0}
             >

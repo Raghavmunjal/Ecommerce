@@ -4,27 +4,28 @@ import {
   getUserCartItems,
   deleteUserCartItems,
   saveUserShippingAddress,
+  applyCoupon,
 } from "../axios/cart";
-import { applyCouponOnItems } from "../Actions/cartAction";
 import { toast } from "react-toastify";
 import { CART_EMPTY } from "../Constants/cartConstant";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Alert } from "antd";
+import { COUPON_APPLIED_SUCCESS } from "../Constants/cartConstant";
 
 const CheckoutScreen = ({ history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const applyCoupon = useSelector((state) => state.applyCoupon);
-  const { error, success, totalAfterDiscount } = applyCoupon;
-
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState("");
   const [isAddressSave, setIsAddressSave] = useState(false);
   const [coupon, setCoupon] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
 
   useEffect(() => {
     getUserCartItems(userInfo.token)
@@ -68,7 +69,22 @@ const CheckoutScreen = ({ history }) => {
   };
 
   const applyDiscountCoupon = () => {
-    dispatch(applyCouponOnItems(coupon));
+    applyCoupon(coupon, userInfo.token)
+      .then((res) => {
+        if (res.data.err) {
+          setSuccess(false);
+          setError(res.data.err);
+          dispatch({ type: COUPON_APPLIED_SUCCESS, payload: false });
+        } else {
+          setTotalAfterDiscount(res.data);
+          setSuccess(true);
+          setError("");
+          dispatch({ type: COUPON_APPLIED_SUCCESS, payload: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -122,7 +138,7 @@ const CheckoutScreen = ({ history }) => {
         <div className="col-md-6">
           <h3 style={{ marginTop: 60, color: "#001529" }}>Order Summary</h3>
           <hr />
-          <p style={{ fontSize: "20px" }}>{products.length} Products</p>
+          <p style={{ fontSize: "20px" }}>Products ({products.length})</p>
 
           {products.map((p, i) => (
             <div key={i}>
@@ -133,7 +149,7 @@ const CheckoutScreen = ({ history }) => {
             </div>
           ))}
           <hr />
-          {totalAfterDiscount > 0 ? (
+          {success && totalAfterDiscount > 0 ? (
             <Alert
               message={
                 <span style={{ letterSpacing: "0.08rem" }}>
@@ -161,6 +177,12 @@ const CheckoutScreen = ({ history }) => {
               <button
                 className="btn btn-primary btn-raised"
                 disabled={!isAddressSave || !products.length}
+                onClick={() =>
+                  history.push({
+                    pathname: "/payment",
+                    state: { from: coupon },
+                  })
+                }
               >
                 Place Order
               </button>

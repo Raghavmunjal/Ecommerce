@@ -14,6 +14,7 @@ import ProductSubCategoryScreen from "./Screens/ProductSubCategoryScreen";
 import ProductBrandScreen from "./Screens/ProductBrandScreen";
 import ShopScreen from "./Screens/ShopScreen";
 import CartScreen from "./Screens/CartScreen";
+import PaymentScreen from "./Screens/PaymentScreen";
 
 // Auth Screens
 import LoginScreen from "./Screens/Auth/LoginScreen";
@@ -72,6 +73,7 @@ const App = () => {
           component={ProductBrandScreen}
         />
         <UserRoute exact path="/checkout" component={CheckoutScreen} />
+        <UserRoute exact path="/payment" component={PaymentScreen} />
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
         <Route

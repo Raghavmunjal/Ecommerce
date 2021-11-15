@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LoadingToRedirect from "../LoadingToRedirect";
+import { logout } from "../../Actions/userActions";
 import axios from "axios";
 
 const UserRoute = ({ children, ...rest }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const dispatch = useDispatch();
   const [ok, setOk] = useState(false);
 
   const checkToken = async (token) => {
@@ -28,10 +30,11 @@ const UserRoute = ({ children, ...rest }) => {
         })
         .catch((error) => {
           console.log(error);
+          dispatch(logout());
           setOk(false);
         });
     }
-  }, [userInfo]);
+  }, [userInfo, dispatch]);
 
   return ok ? <Route {...rest} /> : <LoadingToRedirect />;
 };
