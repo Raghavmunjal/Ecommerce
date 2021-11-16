@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
 import { useSelector, useDispatch } from "react-redux";
 import { createPaymentIntent } from "../axios/payment";
-import { Alert, Divider, Button } from "antd";
+import { Divider, Button, Tooltip } from "antd";
 import { createOrder, createCodOrder } from "../Actions/orderAction";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
@@ -29,7 +29,6 @@ const StripeCheckout = ({ intended }) => {
   const [cartTotal, setCartTotal] = useState(0);
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
   const [payable, setPayable] = useState(0);
-  const [show, setShow] = useState(false);
 
   useEffect(() => {
     createPaymentIntent(applyCoupon, userInfo.token).then((res) => {
@@ -69,7 +68,7 @@ const StripeCheckout = ({ intended }) => {
       setSuccess(true);
       toast.success("Order Placed Successfully");
       setTimeout(() => {
-        history.push("/user/history");
+        history.push("/payment/success");
       }, 1000);
     }
   };
@@ -82,7 +81,7 @@ const StripeCheckout = ({ intended }) => {
     setSuccess(true);
     toast.success("Order Placed Successfully");
     setTimeout(() => {
-      history.push("/user/history");
+      history.push("/payment/success");
     }, 1000);
   };
 
@@ -96,14 +95,27 @@ const StripeCheckout = ({ intended }) => {
 
   const description = () => (
     <>
-      <p>Cart total: Rs.{cartTotal}</p>
+      <p className="text-white">
+        <b>Amount to be paid: Rs. {payable / 100}</b>
+      </p>
+      <p className="text-white">Cart total: Rs.{cartTotal}</p>
       {intended.from !== "" && (
         <>
-          <p>Coupon Applied: {intended.from}</p>
-          <p>Total After Discount: Rs.{totalAfterDiscount}</p>
+          <p className="text-white">Coupon Applied: {intended.from}</p>
+          <p className="text-white">
+            Total After Discount: Rs.{totalAfterDiscount}
+          </p>
         </>
       )}
     </>
+  );
+
+  const message = () => (
+    <Tooltip title={description} placement="right">
+      <span className="mb-4" style={{ fontSize: "20px", cursor: "pointer" }}>
+        <i className="fas fa-info-circle"></i>
+      </span>
+    </Tooltip>
   );
 
   const cardStyle = {
@@ -127,22 +139,11 @@ const StripeCheckout = ({ intended }) => {
   return (
     <>
       <form id="payment-form" className="stripe-form" onSubmit={handleSubmit}>
-        <Alert
-          message={`Amount to be paid: Rs. ${payable / 100}`}
-          type="info"
-          description={show && description()}
-          className="text-left mb-4"
-          action={
-            <span
-              className="text-info"
-              style={{ fontSize: "17px", cursor: "pointer" }}
-              onClick={() => setShow(!show)}
-            >
-              <i className="fas fa-info-circle"></i>
-            </span>
-          }
-        />
-
+        <h3 style={{ textAlign: "center", color: "#001529" }}>
+          <span>Complete your Purchase {message()}</span>
+        </h3>
+        <div className="underline"></div>
+        <br />
         <CardElement
           id="card-element"
           options={cardStyle}
@@ -170,7 +171,7 @@ const StripeCheckout = ({ intended }) => {
         <Button
           className="mb-3"
           block
-          icon={<i className="fas fa-rupee-sign"></i>}
+          icon={<i className="fas fa-rupee-sign p-1"></i>}
           size="large"
           onClick={handleCod}
           style={{ backgroundColor: "#001529", color: "white" }}

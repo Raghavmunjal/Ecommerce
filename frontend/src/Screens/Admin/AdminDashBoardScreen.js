@@ -6,6 +6,7 @@ import { ORDER_UPDATE_RESET } from "../../Constants/orderConstant";
 import ShowPaymentInfo from "../../Components/ShowPaymentInfo";
 import { CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
 import { listBrands } from "../../Actions/brandAction";
+import Meta from "../../Components/Meta";
 
 const AdminDashBoardScreen = () => {
   const orderList = useSelector((state) => state.orderList);
@@ -31,46 +32,49 @@ const AdminDashBoardScreen = () => {
   };
 
   const showOrderinTable = (order) => (
-    <table className="table table-bordered">
-      <thead className="thead-light">
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Price</th>
-          <th scope="col">Brand</th>
-          <th scope="col">Color</th>
-          <th scope="col">Count</th>
-          <th scope="col">Shipping</th>
-        </tr>
-      </thead>
-      <tbody>
-        {order.products.map((p, i) => (
-          <tr key={i}>
-            <td>
-              <b>{p.product.title}</b>
-            </td>
-            <td>{p.product.price}</td>
-            {brands
-              .filter((b) => b._id === p.product.brand)
-              .map((item, i) => (
-                <td key={i}>{item.name}</td>
-              ))}
-            <td>{p.product.color}</td>
-            <td>{p.count}</td>
-            <td>
-              {p.product.shipping === "Yes" ? (
-                <CheckCircleTwoTone twoToneColor="#52c41a" />
-              ) : (
-                <CloseCircleTwoTone twoToneColor="#E74C3C" />
-              )}
-            </td>
+    <div className="table-responsive">
+      <table className="table table-bordered">
+        <thead className="thead-light">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Color</th>
+            <th scope="col">Count</th>
+            <th scope="col">Shipping</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {order.products.map((p, i) => (
+            <tr key={i}>
+              <td>
+                <b>{p.product.title}</b>
+              </td>
+              <td>{p.product.price}</td>
+              {brands
+                .filter((b) => b._id === p.product.brand)
+                .map((item, i) => (
+                  <td key={i}>{item.name}</td>
+                ))}
+              <td>{p.product.color}</td>
+              <td>{p.count}</td>
+              <td>
+                {p.product.shipping === "Yes" ? (
+                  <CheckCircleTwoTone twoToneColor="#52c41a" />
+                ) : (
+                  <CloseCircleTwoTone twoToneColor="#E74C3C" />
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 
   return (
     <div className="container-fluid">
+      <Meta title="Admin Dashboard" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

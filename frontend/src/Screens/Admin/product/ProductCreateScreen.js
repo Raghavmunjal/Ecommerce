@@ -8,6 +8,7 @@ import { listSubCategories } from "../../../Actions/subCategoryAction";
 import { listBrands } from "../../../Actions/brandAction";
 import FileUpload from "../../../Components/FileUpload";
 import { PRODUCT_CREATE_RESET } from "../../../Constants/productConstant";
+import Meta from "../../../Components/Meta";
 
 const intialState = {
   title: "",
@@ -76,6 +77,7 @@ const ProductCreateScreen = () => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Create Products" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

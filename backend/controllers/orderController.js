@@ -3,7 +3,7 @@ const cartSchema = require("../models/cartModel");
 const userSchema = require("../models/userModel");
 const productSchema = require("../models/productModel");
 const orderSchema = require("../models/orderModel");
-const uniqueid = require("uniqueid");
+const uniqid = require("uniqid");
 
 //@desc   Create Order
 //@routes POST /api/order
@@ -86,7 +86,7 @@ const createCodOrder = asyncHandler(async (req, res) => {
   const newOrder = await new orderSchema({
     products: cart.products,
     paymentIntent: {
-      id: uniqueid(),
+      id: uniqid(),
       amount: finalTotal,
       currency: "inr",
       status: "Not Processed",

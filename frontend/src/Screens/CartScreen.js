@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CartCards from "../Components/cards/CartCards";
 import { saveUserCartItems } from "../axios/cart";
+import { Button } from "antd";
 import { toast } from "react-toastify";
+import CheckoutSteps from "../Components/CheckoutSteps";
+import Meta from "../Components/Meta";
 
 const CartScreen = ({ history }) => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -30,43 +33,56 @@ const CartScreen = ({ history }) => {
 
   const showCartItems = () => {
     return (
-      <table className="table table-bordered">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">Image</th>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Color</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Shipping</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
+      <div className="table-responsive">
+        <table className="table table-bordered">
+          <thead className="thead-light">
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">Price</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Color</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Shipping</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
 
-        {cartItems.map((c) => {
-          return <CartCards key={c._id} c={c} />;
-        })}
-      </table>
+          {cartItems.map((c) => {
+            return <CartCards key={c._id} c={c} />;
+          })}
+        </table>
+      </div>
     );
   };
 
   return (
     <div className="container-fluid pt-2">
+      <Meta title="Cart" />
+      <div className="row">
+        <div className="col mb-4 mt-2">
+          {cartItems.length === 0 ? (
+            <CheckoutSteps step0 />
+          ) : (
+            <CheckoutSteps step1 />
+          )}
+        </div>
+      </div>
       <div className="row">
         <div className="col">
-          <h3 style={{ marginTop: 60, color: "#001529" }}>
-            Cart ({cartItems.length})
+          <h3 style={{ color: "#001529" }}>
+            {" "}
+            <i className="fas fa-shopping-bag p-1"></i>Cart
           </h3>
         </div>
       </div>
       <div className="row">
         <div className="col-md-8">
           {!cartItems.length ? (
-            <h4>
+            <p className="text-center mb-5 mt-5">
               No Products in Cart
               <Link to="/shop"> Continue Shopping</Link>
-            </h4>
+            </p>
           ) : (
             showCartItems()
           )}
@@ -74,7 +90,9 @@ const CartScreen = ({ history }) => {
         <div className="col-md-4">
           <h3 style={{ color: "#001529", fontSize: "25px" }}>Order Summary</h3>
           <hr />
-          <h3 style={{ color: "#001529", fontSize: "18px" }}>Products</h3>
+          <h3 style={{ color: "#001529", fontSize: "18px" }}>
+            Products ({cartItems.length})
+          </h3>
           {cartItems.length > 0 &&
             cartItems.map((c, i) => (
               <div key={i}>
@@ -92,22 +110,29 @@ const CartScreen = ({ history }) => {
 
           <hr />
           {userInfo ? (
-            <button
-              className="btn btn-sm btn-raised  btn-primary mt-2"
+            <Button
+              className="mt-2"
+              icon={<i className="fas fa-shopping-bag p-1"></i>}
+              size="large"
+              style={{ backgroundColor: "#001529", color: "white" }}
               onClick={saveOrderToDb}
               disabled={cartItems.length === 0}
             >
-              <span className="h6">Proceed to Checkout</span>
-            </button>
+              Proceed to Checkout
+            </Button>
           ) : (
-            <button className="btn btn-sm btn-raised btn-info mt-2">
+            <Button
+              className="mt-2"
+              icon={<i className="fas fa-sign-in-alt p-1"></i>}
+              size="large"
+              style={{ backgroundColor: "rgb(64, 169, 255)", color: "white" }}
+            >
               <Link to={{ pathname: "/login", state: { from: "/cart" } }}>
                 <span className="h6" style={{ color: "white" }}>
-                  {" "}
                   Login to Checkout
                 </span>
               </Link>
-            </button>
+            </Button>
           )}
         </div>
       </div>

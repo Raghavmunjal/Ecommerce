@@ -12,6 +12,7 @@ import {
 } from "../../../Constants/categoryConstant";
 import CategoryForm from "../../../Components/forms/CategoryForm";
 import { Spin } from "antd";
+import Meta from "../../../Components/Meta";
 
 const CategoryEditScreen = ({ history, match }) => {
   const [name, setName] = useState("");
@@ -53,6 +54,7 @@ const CategoryEditScreen = ({ history, match }) => {
       indicator={antIcon}
     >
       <div className="container-fluid">
+        <Meta title="Edit Category" />
         <div className="row">
           <div className="col-md-2">
             <AdminNav />

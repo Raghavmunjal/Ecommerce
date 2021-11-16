@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import Meta from "../../Components/Meta";
 
 const ForgotPasswordScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -44,6 +45,7 @@ const ForgotPasswordScreen = ({ history }) => {
   };
   return (
     <div className="container col-md-6 offset-md-3 p-5">
+      <Meta title="Forgot Password" />
       <h3 style={{ marginTop: 60, color: "#001529" }}>Forgot Password</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

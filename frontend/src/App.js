@@ -45,6 +45,7 @@ import CheckoutScreen from "./Screens/CheckoutScreen";
 import Header from "./Components/nav/Header";
 import NotFound from "./Components/NotFound";
 import CartDrawer from "./Components/CartDrawer";
+import PaymentSuccess from "./Components/PaymentSuccess";
 
 const App = () => {
   return (
@@ -74,6 +75,7 @@ const App = () => {
         />
         <UserRoute exact path="/checkout" component={CheckoutScreen} />
         <UserRoute exact path="/payment" component={PaymentScreen} />
+        <UserRoute exact path="/payment/success" component={PaymentSuccess} />
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
         <Route

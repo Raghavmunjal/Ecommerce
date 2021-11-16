@@ -8,6 +8,7 @@ import {
 } from "../../../Constants/brandConstant";
 import { listBrandDetails, updateBrand } from "../../../Actions/brandAction";
 import { listCategories } from "../../../Actions/categoryAction";
+import Meta from "../../../Components/Meta";
 
 const BrandEditScreen = ({ match, history }) => {
   const [name, setName] = useState("");
@@ -52,6 +53,7 @@ const BrandEditScreen = ({ match, history }) => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Edit Brand" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

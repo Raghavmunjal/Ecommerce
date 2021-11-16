@@ -11,7 +11,7 @@ const Collections = () => {
           >
             Laptops Collection
           </h4>
-          <Link to="/product/category/laptops-and-accessories">
+          <Link to="/">
             <h6 style={{ color: "white" }}>
               Shop Now <i className="fas fa-arrow-circle-right"></i>
             </h6>
@@ -26,7 +26,7 @@ const Collections = () => {
           >
             Cameras Collection
           </h4>
-          <Link to="/product/category/cameras">
+          <Link to="/">
             <h6 style={{ color: "white" }}>
               Shop Now <i className="fas fa-arrow-circle-right"></i>
             </h6>
@@ -41,7 +41,7 @@ const Collections = () => {
           >
             Headsets Collection
           </h4>
-          <Link to="/product/category/audio">
+          <Link to="/">
             <h6 style={{ color: "white" }}>
               Shop Now <i className="fas fa-arrow-circle-right"></i>
             </h6>

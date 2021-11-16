@@ -11,6 +11,7 @@ import {
   updateSubCategory,
 } from "../../../Actions/subCategoryAction";
 import { listCategories } from "../../../Actions/categoryAction";
+import Meta from "../../../Components/Meta";
 
 const SubCategoryEditScreen = ({ match, history }) => {
   const [name, setName] = useState("");
@@ -59,6 +60,7 @@ const SubCategoryEditScreen = ({ match, history }) => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Edit Sub Category" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

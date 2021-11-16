@@ -10,6 +10,7 @@ import {
 } from "../../../axios/coupon";
 import { DeleteOutlined } from "@ant-design/icons";
 import AdminNav from "../../../Components/nav/AdminNav";
+import Meta from "../../../Components/Meta";
 
 const CouponCreateScreen = () => {
   const [name, setName] = useState("");
@@ -75,6 +76,7 @@ const CouponCreateScreen = () => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Coupons" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

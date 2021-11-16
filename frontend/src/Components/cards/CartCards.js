@@ -61,7 +61,9 @@ const CartCards = ({ c }) => {
             )}
           </div>
         </td>
-        <td>{c.title}</td>
+        <td>
+          <b>{c.title}</b>
+        </td>
         <td>Rs.{c.price}</td>
         <td>{c.brand.name}</td>
         <td>

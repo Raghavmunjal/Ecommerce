@@ -9,6 +9,7 @@ import { listSubCategories } from "../Actions/subCategoryAction";
 import { listBrands } from "../Actions/brandAction";
 import { useDispatch } from "react-redux";
 import Collections from "../Components/home/Collections";
+import Meta from "../Components/Meta";
 
 const HomeScreen = () => {
   const text = [
@@ -27,6 +28,7 @@ const HomeScreen = () => {
 
   return (
     <div className="home">
+      <Meta />
       <div className="hero">
         <div className="hero-banner">
           <h1 className="font-weight-bold mt-3">
@@ -42,9 +44,9 @@ const HomeScreen = () => {
           </Link>
         </div>
       </div>
-      <BestSellers className="mb-5" />
-      <TopRated className="mb-5" />
       <Collections />
+      <TopRated className="mb-5" />
+      <BestSellers className="mb-5" />
       <NewArrivals className="mb-5" />
     </div>
   );

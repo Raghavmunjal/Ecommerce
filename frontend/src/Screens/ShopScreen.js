@@ -16,9 +16,11 @@ import {
   TagsOutlined,
   BgColorsOutlined,
   TransactionOutlined,
+  AntDesignOutlined,
 } from "@ant-design/icons";
 import { Spin, Radio, Space } from "antd";
 import StarRatings from "react-star-ratings";
+import Meta from "../Components/Meta";
 const { SubMenu } = Menu;
 const { Group } = Radio;
 
@@ -211,6 +213,7 @@ const ShopScreen = () => {
       indicator={antIcon}
     >
       <div className="container-fluid">
+        <Meta title="Shop" />
         <div className="row">
           <div className="col-md-3 pt-2">
             <div style={{ marginTop: 60 }}>
@@ -299,7 +302,7 @@ const ShopScreen = () => {
                 className="mb-3 mt-3"
                 title={
                   <span className="h6">
-                    <TagsOutlined />
+                    <AntDesignOutlined />
                     Brands
                   </span>
                 }

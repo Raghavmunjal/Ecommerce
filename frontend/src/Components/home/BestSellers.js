@@ -39,7 +39,7 @@ const BestSellers = () => {
           className="text-center font-weight-bold p-3 mb-3 mt-2"
           style={{ color: "rgb(0, 21, 41)", textTransform: "uppercase" }}
         >
-          Top <span style={{ color: "#40a9ff" }}>Sellings</span>
+          Best <span style={{ color: "#40a9ff" }}>Sellings</span>
         </h2>
         {loading ? (
           <LoadingCard count={3} />

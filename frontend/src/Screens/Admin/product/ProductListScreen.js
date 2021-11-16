@@ -6,6 +6,7 @@ import AdminProductCard from "../../../Components/cards/AdminProductCard";
 import { listCategories } from "../../../Actions/categoryAction";
 import LoadingCard from "../../../Components/cards/LoadingCard";
 import { Pagination } from "antd";
+import Meta from "../../../Components/Meta";
 
 const ProductListScreen = ({ match }) => {
   const productList = useSelector((state) => state.productList);
@@ -38,6 +39,7 @@ const ProductListScreen = ({ match }) => {
   };
   return (
     <div className="container-fluid">
+      <Meta title="Products" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

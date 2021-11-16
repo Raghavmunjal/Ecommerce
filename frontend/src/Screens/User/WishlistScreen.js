@@ -4,6 +4,7 @@ import { getWishlist, removeFromWishlist } from "../../axios/user";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { DeleteTwoTone } from "@ant-design/icons";
+import Meta from "../../Components/Meta";
 
 const WishlistScreen = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -30,6 +31,7 @@ const WishlistScreen = () => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Wishlist" />
       <div className="row">
         <div className="col-md-2">
           <UserNav />

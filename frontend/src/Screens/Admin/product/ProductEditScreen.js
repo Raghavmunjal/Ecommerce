@@ -15,6 +15,7 @@ import {
   PRODUCT_DETAILS_RESET,
   PRODUCT_UPDATE_RESET,
 } from "../../../Constants/productConstant";
+import Meta from "../../../Components/Meta";
 
 const intialState = {
   title: "",
@@ -108,6 +109,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Edit Products" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

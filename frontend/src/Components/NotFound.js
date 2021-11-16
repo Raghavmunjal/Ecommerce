@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Result } from "antd";
+import Meta from "./Meta";
 
 const NotFound = () => {
   const [count, setCount] = useState(5);
@@ -17,6 +18,7 @@ const NotFound = () => {
   }, [count, history]);
   return (
     <div className="container p-5 text-center">
+      <Meta title="Not Found" />
       <Result
         status="404"
         title="404"

@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getUserCartItems,
-  deleteUserCartItems,
+  //deleteUserCartItems,
   saveUserShippingAddress,
   applyCoupon,
 } from "../axios/cart";
 import { toast } from "react-toastify";
-import { CART_EMPTY } from "../Constants/cartConstant";
+//import { CART_EMPTY } from "../Constants/cartConstant";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Alert } from "antd";
 import { COUPON_APPLIED_SUCCESS } from "../Constants/cartConstant";
+//import CheckoutSteps from "../Components/CheckoutSteps";
+import { Button } from "antd";
+import CheckoutSteps from "../Components/CheckoutSteps";
+import { Meta } from "antd/lib/list/Item";
 
 const CheckoutScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -51,22 +55,22 @@ const CheckoutScreen = ({ history }) => {
     });
   };
 
-  const emptyCart = () => {
-    if (window.confirm("Empty the Cart?")) {
-      deleteUserCartItems(userInfo.token)
-        .then((res) => {
-          if (res.data.success === true) {
-            dispatch({ type: CART_EMPTY });
-            localStorage.removeItem("cartItems");
-            history.push("/");
-          }
-        })
-        .catch((e) => {
-          toast.error(e.message);
-          console.log(e);
-        });
-    }
-  };
+  // const emptyCart = () => {
+  //   if (window.confirm("Empty the Cart?")) {
+  //     deleteUserCartItems(userInfo.token)
+  //       .then((res) => {
+  //         if (res.data.success === true) {
+  //           dispatch({ type: CART_EMPTY });
+  //           localStorage.removeItem("cartItems");
+  //           history.push("/");
+  //         }
+  //       })
+  //       .catch((e) => {
+  //         toast.error(e.message);
+  //         console.log(e);
+  //       });
+  //   }
+  // };
 
   const applyDiscountCoupon = () => {
     applyCoupon(coupon, userInfo.token)
@@ -89,17 +93,27 @@ const CheckoutScreen = ({ history }) => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Shipping" />
+      <div className="row">
+        <div className="col mb-4 mt-3">
+          <CheckoutSteps step2 />
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-6">
-          <h3 style={{ marginTop: 60, color: "#001529" }}>Shipping Address</h3>
+          <h3 style={{ color: "#001529" }}>Shipping Address</h3>
           <br />
           <ReactQuill theme="snow" value={address} onChange={setAddress} />
-          <button
-            className="btn btn-primary btn-raised mt-3"
+
+          <Button
+            className="mt-3"
+            icon={<i className="fas fa-map-marker-alt p-1"></i>}
+            size="large"
+            style={{ backgroundColor: "#001529", color: "white" }}
             onClick={saveAddresstoDb}
           >
-            Save
-          </button>
+            Save Address
+          </Button>
           <hr />
           <br />
           <h3 style={{ color: "#001529", fontSize: "25px" }}>Got Coupon?</h3>
@@ -128,15 +142,18 @@ const CheckoutScreen = ({ history }) => {
               closable
             />
           )}
-          <button
+
+          <Button
+            className="mt-3"
+            size="large"
+            style={{ backgroundColor: "#001529", color: "white" }}
             onClick={applyDiscountCoupon}
-            className="btn btn-info btn-raised mt-3"
           >
             Apply Coupon
-          </button>
+          </Button>
         </div>
         <div className="col-md-6">
-          <h3 style={{ marginTop: 60, color: "#001529" }}>Order Summary</h3>
+          <h3 style={{ color: "#001529" }}>Order Summary</h3>
           <hr />
           <p style={{ fontSize: "20px" }}>Products ({products.length})</p>
 
@@ -174,8 +191,9 @@ const CheckoutScreen = ({ history }) => {
 
           <div className="row">
             <div className="col-md-6">
-              <button
-                className="btn btn-primary btn-raised"
+              <Button
+                size="large"
+                style={{ backgroundColor: "#001529", color: "white" }}
                 disabled={!isAddressSave || !products.length}
                 onClick={() =>
                   history.push({
@@ -185,9 +203,9 @@ const CheckoutScreen = ({ history }) => {
                 }
               >
                 Place Order
-              </button>
+              </Button>
             </div>
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <button
                 disabled={!products.length}
                 onClick={emptyCart}
@@ -195,7 +213,9 @@ const CheckoutScreen = ({ history }) => {
               >
                 Empty Cart
               </button>
-            </div>
+
+             
+            </div> */}
           </div>
         </div>
       </div>

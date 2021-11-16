@@ -5,6 +5,7 @@ import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { login, googleLogin } from "../../Actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Meta from "../../Components/Meta";
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -82,6 +83,7 @@ const LoginScreen = ({ history }) => {
 
   return (
     <div className="container p-5">
+      <Meta title="Login" />
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h3 style={{ marginTop: 20, color: "#001529" }}>Login</h3>

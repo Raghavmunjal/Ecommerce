@@ -42,8 +42,9 @@ const Reviews = () => {
       >
         <Button
           onClick={handleLoadMore}
-          className="btn btn-raised btn-info"
           disabled={count === product.reviews?.length}
+          size="large"
+          style={{ backgroundColor: "#001529", color: "white" }}
         >
           Load More
         </Button>

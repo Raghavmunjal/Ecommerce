@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BRAND_CREATE_RESET } from "../../../Constants/brandConstant";
 import CategoryForm from "../../../Components/forms/CategoryForm";
 import LocalSearch from "../../../Components/LocalSearch";
+import Meta from "../../../Components/Meta";
 
 const BrandCreateScreen = () => {
   const [name, setName] = useState("");
@@ -60,6 +61,7 @@ const BrandCreateScreen = () => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Create Brand" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

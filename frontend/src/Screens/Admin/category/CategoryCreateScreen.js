@@ -16,6 +16,7 @@ import { CATEGORY_CREATE_RESET } from "../../../Constants/categoryConstant";
 import CategoryForm from "../../../Components/forms/CategoryForm";
 import LocalSearch from "../../../Components/LocalSearch";
 import { Spin } from "antd";
+import Meta from "../../../Components/Meta";
 
 const CategoryCreateScreen = () => {
   const [name, setName] = useState("");
@@ -65,6 +66,7 @@ const CategoryCreateScreen = () => {
       indicator={antIcon}
     >
       <div className="container-fluid">
+        <Meta title="Create Category" />
         <div className="row">
           <div className="col-md-2">
             <AdminNav />

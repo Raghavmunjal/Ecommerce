@@ -4,6 +4,7 @@ import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { registerComplete } from "../../Actions/userActions";
 import { MailOutlined } from "@ant-design/icons";
+import Meta from "../../Components/Meta";
 
 const RegisterCompleteScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -97,6 +98,7 @@ const RegisterCompleteScreen = ({ history }) => {
 
   return (
     <div className="container p-5">
+      <Meta title="Complete your Registration" />
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h3 style={{ marginTop: 20, color: "#001529" }}>Sign Up</h3>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdminNav from "../../../Components/nav/AdminNav";
 import { Link } from "react-router-dom";
-
+import Meta from "../../../Components/Meta";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
   createSubCategory,
@@ -61,6 +61,7 @@ const SubCategoryCreateScreen = () => {
 
   return (
     <div className="container-fluid">
+      <Meta title="Create Sub Category" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

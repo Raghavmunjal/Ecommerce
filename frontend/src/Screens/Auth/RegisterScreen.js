@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import Meta from "../../Components/Meta";
 
 const RegisterScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -65,6 +66,7 @@ const RegisterScreen = ({ history }) => {
 
   return (
     <div className="container p-5">
+      <Meta title="Register" />
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h3 style={{ marginTop: 20, color: "#001529" }}>Register</h3>
