@@ -4,6 +4,7 @@ import UserProductCard from "../Components/cards/UserProductCard";
 import LoadingCard from "../Components/cards/LoadingCard";
 import { Pagination } from "antd";
 import { toast } from "react-toastify";
+import Meta from "../Components/Meta";
 
 const ProductBrandScreen = ({ match }) => {
   const [products, setProducts] = useState([]);
@@ -35,6 +36,7 @@ const ProductBrandScreen = ({ match }) => {
 
   return (
     <div className="container">
+      <Meta title={`Product: ${productSlug}`} />
       <div className="row">
         <div className="col">
           <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>

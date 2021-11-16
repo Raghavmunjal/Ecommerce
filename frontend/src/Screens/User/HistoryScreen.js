@@ -100,7 +100,7 @@ const HistoryScreen = () => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Purchase History" />
+      <Meta title="Electro: Purchase History" />
       <div className="row">
         <div className="col-md-2">
           <UserNav />
@@ -119,7 +119,7 @@ const HistoryScreen = () => {
             <h3
               style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
             >
-              No Purchase HistoryScreen
+              No Purchase Yet
             </h3>
           )}
           {orders.length > 0 && showOrders()}

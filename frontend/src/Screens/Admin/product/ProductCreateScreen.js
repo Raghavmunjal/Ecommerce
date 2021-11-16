@@ -77,7 +77,7 @@ const ProductCreateScreen = () => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Create Products" />
+      <Meta title="Electro: Create Products" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

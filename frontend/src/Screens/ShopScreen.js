@@ -213,7 +213,7 @@ const ShopScreen = () => {
       indicator={antIcon}
     >
       <div className="container-fluid">
-        <Meta title="Shop" />
+        <Meta title="Electro: Shop" />
         <div className="row">
           <div className="col-md-3 pt-2">
             <div style={{ marginTop: 60 }}>

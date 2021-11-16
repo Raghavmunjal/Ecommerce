@@ -45,7 +45,7 @@ const ForgotPasswordScreen = ({ history }) => {
   };
   return (
     <div className="container col-md-6 offset-md-3 p-5">
-      <Meta title="Forgot Password" />
+      <Meta title="Electro: Forgot Password" />
       <h3 style={{ marginTop: 60, color: "#001529" }}>Forgot Password</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

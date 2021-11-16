@@ -66,7 +66,7 @@ const CategoryCreateScreen = () => {
       indicator={antIcon}
     >
       <div className="container-fluid">
-        <Meta title="Create Category" />
+        <Meta title="Electro: Create Category" />
         <div className="row">
           <div className="col-md-2">
             <AdminNav />

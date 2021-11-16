@@ -76,7 +76,7 @@ const CouponCreateScreen = () => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Coupons" />
+      <Meta title="Electro: Coupons" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

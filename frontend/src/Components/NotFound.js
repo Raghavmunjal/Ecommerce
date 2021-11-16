@@ -18,7 +18,7 @@ const NotFound = () => {
   }, [count, history]);
   return (
     <div className="container p-5 text-center">
-      <Meta title="Not Found" />
+      <Meta title="Electro: Not Found" />
       <Result
         status="404"
         title="404"

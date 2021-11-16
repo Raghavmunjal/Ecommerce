@@ -58,7 +58,7 @@ const CartScreen = ({ history }) => {
 
   return (
     <div className="container-fluid pt-2">
-      <Meta title="Cart" />
+      <Meta title="Electro: Cart" />
       <div className="row">
         <div className="col mb-4 mt-2">
           {cartItems.length === 0 ? (

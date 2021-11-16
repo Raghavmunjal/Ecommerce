@@ -4,6 +4,7 @@ import LoadingCard from "../Components/cards/LoadingCard";
 import { Pagination } from "antd";
 import { getProductBySubCategories } from "../axios/products";
 import { toast } from "react-toastify";
+import Meta from "../Components/Meta";
 
 const ProductSubCategoryScreen = ({ match }) => {
   const [products, setProducts] = useState([]);
@@ -34,6 +35,7 @@ const ProductSubCategoryScreen = ({ match }) => {
 
   return (
     <div className="container">
+      <Meta title={`Product: ${productSlug}`} />
       <div className="row">
         <div className="col">
           <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>

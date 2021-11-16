@@ -7,6 +7,7 @@ import {
 import ProductDetails from "../Components/ProductDetails";
 import UserProductCard from "../Components/cards/UserProductCard";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../Constants/productConstant";
+import Meta from "../Components/Meta";
 
 const ProductScreen = ({ match }) => {
   const productDetails = useSelector((state) => state.productDetails);
@@ -35,6 +36,7 @@ const ProductScreen = ({ match }) => {
   return (
     <>
       <div className="container-fluid">
+        <Meta title={`Product: ${productSlug}`} />
         <div className="row pt-4">
           <ProductDetails product={product} />
         </div>

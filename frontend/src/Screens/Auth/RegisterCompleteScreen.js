@@ -98,7 +98,7 @@ const RegisterCompleteScreen = ({ history }) => {
 
   return (
     <div className="container p-5">
-      <Meta title="Complete your Registration" />
+      <Meta title="Electro: Complete your Registration" />
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h3 style={{ marginTop: 20, color: "#001529" }}>Sign Up</h3>

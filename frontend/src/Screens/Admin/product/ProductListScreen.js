@@ -39,7 +39,7 @@ const ProductListScreen = ({ match }) => {
   };
   return (
     <div className="container-fluid">
-      <Meta title="Products" />
+      <Meta title="Electro: Products" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

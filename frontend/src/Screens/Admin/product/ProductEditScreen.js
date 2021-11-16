@@ -109,7 +109,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Edit Products" />
+      <Meta title="Electro: Edit Products" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

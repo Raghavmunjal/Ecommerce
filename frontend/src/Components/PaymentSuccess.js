@@ -21,7 +21,7 @@ const LoadingToRedirect = () => {
 
   return (
     <div className="container p-5 text-center ">
-      <Meta title="Successfully Purchased" />
+      <Meta title="Thanks for shopping with us." />
       <div className="row">
         <div className="col-md-8 offset-md-2 mb-4 mt-3">
           <CheckoutSteps step4 />
