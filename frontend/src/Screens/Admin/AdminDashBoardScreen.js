@@ -3,10 +3,11 @@ import AdminNav from "../../Components/nav/AdminNav";
 import { useSelector, useDispatch } from "react-redux";
 import { listOrders, updateOrder } from "../../Actions/orderAction";
 import { ORDER_UPDATE_RESET } from "../../Constants/orderConstant";
-import ShowPaymentInfo from "../../Components/ShowPaymentInfo";
 import { CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
 import { listBrands } from "../../Actions/brandAction";
 import Meta from "../../Components/Meta";
+import { Card, Alert, Select } from "antd";
+const { Option } = Select;
 
 const AdminDashBoardScreen = () => {
   const orderList = useSelector((state) => state.orderList);
@@ -31,47 +32,6 @@ const AdminDashBoardScreen = () => {
     dispatch(updateOrder(orderId, orderStatus));
   };
 
-  const showOrderinTable = (order) => (
-    <div className="table-responsive">
-      <table className="table table-bordered">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Color</th>
-            <th scope="col">Count</th>
-            <th scope="col">Shipping</th>
-          </tr>
-        </thead>
-        <tbody>
-          {order.products.map((p, i) => (
-            <tr key={i}>
-              <td>
-                <b>{p.product.title}</b>
-              </td>
-              <td>{p.product.price}</td>
-              {brands
-                .filter((b) => b._id === p.product.brand)
-                .map((item, i) => (
-                  <td key={i}>{item.name}</td>
-                ))}
-              <td>{p.product.color}</td>
-              <td>{p.count}</td>
-              <td>
-                {p.product.shipping === "Yes" ? (
-                  <CheckCircleTwoTone twoToneColor="#52c41a" />
-                ) : (
-                  <CloseCircleTwoTone twoToneColor="#E74C3C" />
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-
   return (
     <div className="container-fluid">
       <Meta title="Electro: Admin Dashboard" />
@@ -79,38 +39,133 @@ const AdminDashBoardScreen = () => {
         <div className="col-md-2">
           <AdminNav />
         </div>
-        <div className="col-md-8 offset-md-1">
-          <h3 style={{ textAlign: "center", marginTop: 60, color: "#001529" }}>
-            Admin DashBoard
+        <div className="col-md-10">
+          <h3 className=" text-center " style={{ marginTop: 60 }}>
+            All Orders
           </h3>
           <div className="underline"></div>
-          {orders.map((o) => (
-            <div key={o._id} className="row pb-5">
-              <div className="btn btn-block bg-light">
-                <ShowPaymentInfo order={o} />
-                <div className="row">
-                  <div className="col-md-4">Delivery Status</div>
-                  <div className="col-md-8">
-                    <select
-                      onChange={(e) =>
-                        handleStatusChange(o._id, e.target.value)
-                      }
-                      className="form-control"
-                      defaultValue={o.orderStatus}
-                      name="status"
-                    >
-                      <option value="Not Processed">Not Processed</option>
-                      <option value="Processing">Processing</option>
-                      <option value="Dispatched">Dispatched</option>
-                      <option value="Cancelled">Cancelled</option>
-                      <option value="Completed">Completed</option>
-                    </select>
+          {orders &&
+            orders.length > 0 &&
+            orders.map((order, i) => {
+              let alertColor = "error";
+              if (order.orderStatus === "Not Processed") {
+                alertColor = "error";
+              } else if (order.orderStatus === "Processing") {
+                alertColor = "warning";
+              } else if (order.orderStatus === "Dispatched") {
+                alertColor = "warning";
+              } else if (order.orderStatus === "Cancelled") {
+                alertColor = "info";
+              } else if (order.orderStatus === "Delievered") {
+                alertColor = "success";
+              }
+              return (
+                <Card className="mt-4 mb-3" key={i}>
+                  <Alert
+                    message={`Order Status  :  ${order.orderStatus.toUpperCase()}`}
+                    type={alertColor}
+                    className="mt-1 mb-4"
+                  />
+                  <div className="row">
+                    <div className="col-md-4 mt-2">
+                      <span className="text-muted mb-4">
+                        <b>Order Id</b> : {order.paymentIntent.id}
+                      </span>
+                      <br />
+                      <span className="text-muted mb-4">
+                        <b>Amount</b> :{" "}
+                        {(order.paymentIntent.amount / 100).toLocaleString(
+                          "en-US",
+                          {
+                            style: "currency",
+                            currency: "INR",
+                          }
+                        )}
+                      </span>
+                      <br />
+                      <span className="text-muted mb-4">
+                        <b>Currency</b> :{" "}
+                        {order.paymentIntent.currency.toUpperCase()}
+                      </span>
+                      <br />
+                      <span className="text-muted mb-4">
+                        <b>Payment method</b> :{" "}
+                        {order.paymentIntent.payment_method_types[0]}
+                      </span>
+                      <br />
+                      <span className="text-muted mb-4">
+                        <b>Ordered on</b> :{" "}
+                        {new Date(
+                          order.paymentIntent.created * 1000
+                        ).toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="col-md-8">
+                      <div className="row mt-2 mb-2 ">
+                        <h6 className="mt-1 mr-4 text-muted">
+                          Change Status :{" "}
+                        </h6>
+                        <Select
+                          onChange={(value) =>
+                            handleStatusChange(order._id, value)
+                          }
+                          defaultValue={order.orderStatus}
+                          style={{ width: 360 }}
+                        >
+                          <Option value="Not Processed">Not Processed</Option>
+                          <Option value="Processing">Processing</Option>
+                          <Option value="Dispatched">Dispatched</Option>
+                          <Option value="Cancelled">Cancelled</Option>
+                          <Option value="Delievered">Delievered</Option>
+                        </Select>
+                      </div>
+                      <div className="row table-responsive">
+                        <table className="table table-bordered mt-2">
+                          <thead className="thead-light ">
+                            <tr>
+                              <th className="text-center">Name</th>
+                              <th className="text-center">Price</th>
+                              <th className="text-center">Brand</th>
+                              <th className="text-center">Color</th>
+                              <th className="text-center">Count</th>
+                              <th className="text-center">Shipping</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {order.products.map((p, i) => (
+                              <tr key={i}>
+                                <td className="text-center">
+                                  {p.product.title}
+                                </td>
+                                <td className="text-center">
+                                  {p.product.price}
+                                </td>
+                                {brands
+                                  .filter((b) => b._id === p.product.brand)
+                                  .map((item, i) => (
+                                    <td key={i} className="text-center">
+                                      {item.name}
+                                    </td>
+                                  ))}
+                                <td className="text-center">{p.color}</td>
+                                <td className="text-center">{p.count}</td>
+                                <td className="text-center">
+                                  {p.product.shipping === "Yes" ? (
+                                    <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                  ) : (
+                                    <CloseCircleTwoTone twoToneColor="#E74C3C" />
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              {showOrderinTable(o)}
-            </div>
-          ))}
+                </Card>
+              );
+            })}
         </div>
       </div>
     </div>

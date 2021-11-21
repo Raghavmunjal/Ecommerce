@@ -217,7 +217,7 @@ const ShopScreen = () => {
         <div className="row">
           <div className="col-md-3 pt-2">
             <div style={{ marginTop: 60 }}>
-              <span className="h4">Filter</span>
+              <span className="h4">Filters</span>
               <span className="btn btn-info float-right" onClick={handleClear}>
                 Clear
               </span>

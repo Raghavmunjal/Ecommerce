@@ -3,15 +3,19 @@ import UserNav from "../../Components/nav/UserNav";
 import { userListOrder } from "../../Actions/orderAction";
 import { listBrands } from "../../Actions/brandAction";
 import { useSelector, useDispatch } from "react-redux";
-import ShowPaymentInfo from "../../Components/ShowPaymentInfo";
-import { CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
+import {
+  CheckCircleTwoTone,
+  CloseCircleTwoTone,
+  DownloadOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { CloudDownloadOutlined } from "@ant-design/icons";
 import Invoice from "../../Components/Invoice";
 import ModalImage from "react-modal-image";
 import Meta from "../../Components/Meta";
+import { Result, Button, Card, Alert, Modal } from "antd";
 
-const HistoryScreen = () => {
+const HistoryScreen = ({ history }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userListOrder());
@@ -23,7 +27,44 @@ const HistoryScreen = () => {
 
   const brandList = useSelector((state) => state.brandList);
   const { brands } = brandList;
-  const showOrderinTable = (order) => (
+
+  //payment info modal
+  const paymentModal = (order) =>
+    Modal.info({
+      title: `Payment Info`,
+      content: (
+        <div>
+          <span className="text-muted mb-4">
+            <b>Order Id</b> : {order.paymentIntent.id}
+          </span>
+          <br />
+          <span className="text-muted mb-4">
+            <b>Amount</b> :{" "}
+            {(order.paymentIntent.amount /= 100).toLocaleString("en-US", {
+              style: "currency",
+              currency: "INR",
+            })}
+          </span>
+          <br />
+          <span className="text-muted mb-4">
+            <b>Currency</b> : {order.paymentIntent.currency.toUpperCase()}
+          </span>
+          <br />
+          <span className="text-muted mb-4">
+            <b>Payment method</b> :{" "}
+            {order.paymentIntent.payment_method_types[0]}
+          </span>
+          <br />
+          <span className="text-muted mb-4">
+            <b>Ordered on</b> :{" "}
+            {new Date(order.paymentIntent.created * 1000).toLocaleString()}
+          </span>
+        </div>
+      ),
+      onOk() {},
+    });
+
+  const showOrderDetails = (order) => (
     <div className="table-responsive">
       <table className="table table-bordered">
         <thead className="thead-light">
@@ -75,28 +116,57 @@ const HistoryScreen = () => {
     </div>
   );
 
-  const showDownloadLink = (order) => {
-    return (
-      <PDFDownloadLink
-        document={<Invoice order={order} />}
-        fileName="invoice.pdf"
-        className="btn btn-sm btn-info"
-      >
-        <CloudDownloadOutlined style={{ fontSize: "15px" }} /> Download Invoice
-      </PDFDownloadLink>
-    );
-  };
-
   const showOrders = () =>
-    orders.reverse().map((order, i) => (
-      <div key={i} className="m-5 p-3 card">
-        <ShowPaymentInfo order={order} />
-        {showOrderinTable(order)}
-        <div className="row mt-2">
-          <div className="col">{showDownloadLink(order)}</div>
-        </div>
-      </div>
-    ));
+    orders.reverse().map((order, i) => {
+      let alertColor = "error";
+      if (order.orderStatus === "NOT PROCESSED") {
+        alertColor = "error";
+      } else if (order.orderStatus === "Processing") {
+        alertColor = "warning";
+      } else if (order.orderStatus === "Dispatched") {
+        alertColor = "warning";
+      } else if (order.orderStatus === "Cancelled") {
+        alertColor = "info";
+      } else if (order.orderStatus === "Delievered") {
+        alertColor = "success";
+      }
+      return (
+        <Card
+          key={i}
+          bordered={true}
+          className="mt-5 mb-5 text-center"
+          actions={[
+            <>
+              <InfoCircleOutlined
+                className="text-info"
+                style={{ fontSize: "16px" }}
+                onClick={() => paymentModal(order)}
+              />{" "}
+              , Payment Info
+            </>,
+            <>
+              <PDFDownloadLink
+                document={<Invoice order={order} />}
+                fileName="invoice.pdf"
+              >
+                <DownloadOutlined
+                  className="text-info"
+                  style={{ fontSize: "16px" }}
+                />{" "}
+                ,<br /> Download Invoice
+              </PDFDownloadLink>
+            </>,
+          ]}
+        >
+          <Alert
+            message={`Order Status  :  ${order.orderStatus.toUpperCase()}`}
+            type={alertColor}
+            className="mt-2 mb-2"
+          />
+          {showOrderDetails(order)}
+        </Card>
+      );
+    });
 
   return (
     <div className="container-fluid">
@@ -116,11 +186,19 @@ const HistoryScreen = () => {
               <div className="underline"></div>
             </>
           ) : (
-            <h3
-              style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
-            >
-              No Purchase Yet
-            </h3>
+            <Result
+              title="No Orders Yet"
+              className="mt-5 p-5"
+              extra={
+                <Button
+                  type="primary"
+                  key="shop"
+                  onClick={() => history.push("/shop")}
+                >
+                  Shop Something
+                </Button>
+              }
+            />
           )}
           {orders.length > 0 && showOrders()}
         </div>

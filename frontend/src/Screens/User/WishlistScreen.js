@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import UserNav from "../../Components/nav/UserNav";
 import { getWishlist, removeFromWishlist } from "../../axios/user";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { DeleteTwoTone } from "@ant-design/icons";
 import Meta from "../../Components/Meta";
+import WishlistCard from "../../Components/cards/WishlistCard";
+import LoadingCard from "../../Components/cards/LoadingCard";
 
 const WishlistScreen = () => {
   const [wishlist, setWishlist] = useState([]);
+  const [loading, setLoading] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -17,11 +18,16 @@ const WishlistScreen = () => {
   }, []);
 
   const loadWishlist = () => {
+    setLoading(true);
     getWishlist(userInfo.token)
       .then((res) => {
+        setLoading(false);
         setWishlist(res.data.wishlist);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setLoading(false);
+        console.log(e);
+      });
   };
 
   const handleRemove = (id) =>
@@ -41,17 +47,17 @@ const WishlistScreen = () => {
             Wishlist
           </h3>
           <div className="underline"></div>
-          {wishlist.map((p) => (
-            <div key={p._id} className="alert alert-secondary">
-              <Link to={`/product/${p.slug}`}>{p.title}</Link>
-              <span
-                onClick={() => handleRemove(p._id)}
-                className="btn btn-sm float-right"
-              >
-                <DeleteTwoTone twoToneColor="red" />
-              </span>
+          {loading ? (
+            <LoadingCard count={3} />
+          ) : (
+            <div className="row">
+              {wishlist.map((p) => (
+                <div key={p._id} className="col-md-4 mb-2">
+                  <WishlistCard product={p} handleRemove={handleRemove} />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
