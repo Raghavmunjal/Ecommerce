@@ -96,6 +96,7 @@ const ShopScreen = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const timeout = setTimeout(() => {
       dispatch(
         listSearchProducts({
@@ -445,21 +446,25 @@ const ShopScreen = () => {
               sub === "" &&
               brand === "" &&
               color === "" &&
-              ship === ""
-                ? defaultProducts &&
-                  defaultProducts.length > 0 &&
-                  defaultProducts.map((p) => (
-                    <div className="col-md-4 mb-5" key={p._id}>
-                      <UserProductCard product={p} />
-                    </div>
-                  ))
-                : filterProducts && filterProducts.length > 0
-                ? filterProducts.map((p) => (
-                    <div className="col-md-4 mb-5" key={p._id}>
-                      <UserProductCard product={p} />
-                    </div>
-                  ))
-                : "No Product Found"}
+              ship === "" ? (
+                defaultProducts &&
+                defaultProducts.length > 0 &&
+                defaultProducts.map((p) => (
+                  <div className="col-md-4 mb-5" key={p._id}>
+                    <UserProductCard product={p} />
+                  </div>
+                ))
+              ) : filterProducts && filterProducts.length > 0 ? (
+                filterProducts.map((p) => (
+                  <div className="col-md-4 mb-5" key={p._id}>
+                    <UserProductCard product={p} />
+                  </div>
+                ))
+              ) : (
+                <div className="text-center col mt-5 mb-5">
+                  <p>No Products Found</p>
+                </div>
+              )}
             </div>
 
             {/* Pagination */}

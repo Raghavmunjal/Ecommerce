@@ -198,7 +198,7 @@ const CheckoutScreen = ({ history }) => {
                 onClick={() =>
                   history.push({
                     pathname: "/payment",
-                    state: { from: coupon },
+                    coupon: coupon,
                   })
                 }
               >

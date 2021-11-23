@@ -14,7 +14,7 @@ const ProductCard = ({ product, handleDelete }) => {
           <img
             src={images && images.length ? images[0].url : ""}
             alt="product"
-            style={{ height: "150px", objectFit: "cover" }}
+            style={{ height: "180px", objectFit: "cover" }}
             className="p-1"
           />
         }

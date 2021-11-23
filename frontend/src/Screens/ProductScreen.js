@@ -29,6 +29,7 @@ const ProductScreen = ({ match }) => {
   const antIcon = <LoadingOutlined style={{ fontSize: 100 }} spin />;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (successReview) {
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }

@@ -38,7 +38,7 @@ const ProductCardItems = ({ product }) => {
           Sub Categories
           {subCategory.map((s) => (
             <Link
-              to={`/subcategory/${s.slug}`}
+              to={`/product/subcategory/${s.slug}`}
               key={s._id}
               className="label label-default label-pill pull-xs-right"
             >
@@ -66,7 +66,7 @@ const ProductCardItems = ({ product }) => {
         <li className="list-group-item">
           Brand
           <Link
-            to={`/brand/${brand.slug}`}
+            to={`/product/brand/${brand.slug}`}
             className="label label-default label-pill pull-xs-right"
           >
             {brand.name}

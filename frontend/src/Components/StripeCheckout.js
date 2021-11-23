@@ -99,9 +99,9 @@ const StripeCheckout = ({ intended }) => {
         <b>Amount to be paid: Rs. {payable / 100}</b>
       </p>
       <p className="text-white">Cart total: Rs.{cartTotal}</p>
-      {intended.from !== "" && (
+      {intended !== "" && (
         <>
-          <p className="text-white">Coupon Applied: {intended.from}</p>
+          <p className="text-white">Coupon Applied: {intended}</p>
           <p className="text-white">
             Total After Discount: Rs.{totalAfterDiscount}
           </p>
@@ -143,6 +143,7 @@ const StripeCheckout = ({ intended }) => {
           <span>Complete your Purchase {message()}</span>
         </h3>
         <div className="underline"></div>
+        <p>For testing purpose use credit number : 4242 4242 4242 4242</p>
         <br />
         <CardElement
           id="card-element"

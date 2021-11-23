@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Tooltip } from "antd";
+import { Card, Tooltip, Popconfirm } from "antd";
 import { Link } from "react-router-dom";
 import {
   EyeOutlined,
@@ -58,10 +58,15 @@ const WishlistCard = ({ product, handleRemove }) => {
               </span>
             </Tooltip>
           ),
-          <span onClick={() => handleRemove(product._id)}>
+          <Popconfirm
+            title="Are you sure to delete?"
+            onConfirm={() => handleRemove(product._id)}
+            okText="Yes"
+            cancelText="No"
+          >
             <DeleteOutlined className="text-danger" />
             <br /> Remove
-          </span>,
+          </Popconfirm>,
         ]}
         style={{ marginTop: 16 }}
         className="product-card mb-3"

@@ -12,7 +12,7 @@ const promise = loadStripe(
 );
 
 const PaymentScreen = ({ history }) => {
-  const intended = history.location.state;
+  const intended = history.location.coupon;
   return (
     <div className="container p-5 text-center">
       <Meta title="Electro: Payment" />

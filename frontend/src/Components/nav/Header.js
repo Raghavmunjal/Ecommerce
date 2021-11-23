@@ -7,7 +7,6 @@ import {
   UserAddOutlined,
   LogoutOutlined,
   ShoppingOutlined,
-  DownCircleOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 
@@ -22,6 +21,8 @@ import { logout } from "../../Actions/userActions";
 import { listCategories } from "../../Actions/categoryAction";
 import { listSubCategories } from "../../Actions/subCategoryAction";
 import { listBrands } from "../../Actions/brandAction";
+
+import icon from "../../images/ICON.png";
 
 const { SubMenu, Item } = Menu;
 
@@ -73,13 +74,22 @@ const Header = () => {
         width: "100%",
       }}
     >
-      <Item key="Home" icon={<AppstoreOutlined />}>
+      <Item
+        key="Home"
+        icon={
+          <img
+            src={icon}
+            alt="Home"
+            style={{ height: "22px", marginBottom: "4px" }}
+          />
+        }
+      >
         <Link to="/">
           {userInfo ? <span>Home</span> : <span>Electro</span>}
         </Link>
       </Item>
 
-      <SubMenu icon={<DownCircleOutlined />} title="Items" key="items">
+      <SubMenu icon={<AppstoreOutlined />} title="Items" key="items">
         <SubMenu key="category" title="Categories">
           {categories &&
             categories.length > 0 &&

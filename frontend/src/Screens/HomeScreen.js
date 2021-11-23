@@ -10,6 +10,7 @@ import { listBrands } from "../Actions/brandAction";
 import { useDispatch } from "react-redux";
 //import Collections from "../Components/home/Collections";
 import Meta from "../Components/Meta";
+import Footer from "../Components/Footer";
 
 const HomeScreen = () => {
   const text = [
@@ -48,6 +49,7 @@ const HomeScreen = () => {
       <TopRated className="mb-5" />
       <BestSellers className="mb-5" />
       <NewArrivals className="mb-5" />
+      <Footer />
     </div>
   );
 };

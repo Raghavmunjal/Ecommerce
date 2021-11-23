@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Meta from "../../Components/Meta";
 import WishlistCard from "../../Components/cards/WishlistCard";
 import LoadingCard from "../../Components/cards/LoadingCard";
+import { message } from "antd";
 
 const WishlistScreen = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -33,6 +34,7 @@ const WishlistScreen = () => {
   const handleRemove = (id) =>
     removeFromWishlist(id, userInfo.token).then((res) => {
       loadWishlist();
+      message.success("Deleted");
     });
 
   return (
