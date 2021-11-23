@@ -14,6 +14,7 @@ const CouponRoutes = require("./routes/couponRoute");
 const StripeRoutes = require("./routes/stripeRoute");
 const OrderRoutes = require("./routes/orderRoute");
 const { ErrorHandler, notFound } = require("./middleware/errMiddleware.js");
+const path = require("path");
 
 const app = express();
 dotenv.config();
@@ -36,6 +37,23 @@ app.use("/api/cart", CartRoutes);
 app.use("/api/coupon", CouponRoutes);
 app.use("/create-payment-intent", StripeRoutes);
 app.use("/api/order", OrderRoutes);
+
+// const __dirname = path.resolve();
+path.join(__dirname, "../");
+
+if (process.env.NODE_ENV === "production") {
+  app.use(
+    express.static(path.join(path.join(__dirname, "../"), "/frontend/build"))
+  ); // set static folder
+  //returning frontend for any route other than api
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+  });
+}
 
 // connecting to the database
 connectDB();
