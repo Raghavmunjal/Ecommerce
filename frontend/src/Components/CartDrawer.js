@@ -27,7 +27,6 @@ const CartDrawer = () => {
       className="text-center"
       placement="right"
       closable={false}
-      width={320}
       title={`Cart / ${cartItems.length} Products`}
     >
       {cartItems.map((c) => (

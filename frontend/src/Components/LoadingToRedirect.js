@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Meta from "./Meta";
 import { Result } from "antd";
 
 const LoadingToRedirect = () => {
@@ -17,6 +18,7 @@ const LoadingToRedirect = () => {
   }, [count, history]);
   return (
     <div className="container p-5 text-center">
+      <Meta title="Electro: Not Found" />
       <Result
         status="403"
         title="403"
