@@ -1,5 +1,5 @@
 import React from "react";
-import icon from "../images/ICON.png";
+
 const Footer = () => {
   return (
     <footer
@@ -7,13 +7,6 @@ const Footer = () => {
       style={{ backgroundColor: "rgb(0, 21, 41)" }}
     >
       <div className="row">&nbsp;</div>
-      <div className="text-center mb-3">
-        <img
-          src={icon}
-          alt="Home"
-          style={{ height: "40px", marginBottom: "4px" }}
-        />{" "}
-      </div>
       <div className="container">
         <div className="row">
           <div className="col-md-3 offset-md-1">
@@ -56,11 +49,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
       <div className="text-center mt-3">
-        <span style={{ color: "rgb(64, 169, 255)" }}>
-          © {new Date().getFullYear()}
-        </span>{" "}
-        Copyright: Electro
+        © {new Date().getFullYear()}
+        Copyright: <span style={{ color: "rgb(64, 169, 255)" }}> Electro</span>
       </div>
     </footer>
   );

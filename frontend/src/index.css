@@ -120,7 +120,7 @@ p {
   box-shadow: 0 3px var(--clr-primary-5);
 } */
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1068px) {
   .products {
     display: flex;
     justify-content: space-between;
@@ -252,7 +252,7 @@ p {
   margin-left: 0.1rem;
 }
 
-/* @media screen and (min-width: 572px) {
+@media screen and (min-width: 572px) {
   .collections {
     display: flex;
     justify-content: space-between;
@@ -307,6 +307,6 @@ p {
     ),
     url("./images/e1.jpg") center/cover no-repeat;
   height: 17rem;
-} */
+}
 
 /* 576 768 998 1200 */

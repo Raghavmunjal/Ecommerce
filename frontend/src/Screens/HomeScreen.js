@@ -11,6 +11,11 @@ import { useDispatch } from "react-redux";
 //import Collections from "../Components/home/Collections";
 import Meta from "../Components/Meta";
 import Footer from "../Components/Footer";
+import camera from "../images/c3.jpg";
+import mobile from "../images/m1.jpg";
+import headphones from "../images/headphones.jpg";
+import { Carousel, Button } from "antd";
+import Collections from "../Components/Collections";
 
 const HomeScreen = () => {
   const text = [
@@ -46,9 +51,73 @@ const HomeScreen = () => {
         </div>
       </div>
 
+      <Collections />
+
       <TopRated className="mb-5" />
-      <BestSellers className="mb-5" />
+
+      <div className="container mt-5 mb-5">
+        <div className="row">
+          <div className="col-md-3 mt-5">
+            <h3 className="mb-4" style={{ color: "rgb(0, 21, 41)" }}>
+              Up to{" "}
+              <span className="display-3" style={{ color: "rgb(64,169,255)" }}>
+                40%{" "}
+              </span>
+              off
+            </h3>
+
+            <p style={{ maxWidth: "26rem" }}>
+              Apply Coupon{" "}
+              <span style={{ color: "rgb(64,169,255)" }}>ELECTROFOREVER </span>{" "}
+              Offer valid for limited time period T&C applied
+            </p>
+            <Button
+              className="mt-2 mb-4"
+              size="large"
+              style={{ backgroundColor: "rgb(0, 21, 41)", color: "white" }}
+            >
+              <Link to="/shop">
+                <i className="fas fa-shopping-bag p-1"></i> Shop Now
+              </Link>
+            </Button>
+          </div>
+          <div className="col-md-8 offset-md-1">
+            <Carousel autoplay>
+              <div>
+                <img
+                  src={headphones}
+                  alt=""
+                  width="100%"
+                  height="400px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div>
+                <img
+                  src={camera}
+                  alt=""
+                  width="100%"
+                  height="400px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div>
+                <img
+                  src={mobile}
+                  alt=""
+                  width="100%"
+                  height="400px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </Carousel>
+          </div>
+        </div>
+      </div>
+
       <NewArrivals className="mb-5" />
+      <BestSellers className="mb-5" />
+
       <Footer />
     </div>
   );
