@@ -57,15 +57,15 @@ const HomeScreen = () => {
             <h3 className="mb-4" style={{ color: "rgb(0, 21, 41)" }}>
               Up to{" "}
               <span className="display-3" style={{ color: "rgb(64,169,255)" }}>
-                40%{" "}
+                <strong>40% </strong>
               </span>
               off
             </h3>
 
             <p style={{ maxWidth: "26rem" }}>
               Apply Coupon{" "}
-              <span style={{ color: "rgb(64,169,255)" }}>ELECTROFOREVER </span>{" "}
-              Offer valid for limited time period T&C applied
+              <b style={{ color: "rgb(64,169,255)" }}>ELECTROFOREVER </b> Offer
+              valid for limited time period T&C applied
             </p>
             <Button
               className="mt-2 mb-4"
