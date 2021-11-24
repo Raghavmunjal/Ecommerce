@@ -10,7 +10,7 @@ const RegisterScreen = ({ history }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = {
-      url: "http://localhost:3000/register/complete",
+      url: "https://electroo.herokuapp.com/register/complete",
       handleCodeInApp: true,
     };
 
