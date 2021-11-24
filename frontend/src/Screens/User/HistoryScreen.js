@@ -79,38 +79,41 @@ const HistoryScreen = ({ history }) => {
           </tr>
         </thead>
         <tbody>
-          {order.products.map((p, i) => (
-            <tr key={i}>
-              <td>
-                <div style={{ width: "100px", height: "auto" }}>
-                  {p.product.images.length && (
-                    <ModalImage
-                      small={p.product.images[0].url}
-                      large={p.product.images[0].url}
-                    />
+          {order &&
+            order.products &&
+            order.products.length > 0 &&
+            order.products.map((p, i) => (
+              <tr key={i}>
+                <td>
+                  <div style={{ width: "100px", height: "auto" }}>
+                    {p.product?.images.length && (
+                      <ModalImage
+                        small={p.product.images[0].url}
+                        large={p.product.images[0].url}
+                      />
+                    )}
+                  </div>
+                </td>
+                <td>
+                  <b>{p.product?.title}</b>
+                </td>
+                <td>{p.product?.price}</td>
+                {brands
+                  .filter((b) => b._id === p.product.brand)
+                  .map((item, i) => (
+                    <td key={i}>{item.name}</td>
+                  ))}
+                <td>{p.product?.color}</td>
+                <td>{p.count}</td>
+                <td>
+                  {p.product?.shipping === "Yes" ? (
+                    <CheckCircleTwoTone twoToneColor="#52c41a" />
+                  ) : (
+                    <CloseCircleTwoTone twoToneColor="#E74C3C" />
                   )}
-                </div>
-              </td>
-              <td>
-                <b>{p.product.title}</b>
-              </td>
-              <td>{p.product.price}</td>
-              {brands
-                .filter((b) => b._id === p.product.brand)
-                .map((item, i) => (
-                  <td key={i}>{item.name}</td>
-                ))}
-              <td>{p.product.color}</td>
-              <td>{p.count}</td>
-              <td>
-                {p.product.shipping === "Yes" ? (
-                  <CheckCircleTwoTone twoToneColor="#52c41a" />
-                ) : (
-                  <CloseCircleTwoTone twoToneColor="#E74C3C" />
-                )}
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

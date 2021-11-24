@@ -24,6 +24,7 @@ const AdminDashBoardScreen = () => {
     if (success) {
       dispatch({ type: ORDER_UPDATE_RESET });
     }
+
     dispatch(listOrders());
     dispatch(listBrands());
   }, [dispatch, success]);
@@ -132,32 +133,35 @@ const AdminDashBoardScreen = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {order.products.map((p, i) => (
-                              <tr key={i}>
-                                <td className="text-center">
-                                  {p.product.title}
-                                </td>
-                                <td className="text-center">
-                                  {p.product.price}
-                                </td>
-                                {brands
-                                  .filter((b) => b._id === p.product.brand)
-                                  .map((item, i) => (
-                                    <td key={i} className="text-center">
-                                      {item.name}
-                                    </td>
-                                  ))}
-                                <td className="text-center">{p.color}</td>
-                                <td className="text-center">{p.count}</td>
-                                <td className="text-center">
-                                  {p.product.shipping === "Yes" ? (
-                                    <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                  ) : (
-                                    <CloseCircleTwoTone twoToneColor="#E74C3C" />
-                                  )}
-                                </td>
-                              </tr>
-                            ))}
+                            {order &&
+                              order.products &&
+                              order.products.length > 0 &&
+                              order.products.map((p, i) => (
+                                <tr key={i}>
+                                  <td className="text-center">
+                                    {p.product?.title}
+                                  </td>
+                                  <td className="text-center">
+                                    {p.product?.price}
+                                  </td>
+                                  {brands
+                                    .filter((b) => b._id === p.product?.brand)
+                                    .map((item, i) => (
+                                      <td key={i} className="text-center">
+                                        {item.name}
+                                      </td>
+                                    ))}
+                                  <td className="text-center">{p.color}</td>
+                                  <td className="text-center">{p.count}</td>
+                                  <td className="text-center">
+                                    {p.product?.shipping === "Yes" ? (
+                                      <CheckCircleTwoTone twoToneColor="#52c41a" />
+                                    ) : (
+                                      <CloseCircleTwoTone twoToneColor="#E74C3C" />
+                                    )}
+                                  </td>
+                                </tr>
+                              ))}
                           </tbody>
                         </table>
                       </div>
