@@ -93,7 +93,7 @@ const CheckoutScreen = ({ history }) => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Electro: Shipping" />
+      <Meta title="Electroo: Shipping" />
       <div className="row">
         <div className="col mb-4 mt-3">
           <CheckoutSteps step2 />

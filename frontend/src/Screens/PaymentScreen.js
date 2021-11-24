@@ -15,7 +15,7 @@ const PaymentScreen = ({ history }) => {
   const intended = history.location.coupon;
   return (
     <div className="container p-5 text-center">
-      <Meta title="Electro: Payment" />
+      <Meta title="Electroo: Payment" />
       <div className="row">
         <div className="col-md-8 offset-md-2 mb-5 mt-2">
           <CheckoutSteps step3 />

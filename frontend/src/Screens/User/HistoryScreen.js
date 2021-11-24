@@ -170,7 +170,7 @@ const HistoryScreen = ({ history }) => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Electro: Purchase History" />
+      <Meta title="Electroo: Purchase History" />
       <div className="row">
         <div className="col-md-2">
           <UserNav />

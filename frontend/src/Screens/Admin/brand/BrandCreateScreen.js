@@ -72,7 +72,7 @@ const BrandCreateScreen = () => {
       spinning={loadingBrandsList === true || loadingCreate === true}
     >
       <div className="container-fluid">
-        <Meta title="Electro: Create Brand" />
+        <Meta title="Electroo: Create Brand" />
         <div className="row">
           <div className="col-md-2">
             <AdminNav />

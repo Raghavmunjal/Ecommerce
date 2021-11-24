@@ -57,7 +57,7 @@ const UpdatePasswordScreen = () => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Electro: Update Password" />
+      <Meta title="Electroo: Update Password" />
       <div className="row">
         <div className="col-md-2">
           {userInfo && userInfo.role === process.env.REACT_APP_CHECK_ADMIN ? (

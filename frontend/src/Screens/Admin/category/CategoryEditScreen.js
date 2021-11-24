@@ -54,7 +54,7 @@ const CategoryEditScreen = ({ history, match }) => {
       indicator={antIcon}
     >
       <div className="container-fluid">
-        <Meta title="Electro: Edit Category" />
+        <Meta title="Electroo: Edit Category" />
         <div className="row">
           <div className="col-md-2">
             <AdminNav />

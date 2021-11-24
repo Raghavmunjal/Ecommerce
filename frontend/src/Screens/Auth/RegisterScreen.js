@@ -66,7 +66,7 @@ const RegisterScreen = ({ history }) => {
 
   return (
     <div className="container p-5">
-      <Meta title="Electro: Register" />
+      <Meta title="Electroo: Register" />
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <h3 style={{ marginTop: 20, color: "#001529" }}>Register</h3>

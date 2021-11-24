@@ -53,7 +53,7 @@ const BrandEditScreen = ({ match, history }) => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Electro: Edit Brand" />
+      <Meta title="Electroo: Edit Brand" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

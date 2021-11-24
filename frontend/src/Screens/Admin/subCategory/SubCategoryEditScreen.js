@@ -60,7 +60,7 @@ const SubCategoryEditScreen = ({ match, history }) => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Electro: Edit Sub Category" />
+      <Meta title="Electroo: Edit Sub Category" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

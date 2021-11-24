@@ -69,7 +69,7 @@ const SubCategoryCreateScreen = () => {
   return (
     <Spin indicator={antIcon} spinning={loadingSubCategoriesList === true}>
       <div className="container-fluid">
-        <Meta title="Electro: Create Sub Category" />
+        <Meta title="Electroo: Create Sub Category" />
         <div className="row">
           <div className="col-md-2">
             <AdminNav />

@@ -11,8 +11,8 @@ const Meta = ({ title, description, keywords }) => {
   );
 };
 Meta.defaultProps = {
-  title: "Welcome To Electro",
-  description: "We sell the best products for cheap",
+  title: "Welcome To Electroo",
+  description: "We sell best products",
   keywords: "electronics, buy electronics, cheap electronics",
 };
 

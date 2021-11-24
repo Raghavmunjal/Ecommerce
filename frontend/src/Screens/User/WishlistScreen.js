@@ -39,7 +39,7 @@ const WishlistScreen = () => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Electro: Wishlist" />
+      <Meta title="Electroo: Wishlist" />
       <div className="row">
         <div className="col-md-2">
           <UserNav />

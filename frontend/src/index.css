@@ -251,7 +251,7 @@ p {
 .rating i {
   margin-left: 0.1rem;
 }
-
+/* 
 @media screen and (min-width: 572px) {
   .collections {
     display: flex;
@@ -307,6 +307,6 @@ p {
     ),
     url("./images/e1.jpg") center/cover no-repeat;
   height: 17rem;
-}
+} */
 
 /* 576 768 998 1200 */

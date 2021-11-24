@@ -8,14 +8,12 @@ import { listCategories } from "../Actions/categoryAction";
 import { listSubCategories } from "../Actions/subCategoryAction";
 import { listBrands } from "../Actions/brandAction";
 import { useDispatch } from "react-redux";
-//import Collections from "../Components/home/Collections";
 import Meta from "../Components/Meta";
 import Footer from "../Components/Footer";
 import camera from "../images/c3.jpg";
 import mobile from "../images/m1.jpg";
 import headphones from "../images/headphones.jpg";
 import { Carousel, Button } from "antd";
-import Collections from "../Components/Collections";
 
 const HomeScreen = () => {
   const text = [
@@ -34,11 +32,11 @@ const HomeScreen = () => {
 
   return (
     <div className="home">
-      <Meta title="Welcome to Electro || Home" />
+      <Meta title="Welcome to Electroo || Home" />
       <div className="hero">
         <div className="hero-banner">
           <h1 className="font-weight-bold mt-3">
-            Electro<span>.</span>
+            Electroo<span>.</span>
           </h1>
 
           <h2 className="mb-5 mt-3">
@@ -50,8 +48,6 @@ const HomeScreen = () => {
           </Link>
         </div>
       </div>
-
-      <Collections />
 
       <TopRated className="mb-5" />
 

@@ -34,7 +34,7 @@ const AdminDashBoardScreen = () => {
 
   return (
     <div className="container-fluid">
-      <Meta title="Electro: Admin Dashboard" />
+      <Meta title="Electroo: Admin Dashboard" />
       <div className="row">
         <div className="col-md-2">
           <AdminNav />

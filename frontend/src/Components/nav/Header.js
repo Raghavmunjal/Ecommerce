@@ -85,7 +85,7 @@ const Header = () => {
         }
       >
         <Link to="/">
-          {userInfo ? <span>Home</span> : <span>Electro</span>}
+          {userInfo ? <span>Home</span> : <span>Electroo</span>}
         </Link>
       </Item>
 

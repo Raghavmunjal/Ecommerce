@@ -18,7 +18,7 @@ const LoadingToRedirect = () => {
   }, [count, history]);
   return (
     <div className="container p-5 text-center">
-      <Meta title="Electro: Not Found" />
+      <Meta title="Electroo: Unauthorized" />
       <Result
         status="403"
         title="403"
