@@ -59,12 +59,16 @@ const AdminRoute = lazy(() => import("./Components/protectedRoute/AdminRoute"));
 
 // Auth Screens
 const LoginScreen = lazy(() => import("./Screens/Auth/LoginScreen"));
-const ForgotPasswordScreen = lazy(() => "./Screens/Auth/ForgotPasswordScreen");
-const RegisterCompleteScreen = lazy(
-  () => "./Screens/Auth/RegisterCompleteScreen"
+const ForgotPasswordScreen = lazy(() =>
+  import("./Screens/Auth/ForgotPasswordScreen")
 );
-const RegisterScreen = lazy(() => "./Screens/Auth/RegisterScreen");
-const UpdatePasswordScreen = lazy(() => "./Screens/Auth/UpdatePasswordScreen");
+const RegisterCompleteScreen = lazy(() =>
+  import("./Screens/Auth/RegisterCompleteScreen")
+);
+const RegisterScreen = lazy(() => import("./Screens/Auth/RegisterScreen"));
+const UpdatePasswordScreen = lazy(() =>
+  import("./Screens/Auth/UpdatePasswordScreen")
+);
 
 // Admin Screens
 const AdminDashBoardScreen = lazy(() =>

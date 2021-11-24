@@ -10,7 +10,7 @@ const RegisterScreen = ({ history }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = {
-      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      url: "http://localhost:3000/register/complete",
       handleCodeInApp: true,
     };
 
@@ -28,7 +28,7 @@ const RegisterScreen = ({ history }) => {
   const { userInfo } = userLogin;
 
   const redirect = userInfo
-    ? userInfo.role === process.env.REACT_APP_CHECK_ADMIN
+    ? userInfo.role === "Ecommerce_Admin"
       ? "/admin/dashboard"
       : "/user/history"
     : "/";

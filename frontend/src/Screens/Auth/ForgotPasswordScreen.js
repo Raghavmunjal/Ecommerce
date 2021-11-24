@@ -12,7 +12,7 @@ const ForgotPasswordScreen = ({ history }) => {
   const { userInfo } = userLogin;
 
   const redirect = userInfo
-    ? userInfo.role === process.env.REACT_APP_CHECK_ADMIN
+    ? userInfo.role === "Ecommerce_Admin"
       ? "/admin/dashboard"
       : "/user/history"
     : "/";
@@ -27,7 +27,7 @@ const ForgotPasswordScreen = ({ history }) => {
     e.preventDefault();
     setLoading(true);
     const config = {
-      url: process.env.REACT_APP_FORGOT_PASSWORD_REDIRECT_URL,
+      url: "http://localhost:3000/login",
       handleCodeInApp: true,
     };
     await auth

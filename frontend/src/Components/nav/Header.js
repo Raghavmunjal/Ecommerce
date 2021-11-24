@@ -147,7 +147,7 @@ const Header = () => {
           title={userInfo && userInfo.email.split("@")[0]}
           className="float-right"
         >
-          {userInfo && userInfo.role === process.env.REACT_APP_CHECK_ADMIN && (
+          {userInfo && userInfo.role === "Ecommerce_Admin" && (
             <Item key="Dashboard">
               <Link to="/admin/dashboard">Dashboard</Link>
             </Item>

@@ -78,6 +78,8 @@ const StripeCheckout = ({ intended }) => {
     dispatch({ type: CART_EMPTY });
     dispatch({ type: COUPON_APPLIED_RESET, payload: false });
     localStorage.removeItem("cartItems");
+    setProcessing(false);
+    setError(null);
     setSuccess(true);
     toast.success("Order Placed Successfully");
     setTimeout(() => {

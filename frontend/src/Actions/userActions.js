@@ -22,7 +22,7 @@ const registerUser = async (idTokenResult) => {
 };
 
 // const roleRedirect = (info, history) => {
-//   if (info.role === process.env.REACT_APP_CHECK_ADMIN) {
+//   if (info.role === "Ecommerce_Admin") {
 //     history.push("/admin");
 //   } else {
 //     history.push("/user/history");

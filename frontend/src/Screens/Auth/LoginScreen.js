@@ -16,7 +16,7 @@ const LoginScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
   const redirect = userInfo
-    ? userInfo.role === process.env.REACT_APP_CHECK_ADMIN
+    ? userInfo.role === "Ecommerce_Admin"
       ? "/admin/dashboard"
       : "/user/history"
     : "/";

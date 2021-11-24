@@ -60,7 +60,7 @@ const UpdatePasswordScreen = () => {
       <Meta title="Electroo: Update Password" />
       <div className="row">
         <div className="col-md-2">
-          {userInfo && userInfo.role === process.env.REACT_APP_CHECK_ADMIN ? (
+          {userInfo && userInfo.role === "Ecommerce_Admin" ? (
             <AdminNav />
           ) : (
             <UserNav />
