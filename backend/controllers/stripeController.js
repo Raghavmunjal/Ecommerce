@@ -4,7 +4,7 @@ const userSchema = require("../models/userModel");
 const productSchema = require("../models/productModel");
 const couponSchema = require("../models/couponModel");
 const stripe = require("stripe")(
-  "sk_test_51JvbrlSDzC3xMfDCD8dJZq0ddS6rAHJH92gGcz2J80wA5UXsfFugKl3Je32gqPy5eYaq4bzYFO8ZIaG6LQJrSTfF00gDkhGLmu"
+  "sk_test_51K4dy2SG264J1ES8sJvMXIuiAFs8I8nUuJRJcLqizQhPQAiXzZ8Hwek9LmyQIAEo2gFJneFfQ4ANCKnsin7kk3pT00x01OeY9x"
 );
 
 //@desc   Paymnet

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingToRedirect from "../LoadingToRedirect";
-import { logout } from "../../Actions/userActions";
 import axios from "axios";
 
 const UserRoute = ({ children, ...rest }) => {
@@ -30,7 +29,6 @@ const UserRoute = ({ children, ...rest }) => {
         })
         .catch((error) => {
           console.log(error);
-          dispatch(logout());
           setOk(false);
         });
     }

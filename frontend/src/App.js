@@ -1,4 +1,7 @@
 import React, { lazy, Suspense } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "./Actions/userActions";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Header from "./Components/nav/Header";
@@ -114,11 +117,31 @@ const NotFound = lazy(() => import("./Components/NotFound"));
 const PaymentSuccess = lazy(() => import("./Components/PaymentSuccess"));
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  axios.interceptors.response.use(
+    function (response) {
+      // any status code that lie within range of 2XX  cause this function to trigger
+      return response;
+    },
+    function (error) {
+      // any status code that falls outside within range of 2XX  cause this function to trigger
+      let res = error.response;
+      if (res.status === 401 && res.config && !res.config.__isRetryRequest) {
+        return new Promise((resolve, reject) => {
+          console.log("Logout ");
+          dispatch(logout());
+        });
+      }
+      return Promise.reject(error);
+    }
+  );
+
   return (
     <Router>
       <Suspense
         fallback={
-          <div className="col text-center p-5">
+          <div className="col text-center p-5 display-4">
             __Ele <LoadingOutlined /> ctro__
           </div>
         }

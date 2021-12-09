@@ -9,6 +9,7 @@ import { listSubCategories } from "../Actions/subCategoryAction";
 import { listBrands } from "../Actions/brandAction";
 import { useDispatch } from "react-redux";
 import Meta from "../Components/Meta";
+// import Collections from "../Components/Collections";
 import Footer from "../Components/Footer";
 import camera from "../images/c3.jpg";
 import mobile from "../images/m1.jpg";
@@ -112,6 +113,7 @@ const HomeScreen = () => {
       </div>
 
       <NewArrivals className="mb-5" />
+      {/* <Collections className="mb-5" /> */}
       <BestSellers className="mb-5" />
 
       <Footer />

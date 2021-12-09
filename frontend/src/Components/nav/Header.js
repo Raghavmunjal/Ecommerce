@@ -48,7 +48,7 @@ const Header = () => {
   const { cartItems } = cart;
 
   const handleClick = (e) => {
-    setCurrent(e.key);
+    setCurrent(e.key.toString());
   };
 
   useEffect(() => {
@@ -148,13 +148,13 @@ const Header = () => {
           className="float-right"
         >
           {userInfo && userInfo.role === "Ecommerce_Admin" && (
-            <Item key="Dashboard">
+            <Item key="AdminDashboard">
               <Link to="/admin/dashboard">Dashboard</Link>
             </Item>
           )}
 
           {userInfo && userInfo.role === "customer" && (
-            <Item key="Dashboard">
+            <Item key="UserDashboard">
               <Link to="/user/history">Dashboard</Link>
             </Item>
           )}

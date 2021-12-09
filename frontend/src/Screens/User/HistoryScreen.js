@@ -184,7 +184,7 @@ const HistoryScreen = ({ history }) => {
               <h3
                 style={{ textAlign: "center", marginTop: 55, color: "#001529" }}
               >
-                User History
+                Your Orders
               </h3>
               <div className="underline"></div>
             </>

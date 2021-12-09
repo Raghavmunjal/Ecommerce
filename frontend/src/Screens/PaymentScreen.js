@@ -8,7 +8,7 @@ import Meta from "../Components/Meta";
 
 // load Stripe outside of components render to avoid recreating stripe object on every render
 const promise = loadStripe(
-  "pk_test_51JvbrlSDzC3xMfDCFOxmWUACkaTHfbhyR26GTFy2bSR98RCCOpIVYjgGOlNkw5Iv8FXhTUIoRRVHvcHj5cb35hT500b0bxwvvV"
+  "pk_test_51K4dy2SG264J1ES8rIhW53y26vitlOK0wbOH11l0z7WbLNtDF3WblGYNgEoavyme9MDnuavxZxKwAEHT45F3m1jH00ra1JjIcV"
 );
 
 const PaymentScreen = ({ history }) => {
