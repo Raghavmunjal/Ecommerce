@@ -44,7 +44,7 @@ const HomeScreen = () => {
             <Jumbotron text={text} />
           </h2>
 
-          <Link to="/" className="hero-btn">
+          <Link to="/shop" className="hero-btn">
             Shop Now
           </Link>
         </div>

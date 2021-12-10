@@ -248,6 +248,19 @@ p {
   margin-left: 0.1rem;
 }
 
+.activee {
+  background-color: var(--clr-primary-5);
+  color: var(--clr-white) !important;
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius);
+  font-weight: 900;
+}
+.activee h4 {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 @media screen and (min-width: 572px) {
   .collections {
     display: flex;
