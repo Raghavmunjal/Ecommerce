@@ -23,7 +23,7 @@ const uploadFile = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc   Create SubCategory
+//@desc   Remove Image
 //@routes POST /api/images/remove
 //@access PRIVATE/ADMIN
 const removeFile = (req, res) => {
